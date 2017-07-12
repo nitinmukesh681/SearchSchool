@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600|Raleway:600,300|Josefin+Slab:400,700,600italic,600,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="css/slick-team-slider.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+
+</head>
+<style type="text/css">
+  a{
+    text-decoration: none;
+
+  }
+  a:hover{
+    color: purple;
+    text-decoration: none;
+  }
+</style>
+<body>
+
+<!--HEADER START-->
+	<div class="main-navigation navbar-fixed-top">
+		<nav class="navbar navbar-default">
+			<div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="/home/">InstuFind</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+			  <ul class="nav navbar-nav navbar-right">
+			    
+			    {% if into %}
+          <li class="active"><a href="/loginHome/#banner">Home</a></li>
+          <li><a href="/loginHome/#about">Our Team</a></li>
+          <li><a href="/loginHome/#contact">Contact Us</a></li>
+          <li><a href="/AddInstitute/">Add Institution</a></li>
+           <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{user.first_name}}<span class="fa fa-caret-down"></span></a>
+
+
+          <ul class="dropdown-menu">
+          <li><a href="/logout/">Logout</a></li> 
+          </ul> 
+
+          </li>
+
+
+
+          <li><a class=" dropdown-toggle" data-toggle="dropdown">Question<span class="fa fa-caret-down"></span></a>
+
+            <ul class="dropdown-menu">
+              <li><a href="/answer_the_question/">Question For You</a></li>
+            <li><a href="/ask/">Your Question</a></li>
+            </ul>
+
+          </li>
+
+ 
+           {% elif not into %}
+           <li class="active"><a href="/home/#banner">Home</a></li>
+          <li><a href="/discussionPage/">Dashboard</a></li>
+          <li><a href="/home/#contact">Contact Us</a></li>
+          <li><a href="/AddInstitute/">Add Institution</a></li>
+          <li><a href="/Register/">Register</a></li>
+          <li><a href="/loginP/">Login</a></li>
+          {% endif %}
+         
+			  </ul>
+			</div>
+		  </div>
+		</nav>
+	</div>
+
+	<!--HEADER END-->
+
+
+  <!-- page content -->
+       
+<br><br><br><br>
+            <div class="row">
+              <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
+                <div class="x_panel">
+                  <div class="bg-success x_title">
+                    <h2>About <strong>{{InstitutionObject.Institution_name}}</strong></h2>
+                  </div>
+                  <div class="clearfix"></div>
+                  
+
+                  <div class="x_content">
+
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">Institution Name</th>
+
+                            <th class="column-title">Established Year</th>
+                            <th class="column-title">Website</th>
+                            <th class="column-title">Contact To</th>
+                            <th class="column-title">Contact Number</th>
+
+                            <th class="column-title">City</th>
+                            <th class="column-title">Address</th>
+                            <th class="column-title">Email</th>                          
+                         </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="odd pointer">
+                            <td class=" ">{{InstitutionObject.Institution_name}}</td>
+                            <td class=" ">{{InstitutionObject.established_year}}</td>
+                            <td class=" "><a href="http://{{InstitutionObject.website}}">{{InstitutionObject.website}}</a></td>
+                            <td class=" ">{{InstitutionObject.person_to_contact}}</td>
+                            <td class=" ">{{InstitutionObject.contact_details}}</td>
+                            <td class=" ">{{InstitutionObject.city}}</td>
+                            <td class=" ">{{InstitutionObject.full_address}}, {{InstitutionObject.pincode}}</td>
+                            <td class=" ">{{InstitutionObject.email}}</td>
+                            
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+     
+                  <!--  -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+  <!-- /page content -->
+
+            <!-- <div class="container"> -->
+              <div class="row">
+              	<div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
+              	 	<div class="bg-success x_title">
+                    <h3><span class="fa fa-lightbulb-o"></span> Description</h3>
+                  </div>
+                    <h4><strong><span class="fa fa-cubes"></span>{{InstitutionObject.description}}</h4>
+              	</div>
+              </div>
+            <!-- </div> -->
+<!-- bar graph start -->
+
+
+<!-- testing start -->
+
+            <!--   <div class="col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Bar graph <small>Sessions</small></h2>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <canvas id="mybarChart"></canvas>
+                  </div>
+                </div>
+              </div><br> -->
+
+<!-- testing ends -->
+
+
+<!-- bar graph ends -->
+
+          <div class="row " id="{{institute.id}}">
+            <div class="col-md-8 col-sm-10 col-xs-12 col-md-offset-2">
+              <div class="bg-warning x_title">
+                     <a style="text-decoration: none; color: black;" data-target="#myModal2" data-toggle="modal"> <h3 class="column-title"><span class="fa fa-diamond"></span> Review</h3> </a>
+
+
+                  <!--modal testing -->
+
+                <div class="container">
+                
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal2" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Add New Reviews </h4>
+                        </div>
+                        <div class="modal-body">
+
+                              <!-- <div class="clearfix"></div> -->
+
+                              <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                  <div class="x_panel">
+
+                                    <div class="x_content">
+
+                                      <form class="form-horizontal form-label-left" method="post" action="/addReview/" id="" autocomplete="off"> {% csrf_token %}
+
+                                          <input type="hidden" name="abc" value="{{InstitutionObject.id}}">
+                                        
+                                       
+                                        <div class="  col-md-8 col-sm-8 col-xs-12 col-md-offset-2">
+                                          <div class="x_panel">
+                                            <div class="x_title">
+                                           <!-- <h3 style="font-family: cursive;">Institution Details</h3> -->
+
+                                            <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content"><br />
+
+                                              <div class="form-group">
+                                                <!-- <label class="control-label col-md-3 col-sm-3 col-xs-12">Institute Name</label> -->
+                                                <div class="">
+                                                  <input type="text" name="institute_name" class="form-control" value="{{InstitutionObject.Institution_name}}" disabled="">
+                                                </div>
+                                              </div>
+
+
+                                              <div class="form-group">
+                                                <!-- <label class="control-label col-md-3 col-sm-3 col-xs-12">Title</label> -->
+                                                <div class="">
+                                                  <input type="text" name="title" class="form-control" placeholder="e.g. Excellent, Good etc">
+                                                </div>
+                                              </div>
+                                            
+                                              <div class="form-group">
+                                                <!-- <label class="control-label col-md-3 col-sm-3 col-xs-12">Review</label> -->
+                                                <div class="">
+                                                  <textarea type="text" name="review" rows="4" class="form-control" placeholder="Your Review"></textarea>
+                                                </div>
+                                              </div>
+
+
+                                         
+                                        
+                                             
+                                            </div>
+
+                                          </div>
+                                        </div>
+                                      
+
+
+                                    
+
+                                      <div class="row">
+                                        <div class="form-group">
+                                          <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-8">
+                                            <!-- <button type="Cancel" class="btn btn-primary">Cancel</button> -->
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                
+                                      </form>
+
+
+                                    </div>
+
+                                  </div>
+                                      <!-- </form> -->
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                         
+
+                       
+                        <!-- /page content -->
+                    </div>
+                  </div>
+                      
+                </div>
+
+            
+              </div>
+            </div>
+          </div>
+
+<!--modal finished -->
+      <div class="col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1">
+        {% for rev in reviewObject %}
+        <h4><strong><span class="fa fa-cubes"></span>
+        {{rev.review_title}}</strong></h4>
+          <h4> {{rev.review}}
+            <form action="/about_reviewer/" method="post">{% csrf_token %}
+              <input type="hidden" name="reviewId" value="{{rev.addedBy.user.username}}">
+              <button type="submit" class="btn"> <strong>{{rev.addedBy.user.first_name}} {{rev.addedBy.user.last_name}}</strong></button>
+            </form>
+          </h4>
+        <hr>
+        {% endfor %}
+      </div>
+
+<!-- <hr> -->
+
+    <script src="/static/js/jquery.min.js"></script>
+  	<script src="/static/js/jquery.easing.min.js"></script>
+  	<script src="/static/js/bootstrap.min.js"></script>
+  	<script src="/static/js/jquery.mixitup.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/static/js/slick.min.js"></script>
+	<script type="text/javascript" src="/static/js/custom.js"></script>
+    <script src="/static/contactform/contactform.js"></script>
+    
+<script src="/static/dist/Chart.min.js"></script>
+
+    <script type="text/javascript">
+       // Bar chart
+      var ctx = document.getElementById("mybarChart");
+      var mybarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["January", "February", "March", "April", "May", "June", "July",  "August"],
+          datasets: [{
+            label: '# of Votes',
+            backgroundColor: "#26B99A",
+            {% for stats in stats_data %}
+             {{stats.no_of_student_admitted}}
+            {% endfor %}
+            data:[]
+            
+            
+
+
+          }, {
+            label: '# of Votes',
+            backgroundColor: "#03586A",
+            data: [41, 56, 25, 48, 72, 34, 12, 56]
+          }]
+        },
+
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+
+    </script>
+
+
+
+</body>
+</html>
