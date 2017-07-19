@@ -8,7 +8,8 @@
   <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600|Raleway:600,300|Josefin+Slab:400,700,600italic,600,400italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="css/slick-team-slider.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<script src="/static/js/jquery.min.js"></script>
 
 
 </head>
@@ -21,8 +22,27 @@
 
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default" style="background-color: pink;">
 			<div class="container">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="mid_center">
+                 
+                  <form action="/searchQuestionS/" method="post"> {% csrf_token %}
+                    <div class="col-xs-12 form-group pull-right top_search">
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for Question by Topics or Viewers" style="color: purple;">
+                          <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit" style="background-color: purple; color: white;">Go!</button>
+                          </span>
+                      </div>
+                    </div>
+                  </form>
+
+                 <!--  -->
+        </div>
+      </div>
+
 			<div class="navbar-header">
 			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 			    <span class="icon-bar"></span>
@@ -33,32 +53,22 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 			  <ul class="nav navbar-nav navbar-right">
-			    <li class="active"><a href="/loginHome/#banner">Home</a></li>
+			    <li ><a href="/loginHome/#banner">Home</a></li>
           <li><a href="/discussionPage/">Dashboard</a></li>
           <li><a href="/loginHome/#about">Our Team</a></li>
 
           <li><a href="/AddInstitute/">Add Institution</a></li>
           <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{user.first_name}}<span class="fa fa-caret-down"></span></a>
-
-
-          <ul class="dropdown-menu">
-          <li><a href="/logout/">Logout</a></li> 
-          </ul> 
-
-          </li>
-
-
-
-          <li><a class=" dropdown-toggle" data-toggle="dropdown">Question<span class="fa fa-caret-down"></span></a>
-
             <ul class="dropdown-menu">
-                        <li><a href="/answer_the_question/">Question For You</a></li>
-                        <li><a href="/ask/">Your Question</a></li>
-                        </ul>
-
+              <li><a href="/logout/">Logout</a></li> 
+            </ul> 
           </li>
-
-
+          <li><a class=" dropdown-toggle" data-toggle="dropdown">Question<span class="fa fa-caret-down"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/answer_the_question/">Question For You</a></li>
+              <li><a href="/ask/">Your Question</a></li>
+            </ul>
+          </li>
 			  </ul>
 			</div>
 		  </div>
@@ -73,9 +83,20 @@
   <!-- page content -->
        
 
-        <br><br><br><br>
+        <br><br><br><br><br>
       <div class="container">
+        
+      
+<br><br><br>
         <div class="row">
+          <div id="statusReport">
+                      {% if messages %}
+                      {% for msg in messages %}
+                         ## {{msg.message}}
+                
+                      {% endfor %}
+                      {% endif %}
+        </div>
           
           <div class="col-md-2 col-xs-4 col-sm-2">
               
@@ -111,7 +132,7 @@
                                        
                                 <div class=" col-md-8 col-sm-8 col-xs-12 col-md-offset-2">
                                   <div class="x_panel">
-                                    <div class="x_title">
+                                    <div class="x_title"></div>
                                      
                                         <div class="x_content"><br />
 
@@ -127,25 +148,18 @@
                                           </div>
 
                                       
-                                        <div class="form-group">
-                                          <!-- <label class="control-label col-md-3 col-sm-3 col-xs-12">Review</label> -->
-                                          <div class="">
-                                            <textarea type="text" name="question" rows="4" class="form-control" placeholder="Your Question"></textarea>
-                                          </div>
+                                          <div class="form-group">
+                                            <!-- <label class="control-label col-md-3 col-sm-3 col-xs-12">Review</label> -->
+                                            <div class="">
+                                              <textarea type="text" name="question" rows="4" class="form-control" placeholder="Your Question"></textarea>
+                                            </div>
+                                          </div>                                  
+                                       
                                         </div>
 
-
-                                       <!--  -->
-                                  
-                                       
-                                      </div>
-
-                                    </div>
+                                    
                                   </div>
-                                
-
-
-                              
+                                                              
                                 </div>
 
                                 <div class="row">
@@ -210,7 +224,7 @@
                 {% if question.answer_is %}
                 <div class="panel panel-success"> 
                 {% elif not question.answer_is %}
-                <div class="panel panel-danger"> 
+                <div class="panel panel-danger" onclick="document.getElementById('{{question.id}}').style.display='block'"> 
                 {% endif %}
 
                     <div class="panel-heading">
@@ -220,20 +234,69 @@
                             <p style="float: right;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </p><br>
                           </div>
                     </div>
+
+
+                   
                       
                     {% if question.answer_is %}
                     <div class="panel-body"> 
                           <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
 
                             <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h4> 
-                            <small>Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} </small>
-                          </div>   
+                            <small>Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} <strong>Likes: {{question.number_of_likes}} Comments:</strong></small>
+                          </div> 
+                          
+                          <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
+                            <a class="btn btn-warning btn-xs">Comment</a>
+                          <!-- <form action="/likes_answer/" method="POST">{% csrf_token %} -->
+                          <!-- <input type="hidden" name="id_required" value="{{question.id}}"> -->
+                            <button class="btn btn-primary btn-xs" id="{{question.id}}101">Like</button> 
+                          
+                          <!-- </form>  -->
+                            <script type="text/javascript">
+                              $('#{{question.id}}101').click(
+                                  function(){
+                                    $.ajax({
+                                      type:"POST",
+                                      url:"/likes_answer/",
+                                      data:{'id_required':{{question.id}},},
+                                      success:function(response)
+                                      {
+                                        console.log(response);
+                                        location.href = "/discussionPage/";
+                                      }
+                                    });
+                                  });
+                            </script>
+                          </div>  
                     </div>
-                    {% endif %}
-                
-                  
-                </div>
+   
+                {% elif not question.answer_is %}
+                  <div id="{{question.id}}" style="display: none;">
+                      <div class="">
+                        <div class="">
+                        <br>
+                          <form action="/answer_the_question_DP/" method="post">{% csrf_token %}
+                          <input type="hidden" name="abc" value="{{question.id}}">
+                            <div class="form-group">
+                              <textarea type="text" name="answer" class="form-control" rows="2" placeholder="Write your answer..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                             
+                              <button class="btn btn-info btn-sm col-md-offset-11 col-sm-offset-11 col-xs-offset-10" type="submit">Submit</button>
+                            </div>
+
+                          </form>
+                        </div>
+                      
+                      </div>
+                  </div>
+               
+                {% endif %}
+                </div> 
               </div>
+                  <!--modal finished -->
            {% endfor %}
         </div>
 
@@ -247,12 +310,12 @@
 
 
 <script src="/static/js/jquery.min.js"></script>
-  	<script src="/static/js/jquery.easing.min.js"></script>
-  	<script src="/static/js/bootstrap.min.js"></script>
-  	<script src="/static/js/jquery.mixitup.js" type="text/javascript"></script>
-	<script type="text/javascript" src="/static/js/slick.min.js"></script>
-	<script type="text/javascript" src="/static/js/custom.js"></script>
-    <script src="/static/contactform/contactform.js"></script>
+<script src="/static/js/jquery.easing.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery.mixitup.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/slick.min.js"></script>
+<script type="text/javascript" src="/static/js/custom.js"></script>
+<script src="/static/contactform/contactform.js"></script>
     
 </body>
 </html>

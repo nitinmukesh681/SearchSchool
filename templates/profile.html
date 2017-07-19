@@ -9,7 +9,7 @@
 </html><!DOCTYPE html>
 <html>
 <head>
-	<title>Add Your Institution</title>
+	<title>My Profile</title>
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
@@ -78,6 +78,7 @@
 
              <div class="bg-danger col-xs-12 col-sm-12 col-md-12">
              	<center><h1 style="font-family: cursive;"><strong> About {{myuserObject.user.first_name}}</strong></h1></center> 
+              
              </div>
 
                        <div class="well">
@@ -89,8 +90,8 @@
                    
                     </div> -->
                     
-                   <div class="container">
-                   <br><br>
+                  <div class="container">
+                    <br><br>
 
                       <div class="row">
                         <label class="control-label col-md-3 col-sm-3 col-xs-6"> Name</label>
@@ -148,54 +149,111 @@
                       </div>
 <br>              
 
-                          <div class="row">
+                      <div class="row">
                             <label class="control-label col-md-3 col-sm-3 col-xs-6">Total Reviews</label>
                             <div class="col-md-5 col-sm-6 col-xs-6">
                              {{myuserObject.Number_of_reviews}}
                             </div>
-                          </div>
+                      </div>
 <br>
 
-                          <div class="row">
+                      <div class="row">
                             <label class="control-label col-md-3 col-sm-3 col-xs-6">Last Logged In</label>
                             <div class="col-md-5 col-sm-6 col-xs-6">
                              {{myuserObject.last_logged_in}}
                             </div>
-                          </div>
-
-                     
-                   
+                      </div>                  
 <br>
-                      
-
-                    </div>
                   </div>
-                  </div>
+                </div>
+              </div>
                 <!-- </div> -->
             
 
                   <div class="col-md-6 col-sm-4 col-xs-12 ">
-<br><br>
-                   
- 						       <img style="width: 280px; height: 350px;" src="{{myuserObject.image.url}}">
+<br><br>          
+                {% if myuserObject.is_image_uploaded %}
+                  
 
-                  </div>
+ 						       <img style="width: 280px; height: 350px;" src="{{imageObject.image.url}}">
                  
-<hr>
-        <div class="col-xs-12 col-md-12 col-sm-12">
 
-  
+                {% elif not myuserObject.is_image_uploaded %}
+                    <form action="/upload/" method="post" enctype="multipart/form-data"> {% csrf_token %}
+                      <!-- <h5>Please Select Picture</h5> -->
+                     <p>{{ form.non_field_errors }}</p>
+
+                      <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+
+                      <p>
+                          {{ form.docfile.errors }}
+                          {{ form.docfile }}
+                      </p>
+
+                      <br>
+                      <button class="btn btn-warning btn-sm" type="submit">Submit</button>
+                    </form>
+                  </div>
+                {% endif %} 
+                <br>
+        <div class="col-xs-12 col-md-12 col-sm-12">
+<hr>
           <button class="btn btn-info" id="" data-target="#myModal3" data-toggle="modal">Edit</button>
 
         </div>
     
  
+  </div>
+</div>  
+	
 </div>
+	<div class="container">
+            <div class="row">
+              <div class="">
+                <div class="">
+                  <div class="bg-success x_title">
+                    <h2>About <strong>Institution You Added </strong></h2>
+                  </div>
+                  
+                  <div class="x_content">
 
-	
-	
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">Institution Name</th>
+                            <th class="column-title">Added On</th>
+                            <th class="column-title">Website</th>
+                            <th class="column-title">Edit Details</th>
+                                      
+                         </tr>
+                        </thead>
+
+                        <tbody>
+                          {% for inst in InstitutionObject %}
+                          {% if inst %}
+                          <tr class="odd pointer">
+                            <td class=" ">{{inst.Institution_name}}</td>
+                            <td class=" ">{{inst.established_year}}</td>
+                            <td class=" "><a href="http://{{inst.website}}">{{inst.website}}</a></td>
+                            <td class=" "><button class="btn btn-info btn-xs">Edit</button></td>
+                          </tr>
+                          {% endif %}
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+     
+                  <!--  -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
   <!--modal testing -->
-<div>
+
 <div class="container">
   <!-- Trigger the modal with a button -->
   <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Add new</button> -->
@@ -208,186 +266,155 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Question </h4>
+          <h4 class="modal-title">Edit Your Profile</h4>
         </div>
-        <div class="modal-body">
-
-            <div class="clearfix"></div>
-
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                     
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-
-                    <form class="form-horizontal form-label-left" method="post" action="/updateProfile/" id="AskQuestion" autocomplete="off"> {% csrf_token %}
-
-                        <input type="hidden" name="abc" value="{{myuserObject.user.username}}">
-                      
-                     
-                <div class="  col-md-8 col-sm-8 col-xs-12 col-md-offset-2">
-                  <div class="x_panel">
-                    <div class="x_title">
-                   <!-- <h3 style="font-family: cursive;">Institution Details</h3> -->
-
-                    <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content"><br />
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">First Name</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="topic" class="form-control" value="{{myuserObject.user.first_name}}" > 
-                        </div>
-                      </div>
-
-                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Last Name</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="topic" class="form-control" value="{{myuserObject.user.last_name}}"> 
-                        </div>
-                      </div>
-                        
-                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <select name="gender" class="form-control" n>
-                           <option value="Male">Male</option>
-                           <option value="Female">Female</option>
-                           <option value="Others">Others</option>
-                         </select>
-                        </div>
-                      </div>
-                      
-                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select name="country" class="form-control" n>
-                           <option value="">{{myuserObject.country.name}}</option>
-                           {% for count in countryObjects %}
-                           <option value="{{count.name}}">{{count.name}}</option>
-                           {% endfor %}
-                         </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">State</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select name="state" class="form-control" >
-                           <option value="">{{myuserObject.state.name}}</option>
-                           {% for stat in stateObjects %}
-                           <option value="{{stat.name}}">{{stat.name}}</option>
-                           {% endfor %}
-                         </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">City</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select name="city" class="form-control" >
-                           <option value="">{{myuserObject.city.name}}</option>
-                           {% for cit in cityObjects %}
-                           <option value="{{cit.name}}">{{cit.name}}</option>
-                           {% endfor %}
-                         </select>
-                        </div>
-                      </div>
-
-                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="contact" class="form-control" value="{{myuserObject.mobileNumber}}"> 
-                        </div>
-                      </div>
-                    
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Full Address</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="address" class="form-control" value="{{myuserObject.full_address}}"> 
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Pincode</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="pincode" class="form-control" value="{{myuserObject.pincode}}"> 
-                        </div>
-                      </div>
-                    
-
-                     <!--  -->
-                
-                     
-                    </div>
-
-                  </div>
-                </div>
-              
-
-
-            
-
+          <div class="modal-body">
               <div class="row">
-                <div class="form-group">
-                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-8">
-                    <!-- <button type="Cancel" class="btn btn-primary">Cancel</button> -->
-                    <button type="submit" class="btn btn-success" id="{{myuserObject.id}}">Submit</button>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_content">
 
-							
-                  </div>
-                </div>
-              </div>
-              
-            </form>
+                      <form class="form-horizontal form-label-left" method="post" action="/updateProfile/" id="AskQuestion" autocomplete="off"> {% csrf_token %}
+
+                          <input type="hidden" name="abc" value="{{myuserObject.user.username}}">
+                        
+                       
+                          <div class="  col-md-8 col-sm-8 col-xs-12 col-md-offset-2">
+                            <div class="x_panel">
+                              <div class="x_title">
+                             <!-- <h3 style="font-family: cursive;">Institution Details</h3> -->
+
+                              <div class="clearfix"></div>
+                              </div>
+                              <div class="x_content"><br />
+
+                                <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">First Name</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" name="topic" class="form-control" value="{{myuserObject.user.first_name}}" > 
+                                  </div>
+                                </div>
+
+                                 <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Last Name</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" name="topic" class="form-control" value="{{myuserObject.user.last_name}}"> 
+                                  </div>
+                                </div>
+                                  
+                                 <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender </label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                   <select name="gender" class="form-control" n>
+                                     <option value="Male">Male</option>
+                                     <option value="Female">Female</option>
+                                     <option value="Others">Others</option>
+                                   </select>
+                                  </div>
+                                </div>
+                                
+                                 <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select name="country" class="form-control" n>
+                                     <option value="">{{myuserObject.country.name}}</option>
+                                     {% for count in countryObjects %}
+                                     <option value="{{count.name}}">{{count.name}}</option>
+                                     {% endfor %}
+                                   </select>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">State</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select name="state" class="form-control" >
+                                     <option value="">{{myuserObject.state.name}}</option>
+                                     {% for stat in stateObjects %}
+                                     <option value="{{stat.name}}">{{stat.name}}</option>
+                                     {% endfor %}
+                                   </select>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">City</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select name="city" class="form-control" >
+                                     <option value="">{{myuserObject.city.name}}</option>
+                                     {% for cit in cityObjects %}
+                                     <option value="{{cit.name}}">{{cit.name}}</option>
+                                     {% endfor %}
+                                   </select>
+                                  </div>
+                                </div>
+
+                                 <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" name="contact" class="form-control" value="{{myuserObject.mobileNumber}}"> 
+                                  </div>
+                                </div>
+                              
+                                <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Full Address</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" name="address" class="form-control" value="{{myuserObject.full_address}}"> 
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Pincode</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" name="pincode" class="form-control" value="{{myuserObject.pincode}}"> 
+                                  </div>
+                                </div>
+                              
+
+                               <!--  -->
+                          
+                               
+                              </div>
+
+                            </div>
+                          </div>
+                        
 
 
+                      
+
+                        <div class="row">
+                          <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-8">
+                              <!-- <button type="Cancel" class="btn btn-primary">Cancel</button> -->
+                              <button type="submit" class="btn btn-success" id="{{myuserObject.id}}">Submit</button>
+
+          							
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </form>
+                
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-         
-
-       
-        <!-- /page content -->
-
-
-         
-
-
-          
-        </div>
-       <!--  <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div> -->
-      </div>
-      
-    </div>
-  </div>
-  
+          </div>
+      </div>      
+        <!-- /page content -->        
+    </div>     
+  </div>     
 </div>
-</div>
-</div> 
-</div>
+
+
 <!--modal finished -->
-
-
-
+          
 
 		  
 
 
 
-	</div>
 	
-</div>
 
 <script src="/static/js/jquery.min.js"></script>
   	<script src="/static/js/jquery.easing.min.js"></script>

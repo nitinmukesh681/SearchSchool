@@ -8,10 +8,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-# from datetime import datetime, timedelta, date
-# from django.utils import timezone
-# from django.utils.timezone import utc
 from django.conf import settings
+from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound
+from django.core.urlresolvers import reverse
+from coachingApp.forms import DocumentForm
+
+
 
 
 # Create your views here.
@@ -207,6 +210,8 @@ def AddInstitute(request):
 @csrf_exempt
 @login_required(login_url = '/loginP')
 def AddAnInstitution(request):
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
 	if request.method == "POST":
 		form = request.POST
 
@@ -228,7 +233,7 @@ def AddAnInstitution(request):
 			Institution_name = Institution_name.capitalize(),
 			established_year = established_year,
 			contact_details = contact_details,
-
+			addedBy = myuserObject,
 			website = website,
 			email = email,
 			person_to_contact = person_to_contact.capitalize(),
@@ -375,6 +380,62 @@ def registerYourself(request):
 	else:
 		return redirect('/Register/')
 
+
+# upload your images
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def listS(request):
+    # Handle file upload
+    user = request.user
+    myuserObject = MyUser.objects.get(user = user)
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(image=request.FILES['docfile'])
+            newdoc.userId = myuserObject
+            myuserObject.is_image_uploaded = True
+            myuserObject.image_url = newdoc.image.url
+            myuserObject.save()
+            newdoc.save()
+            print('image has been uploaded!!!')
+
+            # Redirect to the document list after POST
+            return redirect('/profile/')
+    else:
+        form = DocumentForm()  # A empty, unbound form
+
+    # Load documents for the list page
+    # documents = Document.objects.all()
+
+    # Render list page with the documents and the form
+    return render(request,'profile.html',{'myuserObject': myuserObject, 'form': form})
+
+
+#upload your institution images
+# @csrf_exempt
+# @login_required(login_url = '/loginP')
+# def listS(request):
+#     # Handle file upload
+#     user = request.user
+#     myuserObject = MyUser.objects.get(user = user)
+#     if request.method == 'POST':
+#         form = DocumentForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             newdoc = InstitutionImage(image=request.FILES['docfile'])
+#             newdoc.userId = myuserObject
+#             newdoc.InstitutionName = 
+#             newdoc.save()
+#             print('image has been uploaded!!!')
+
+#             # Redirect to the document list after POST
+#             return redirect('/info/')
+#     else:
+#         form = DocumentForm()  # A empty, unbound form
+#     	return render(request,'info.html',{'myuserObject': myuserObject, 'form': form})
+
+
+
+
 @csrf_exempt
 def loginPage(request):
 	return render(request,'login.html')
@@ -386,16 +447,21 @@ def loginAcc(request):
 	user = authenticate(username = username, password = password)
 	if user is not None:
 		if user.is_active:
-			login(request, user)
-			
-			first_name = user.first_name
-			# emailReq = user.username
+			try:
+				login(request, user)
+				
+				first_name = user.first_name
+				# emailReq = user.username
 
-			userObject = MyUser.objects.get(user = user)
-			userObject.is_loggedIn = True
-			userObject.last_logged_in = datetime.now()
-			userObject.save()
-		
+				userObject = MyUser.objects.get(user = user)
+				userObject.is_loggedIn = True
+				userObject.last_logged_in = datetime.now()
+				userObject.save()
+			except:
+				messages.warning(request,"This account is not found!!")
+				return render(request,'login.html')
+
+			
 			return render(request,'login_home.html',{'first_name':first_name})
 		else:
 			print(3)
@@ -432,10 +498,20 @@ def user_logout(request):
 @csrf_exempt
 @login_required(login_url = '/loginP')
 def profile(request):
+
 	user = request.user
 	myuserObject = MyUser.objects.get(user = user)
-	return render(request,'profile.html',{'myuserObject':myuserObject})
 
+	form = DocumentForm()
+	try:
+		imageObject = Document.objects.get(userId = myuserObject)
+		try:
+			InstitutionObject = AboutInstitution.objects.filter(addedBy = myuserObject)
+			return render(request,'profile.html',{'InstitutionObject':InstitutionObject,'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
+		except:
+			return render(request,'profile.html',{'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
+	except:
+		return render(request,'profile.html',{'form':form,'myuserObject':myuserObject})
 
 @csrf_exempt
 # @login_required(login_url='/loginP')
@@ -511,7 +587,7 @@ def askFunction(request):
 	myuserObject = MyUser.objects.get(user = user)
 	try:
 
-		question_by_all_user = AskQuestion.objects.filter(userAsked = myuserObject)
+		question_by_all_user = AskQuestion.objects.filter(userAsked = myuserObject).order_by('number_of_likes')
 
 		return render(request,'ask.html',{'user':user,'question_by_all_user':question_by_all_user})
 	except:
@@ -529,6 +605,30 @@ def answer_the_question(request):
 	except:
 		messages.warning(request,"Sorry No Question Found for you!!")
 		return render(request,'answer_it.html',{'user':user,})
+
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def answer_the_question_DP(request):
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+
+	if request.method == 'POST':
+		form = request.POST
+
+		questionId = form['abc']
+
+		questionObject = AskQuestion.objects.get(id = questionId)
+		questionObject.answer_is = form['answer']
+		questionObject.is_answered_YesNo = True
+		questionObject.Asked_to = myuserObject
+		questionObject.save()
+
+
+		return redirect('/discussionPage/')
+	else:
+		return redirect('/discussionPage/')
+
 
 @csrf_exempt
 @login_required(login_url = '/loginP')
@@ -555,8 +655,9 @@ def discussionPage_today(request):
 	myuserObject = MyUser.objects.get(user = user)
 	date = datetime.now()
 	AskQuestionObject = AskQuestion.objects.filter(asked_Date = date)
+	topics = TopicMaster.objects.all()
 
-	return render(request,'discussion.html',{'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+	return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
 
 
 @csrf_exempt
@@ -598,7 +699,7 @@ def discussionPage(request):
 	user = request.user
 	myuserObject = MyUser.objects.get(user = user)
 	topics = TopicMaster.objects.all()
-	AskQuestionObject = AskQuestion.objects.all()
+	AskQuestionObject = AskQuestion.objects.all().order_by('-id')
 
 	return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
 
@@ -611,12 +712,13 @@ def discussionPage_last_seven_days(request):
 	myuserObject = MyUser.objects.get(user = user)
 	startdate = datetime.today()
 	enddate = startdate - timedelta(days = 6)
+	topics = TopicMaster.objects.all()
 
-	AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate)
+	AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate).order_by('-id')
 	for obj in AskQuestionObject:
 		print(obj)
 
-	return render(request,'discussion.html',{'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+	return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
 
 
 @csrf_exempt
@@ -626,9 +728,143 @@ def discussionPage_last_thirty_days(request):
 	myuserObject = MyUser.objects.get(user = user)
 	startdate = datetime.today()
 	enddate = startdate - timedelta(days = 30)
+	topics = TopicMaster.objects.all()
 
-	AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate)
+	AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate).order_by('-id')
 	for obj in AskQuestionObject:
 		print(obj)
 
-	return render(request,'discussion.html',{'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+	return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+
+
+# @csrf_exempt
+# @login_required(login_url = '/loginP')
+# def likes_answer(request):
+# 	user = request.user
+# 	myuserObject = MyUser.objects.get(user = user)
+
+# 	if request.method == 'POST':
+# 		form = request.POST
+
+# 		id_got = form['id_required']
+# 		questionObject = AskQuestion.objects.get(id = id_got)
+# 		topicObject = questionObject.Ask_topic
+# 		try:
+# 			try:		
+# 				likesObject = likes.objects.filter(likes_object = questionObject)
+# 				print('object is not found')
+# 				for quest in likesObject:
+# 					try:
+# 						if quest.liked_by.user == myuserObject.user:
+# 							return HttpResponse('already liked!!')
+
+# 					except:
+# 						likesObject_created = likes.objects.create(
+# 							liked_by = myuserObject,
+# 							like_type = 'Answer',
+# 							likes_object = questionObject,
+# 							object_topic = topicObject,
+# 							)
+# 						questionObject.number_of_likes += 1
+# 						questionObject.save()
+
+# 						return HttpResponse('done')
+# 			except:
+# 				print('i have came here')
+# 				likesObject_created = likes.objects.create(
+# 					liked_by = myuserObject,
+# 					like_type = 'Answer',
+# 					likes_object = questionObject,
+# 					object_topic = topicObject,
+# 					)
+# 				questionObject.number_of_likes += 1
+# 				questionObject.save()
+# 				return HttpResponse('done')
+
+# 		except:
+# 			return HttpResponse('not done yet')
+# 	else:
+# 		return HttpResponse('not done!!')
+
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def likes_answer(request):
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+
+		if request.method == 'POST':
+			post = request.POST
+
+			id_got = post['id_required']
+			AskQuestionObject = AskQuestion.objects.get(id = id_got)
+			topicObject = AskQuestionObject.Ask_topic
+
+			try:
+
+				likes_object = likes.objects.filter(likes_object = AskQuestionObject)
+
+				# try:
+				a = 0
+				# likes_object.filter(liked_by = myuserObject)
+				print('object found')
+				for obj in likes_object:
+					if obj.liked_by == myuserObject:
+						a += 1
+						return HttpResponse('You have liked this!!')
+
+				if a != 1:
+					print('object not found!!')
+					likesObject = likes.objects.create(
+						liked_by = myuserObject,
+						like_type = 'Answer',
+						likes_object = AskQuestionObject,
+						object_topic = topicObject,
+						)
+					AskQuestionObject.number_of_likes +=1
+					AskQuestionObject.save()
+					return redirect('/discussionPage/')
+
+			except:
+				print(120)
+				likesObject = likes.objects.create(
+					liked_by = myuserObject,
+					like_type = 'Answer',
+					likes_object = AskQuestionObject,
+					object_topic = topicObject	,
+					)
+				AskQuestionObject.number_of_likes +=1
+				AskQuestionObject.save()
+				return redirect('/discussionPage/')
+			return HttpResponseNotFound('<h1>Page not found</h1>')
+		else:
+			return redirect('/discussionPage/')
+	except:
+		return HttpResponseNotFound('<h1>Page not found</h1>')
+
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def searchQuestionS(request):
+	user = request.user
+
+	if request.method == 'POST':
+		form = request.POST
+
+		querryObject = form['search'].capitalize()
+		try:
+			try:
+				searchObject = TopicMaster.objects.get(name = querryObject)
+				AskQuestionObject = AskQuestion.objects.filter(Ask_topic = searchObject).order_by('-asked_Date')
+				return render(request,'discussion.html',{'user':user,'AskQuestionObject':AskQuestionObject})
+			except:
+				try:
+					AskQuestionObject = AskQuestion.objects.filter(Asked_Question = querryObject)
+					return render(request,'discussion.html',{'user':user,'AskQuestionObject':AskQuestionObject})
+				except:
+					messages.warning(request,'No result found!!')
+					return redirect('/discussionPage/')
+		except:
+			messages.warning(request,'No result found!!')
+			return redirect('/discussionPage/')

@@ -4,6 +4,8 @@ from datetime import datetime
 
 
 # Create your models here.
+
+
 class CountryMaster(models.Model):
 	name = models.CharField(max_length = 100,null = True,blank = True)
 	last_modifiedBy = models.CharField(max_length = 100,null = True, blank = True)
@@ -37,7 +39,8 @@ class MyUser(models.Model):
 	country = models.ForeignKey(CountryMaster,null = True,blank = True)
 	state = models.ForeignKey(StateMaster,null = True,blank = True)
 	city = models.ForeignKey(CityMaster,null = True,blank = True)
-	image = models.ImageField(upload_to = 'profile_image',blank = True)	
+	image_url = models.CharField(max_length = 500, null = True, blank = True)
+	is_image_uploaded = models.BooleanField(default = False)
 	mobileNumber = models.BigIntegerField(null = True, blank = True)
 	full_address = models.CharField(max_length = 300,null = True, blank = True)
 	pincode = models.IntegerField(null = True,blank = True)
@@ -50,10 +53,18 @@ class MyUser(models.Model):
 	def __str__(self):
 		return '%s %s' % (self.user.username,self.mobileNumber)
 
+class Document(models.Model):
+	userId = models.OneToOneField(MyUser,null = True,blank = True)
+	image = models.ImageField(upload_to = 'profile_image',blank = True)	
+	uploaded_date_time = models.DateTimeField(auto_now_add = True,null = True,blank = True)
+	def __str__(self):
+		return '%s' % (self.userId.user.username)
+
 
 class AboutInstitution(models.Model):
 	mm = (('Coaching','Coaching'),('School','School'),('College','College'))
 	mms = (('Government','Government'),('Private','Private'),('Trust','Trust'))
+	addedBy = models.ForeignKey(MyUser,null = True, blank = True)
 	Institution_name = models.CharField(max_length = 100,null = True, blank = True)
 	InstitutionCategory = models.CharField(max_length = 100,choices = mm, null = True, blank = True)
 	InstitutionType = models.CharField(max_length = 100,choices = mms, null = True, blank = True)	
@@ -68,7 +79,7 @@ class AboutInstitution(models.Model):
 	full_address = models.CharField(max_length = 300,null = True, blank = True)
 	pincode = models.IntegerField(null = True,blank = True)
 	description = models.TextField(null = True,blank = True)
-	
+	is_image_uploaded = models.BooleanField(default = False)
 	# reviewStatus = models.ForeignKey(ReviewAboutInstitution,null = True,blank = True)
 	def __str__(self):
 		return '%s %s %s' % (self.id,self.Institution_name,self.website)
@@ -105,9 +116,20 @@ class AskQuestion(models.Model):
 	is_edited_YesNo = models.BooleanField(default = False)
 	edited_on_date = models.DateField(auto_now_add = True,null = True,blank = True)
 	edited_on_time = models.TimeField(auto_now_add = True,null = True, blank = True)
+	number_of_likes = models.BigIntegerField(default = 0, null = True, blank = True)
 
 	def __str__(self):
 		return 'Question is  %s and topic %s' % (self.Asked_Question,self.Ask_topic)
+
+class likes(models.Model):
+	mm = (('Topics','Topics'),('Comment','Comment'),('Answer','Answer'))
+	liked_by = models.ForeignKey(MyUser,null = True,blank = True,on_delete=models.CASCADE)
+	like_type = models.CharField(max_length = 200,null = True, blank = True, choices = mm)
+	likes_object = models.ForeignKey(AskQuestion,null = True, blank = True)
+	object_topic = models.ForeignKey(TopicMaster,null = True, blank = True)
+	liked_date_time = models.DateTimeField(auto_now_add = True, blank = True, null = True)
+	def __str__(self):
+		return '%s %s' % (self.liked_by.user.username, self.liked_date_time)
 
 class ResultCategoryMaster(models.Model):
 	name = models.CharField(max_length = 200, null = True, blank = True)
@@ -127,3 +149,12 @@ class statistical_data_institution(models.Model):
 
 	def __str__(self):
 		return '%s %s' % (self.id,self.InstitutionName)
+
+
+class InstitutionImage(models.Model):
+	userId = models.OneToOneField(MyUser,null = True,blank = True)
+	InstitutionName = models.ForeignKey(AboutInstitution,null = True ,blank = True)
+	image = models.ImageField(upload_to = 'profile_image',blank = True)	
+	uploaded_date_time = models.DateTimeField(auto_now_add = True,null = True,blank = True)
+	def __str__(self):
+		return '%s' % (self.userId.user.username)

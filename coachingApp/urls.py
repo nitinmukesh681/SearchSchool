@@ -26,5 +26,9 @@ urlpatterns = [
 	url(r'^discussionPage_last_thirty_days/',discussionPage_last_thirty_days,name='discussionPage'),
 	url(r'^profile/',profile,name='discussionPage'),
 	url(r'^askQuestion_DP/',askQuestion_DP,name='discussionPage'),
+	url(r'^answer_the_question_DP/',answer_the_question_DP,name='answer_the_question_DP'),
+	url(r'^upload/',listS,name='answer_the_question_DP'),
+	url(r'^likes_answer/',likes_answer,name='likes_answer'),
+	url(r'^searchQuestionS/',searchQuestionS,name='likes_answer'),
 
 	]
