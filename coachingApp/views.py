@@ -110,8 +110,13 @@ def search(request):
 						print('review found')
 						return render(request,'info.html',{'into':into,'reviewObject':reviewObject,'InstitutionObject':InstitutionObject})
 					except:
-						print('review not found')
-						return render(request,'info.html',{'into':into,'InstitutionObject':InstitutionObject})
+						try:
+							print('review not found')
+							imageObject = InstitutionImage.objects.filter(InstitutionName = InstitutionObject)
+							return render(request,'info.html',{'imageObject':imageObject,'into':into,'InstitutionObject':InstitutionObject})
+						except:
+							return render(request,'info.html',{'into':into,'InstitutionObject':InstitutionObject})
+
 
 				except:
 					try:
@@ -412,26 +417,27 @@ def listS(request):
 
 
 #upload your institution images
-# @csrf_exempt
-# @login_required(login_url = '/loginP')
-# def listS(request):
-#     # Handle file upload
-#     user = request.user
-#     myuserObject = MyUser.objects.get(user = user)
-#     if request.method == 'POST':
-#         form = DocumentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             newdoc = InstitutionImage(image=request.FILES['docfile'])
-#             newdoc.userId = myuserObject
-#             newdoc.InstitutionName = 
-#             newdoc.save()
-#             print('image has been uploaded!!!')
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def listing(request):
+    # Handle file upload
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+	if request.method == 'POST':
+		id_got = AboutInstitution.objects.get(id = id_of_inst)
+		form = DocumentForm(request.POST, request.FILES)
+		if form.is_valid():
+			newdoc = AboutInstitution(image=request.FILES['docfile'])
+			newdoc.userId = myuserObject
+			newdoc.InstitutionName = id_got
+			newdoc.save()
+			print('image has been uploaded!!!')
 
-#             # Redirect to the document list after POST
-#             return redirect('/info/')
-#     else:
-#         form = DocumentForm()  # A empty, unbound form
-#     	return render(request,'info.html',{'myuserObject': myuserObject, 'form': form})
+            # Redirect to the document list after POST
+			return redirect('/info/')
+	else:
+		form = DocumentForm()  # A empty, unbound form
+		return render(request,'info.html',{'myuserObject': myuserObject, 'form': form})
 
 
 
