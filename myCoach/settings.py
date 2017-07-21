@@ -92,8 +92,8 @@ DATABASES = {
         'NAME':'schooldata',
         'USER':'nitin',
         'PASSWORD':'nitin',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'HOST':'',
+        'PORT':'',
     }
 }
 
