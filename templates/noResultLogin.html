@@ -31,17 +31,45 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 			  <ul class="nav navbar-nav navbar-right">
-			    <li class="active"><a href="loginHome/#banner">Home</a></li>
+			   
+			    {% if myuserObject.is_loggedIn %}
+
+			  <li class="active"><a href="/loginHome/#banner">Home</a></li>
+			   <!--  <li><a href="/home/#service">Service</a></li>
+			    <li><a href="/home/#portfolio">Portfolio</a></li> -->
+          <li><a href="/discussionPage/">Dashboard</a></li>
+			    <li><a href="/loginHome/#contact">Contact Us</a></li>
+           <li><a href="/AddInstitute/">Add Institution</a></li>
+          <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{user.first_name}}<span class="fa fa-caret-down"></span></a>
+
+
+          <ul class="dropdown-menu">
+            <li><a href="/profile/">Profile</a></li>           
+            <li><a href="/logout/">Logout</a></li> 
+          </ul> 
+
+          </li>
+
+
+
+          <li><a class=" dropdown-toggle" data-toggle="dropdown">Question<span class="fa fa-caret-down"></span></a>
+
+            <ul class="dropdown-menu">
+              <li><a href="/answer_the_question/">Question For You</a></li>
+              <li><a href="/ask/">Your Question</a></li>
+            </ul>
+
+          </li>
+
+
+			   {% elif not myuserObject.is_loggedIn %}
+			     <li class="active"><a href="#banner">Home</a></li>
 			    <!-- <li><a href="#service">Service</a></li> -->
 			    <!-- <li><a href="#portfolio">Portfolio</a></li> -->
-          <li><a href="/discussionPage/">Dashboard</a></li>
-			    <li><a href="loginHome/#contact">Contact Us</a></li>
+			    <li><a href="#about">Our Team</a></li>
+			    <li><a href="#contact">Contact Us</a></li>
 			    <li><a href="/AddInstitute/">Add Institution</a></li>
-			 
-			    {% if myuserObject.is_loggedIn %}
-			  <li><a href="">Hi {{myuserObject.user.first_name}}</a></li>
-			   {% elif not myuserObject.is_loggedIn %}
-			    <li><a href="/Register/">Register</a>
+			   <li><a href="/Register/">Register</a>
 			   </li>
 			   <li><a href="/loginP/">Login</a></li>
 			   {% endif %}

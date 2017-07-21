@@ -58,7 +58,7 @@ class Document(models.Model):
 	image = models.ImageField(upload_to = 'profile_image',blank = True)	
 	uploaded_date_time = models.DateTimeField(auto_now_add = True,null = True,blank = True)
 	def __str__(self):
-		return '%s' % (self.userId.user.username)
+		return '%s' % (self.id)
 
 
 class AboutInstitution(models.Model):
