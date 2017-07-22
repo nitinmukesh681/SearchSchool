@@ -15,17 +15,15 @@ from django.core.urlresolvers import reverse
 from coachingApp.forms import DocumentForm
 
 
-
-
 # Create your views here.
 @csrf_exempt
 def homepage(request):
+	InstitutionObject = AboutInstitution.objects.filter()
 	return render(request,'index.html')
 
 @csrf_exempt
 def search(request):
 	try:
-
 		user = request.user
 		myuserObject_o = MyUser.objects.get(user = user)
 		into = True
@@ -222,6 +220,7 @@ def AddAnInstitution(request):
 
 		Institution_name = form['institute_name']
 		established_year = form['year_established']
+		category = form['category']
 		website = form['website_name']
 		contact_details = form['contact']
 		person_to_contact = form['person_contact']
@@ -236,6 +235,7 @@ def AddAnInstitution(request):
 
 		InstitutionObject = AboutInstitution.objects.create(
 			Institution_name = Institution_name.capitalize(),
+			InstitutionCategory = category,
 			established_year = established_year,
 			contact_details = contact_details,
 			addedBy = myuserObject,
@@ -364,10 +364,7 @@ def registerYourself(request):
 
 		myuser = MyUser.objects.create(
 			user = user,
-			# mobile_number  = mobile_number,
-			# email = email,
 			mobileNumber = mobile_number,
-			# image = image,
 			gender = gender,
 			country = country,
 			state = state,
@@ -376,7 +373,7 @@ def registerYourself(request):
 			pincode = pincode,
 			isProfileComplete = False,
 			is_activeYesNO = True,
-			# created_date_time = datetime.datetime.now().date()
+			created_date_time = datetime.now().date()
 			
 			)
 	
@@ -504,7 +501,10 @@ def user_logout(request):
 @csrf_exempt
 @login_required(login_url = '/loginP')
 def profile(request):
-
+	countryObjects = CountryMaster.objects.all()
+	stateObjects = StateMaster.objects.all()
+	cityObjects = CityMaster.objects.all()
+	
 	user = request.user
 	myuserObject = MyUser.objects.get(user = user)
 
@@ -513,11 +513,41 @@ def profile(request):
 		imageObject = Document.objects.get(userId = myuserObject)
 		try:
 			InstitutionObject = AboutInstitution.objects.filter(addedBy = myuserObject)
-			return render(request,'profile.html',{'InstitutionObject':InstitutionObject,'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
+			return render(request,'profile.html',{'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'InstitutionObject':InstitutionObject,'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
 		except:
-			return render(request,'profile.html',{'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
+			return render(request,'profile.html',{'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
 	except:
-		return render(request,'profile.html',{'form':form,'myuserObject':myuserObject})
+		return render(request,'profile.html',{'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'form':form,'myuserObject':myuserObject})
+
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def updateProfile(request):
+	user = request.user
+	if request.method == 'POST':
+		form = request.POST
+		profileObject = MyUser.objects.get(user = user)
+		countryObject = CountryMaster.objects.get(name = form['country'])
+		stateObject = StateMaster.objects.get(name = form['state'])
+		cityObject = CityMaster.objects.get(name = form['city'])
+
+		user.first_name = form['first_name']
+		user.last_name = form['last_name']
+		profileObject.gender = form['gender']
+		profileObject.country = countryObject
+		profileObject.state = stateObject
+		profileObject.city = cityObject
+		profileObject.full_address = form['address']
+		profileObject.pincode = form['pincode']
+
+		user.save()
+		profileObject.save()
+		return redirect('/profile/')
+	else:
+		return redirect('/profile/')
+
+
+
 
 @csrf_exempt
 # @login_required(login_url='/loginP')
@@ -628,6 +658,9 @@ def answer_the_question_DP(request):
 		questionObject.answer_is = form['answer']
 		questionObject.is_answered_YesNo = True
 		questionObject.Asked_to = myuserObject
+		questionObject.answer_on_date = datetime.now().date()
+		questionObject.answer_on_time = datetime.now().time()
+
 		questionObject.save()
 
 
@@ -648,6 +681,9 @@ def addAnswer(request):
 		questionObject = AskQuestion.objects.get(id = questionId)
 		questionObject.answer_is = form['answer']
 		questionObject.is_answered_YesNo = True
+		questionObject.answer_on_date = datetime.now().date()
+		questionObject.answer_on_time = datetime.now().time()
+
 		questionObject.save()
 
 		return redirect('/answer_the_question/')
@@ -743,54 +779,6 @@ def discussionPage_last_thirty_days(request):
 	return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
 
 
-# @csrf_exempt
-# @login_required(login_url = '/loginP')
-# def likes_answer(request):
-# 	user = request.user
-# 	myuserObject = MyUser.objects.get(user = user)
-
-# 	if request.method == 'POST':
-# 		form = request.POST
-
-# 		id_got = form['id_required']
-# 		questionObject = AskQuestion.objects.get(id = id_got)
-# 		topicObject = questionObject.Ask_topic
-# 		try:
-# 			try:		
-# 				likesObject = likes.objects.filter(likes_object = questionObject)
-# 				print('object is not found')
-# 				for quest in likesObject:
-# 					try:
-# 						if quest.liked_by.user == myuserObject.user:
-# 							return HttpResponse('already liked!!')
-
-# 					except:
-# 						likesObject_created = likes.objects.create(
-# 							liked_by = myuserObject,
-# 							like_type = 'Answer',
-# 							likes_object = questionObject,
-# 							object_topic = topicObject,
-# 							)
-# 						questionObject.number_of_likes += 1
-# 						questionObject.save()
-
-# 						return HttpResponse('done')
-# 			except:
-# 				print('i have came here')
-# 				likesObject_created = likes.objects.create(
-# 					liked_by = myuserObject,
-# 					like_type = 'Answer',
-# 					likes_object = questionObject,
-# 					object_topic = topicObject,
-# 					)
-# 				questionObject.number_of_likes += 1
-# 				questionObject.save()
-# 				return HttpResponse('done')
-
-# 		except:
-# 			return HttpResponse('not done yet')
-# 	else:
-# 		return HttpResponse('not done!!')
 
 
 @csrf_exempt
@@ -874,3 +862,25 @@ def searchQuestionS(request):
 		except:
 			messages.warning(request,'No result found!!')
 			return redirect('/discussionPage/')
+
+
+@csrf_exempt
+def contactPage(request):
+	if request.method == 'POST':
+		form = request.POST
+		name = form['name']
+		email = form['email']
+		subject = form['subject']
+		message = form['message']
+
+		helpObject = Help_Contact.objects.create(
+			name = name,
+			email = email,
+			subject = subject,
+			message = message,
+			)
+		message = "Your message has been sent. We will try to contact you soon.!!"
+		return render(request,'index.html',{'message':message})
+	else:
+		return render(request,'index.html')
+

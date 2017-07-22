@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>About Reviewer</title>
-</head>
-<body>
-
-</body>
-</html><!DOCTYPE html>
 <html>
 <head>
 	<title>My Profile</title>
@@ -119,7 +110,7 @@
 <br>
                  
                       <div class="row">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-6">state</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-6">State</label>
                         <div class="col-md-5 col-sm-6 col-xs-6">
                          {{myuserObject.state}}
                         </div>
@@ -276,8 +267,7 @@
 
                       <form class="form-horizontal form-label-left" method="post" action="/updateProfile/" id="AskQuestion" autocomplete="off"> {% csrf_token %}
 
-                          <input type="hidden" name="abc" value="{{myuserObject.user.username}}">
-                        
+                          
                        
                           <div class="  col-md-8 col-sm-8 col-xs-12 col-md-offset-2">
                             <div class="x_panel">
@@ -291,14 +281,14 @@
                                 <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12">First Name</label>
                                   <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="topic" class="form-control" value="{{myuserObject.user.first_name}}" > 
+                                    <input type="text" name="first_name" class="form-control" value="{{myuserObject.user.first_name}}" > 
                                   </div>
                                 </div>
 
                                  <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Last Name</label>
                                   <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="topic" class="form-control" value="{{myuserObject.user.last_name}}"> 
+                                    <input type="text" name="last_name" class="form-control" value="{{myuserObject.user.last_name}}"> 
                                   </div>
                                 </div>
                                   
@@ -317,7 +307,7 @@
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
                                   <div class="col-md-9 col-sm-9 col-xs-12">
                                     <select name="country" class="form-control" n>
-                                     <option value="">{{myuserObject.country.name}}</option>
+                                     <option value="{{myuserObject.country.name}}">{{myuserObject.country.name}}</option>
                                      {% for count in countryObjects %}
                                      <option value="{{count.name}}">{{count.name}}</option>
                                      {% endfor %}
@@ -329,7 +319,7 @@
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12">State</label>
                                   <div class="col-md-9 col-sm-9 col-xs-12">
                                     <select name="state" class="form-control" >
-                                     <option value="">{{myuserObject.state.name}}</option>
+                                     <option value="{{myuserObject.state.name}}">{{myuserObject.state.name}}</option>
                                      {% for stat in stateObjects %}
                                      <option value="{{stat.name}}">{{stat.name}}</option>
                                      {% endfor %}
@@ -341,7 +331,7 @@
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12">City</label>
                                   <div class="col-md-9 col-sm-9 col-xs-12">
                                     <select name="city" class="form-control" >
-                                     <option value="">{{myuserObject.city.name}}</option>
+                                     <option value="{{myuserObject.city.name}}">{{myuserObject.city.name}}</option>
                                      {% for cit in cityObjects %}
                                      <option value="{{cit.name}}">{{cit.name}}</option>
                                      {% endfor %}
@@ -352,7 +342,7 @@
                                  <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact</label>
                                   <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="contact" class="form-control" value="{{myuserObject.mobileNumber}}"> 
+                                    <input type="text" name="contact" class="form-control" value="{{myuserObject.mobileNumber}}" disabled=""> 
                                   </div>
                                 </div>
                               

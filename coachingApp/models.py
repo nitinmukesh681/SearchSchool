@@ -111,8 +111,8 @@ class AskQuestion(models.Model):
 	Ask_topic = models.ForeignKey(TopicMaster,null = True, blank = True)
 	answer_is = models.TextField(null = True, blank = True)
 	is_answered_YesNo = models.BooleanField(default = False)
-	answer_on_date = models.DateField(auto_now_add = True,null = True,blank = True)
-	answer_on_time = models.TimeField(auto_now_add = True,null = True, blank = True)
+	answer_on_date = models.DateField(null = True,blank = True)
+	answer_on_time = models.TimeField(null = True, blank = True)
 	is_edited_YesNo = models.BooleanField(default = False)
 	edited_on_date = models.DateField(auto_now_add = True,null = True,blank = True)
 	edited_on_time = models.TimeField(auto_now_add = True,null = True, blank = True)
@@ -158,3 +158,12 @@ class InstitutionImage(models.Model):
 	uploaded_date_time = models.DateTimeField(auto_now_add = True,null = True,blank = True)
 	def __str__(self):
 		return '%s' % (self.userId.user.username)
+
+class Help_Contact(models.Model):
+	name = models.CharField(max_length = 150,null = True, blank = True)
+	email = models.EmailField(null = True,blank = True)
+	subject = models.CharField(max_length = 150, null = True,blank = True)
+	message = models.TextField(null = True, blank = True)
+
+	def __str__(self):
+		return '%s' % (self.subject)

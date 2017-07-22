@@ -31,5 +31,7 @@ urlpatterns = [
 	url(r'^likes_answer/',likes_answer,name='likes_answer'),
 	url(r'^searchQuestionS/',searchQuestionS,name='likes_answer'),
 	url(r'^uploadInst/',listing,name='upload_your_institution Images'),
+	url(r'^contactPage/',contactPage,name='contactPage'),
+	url(r'^updateProfile/',updateProfile,name='updateProfile'),
 
 	]

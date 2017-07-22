@@ -20,13 +20,13 @@ $(function () {
 
 
       year_established: {
-        required: false,
+        required: true,
         // Specify that email should be validated
         // by the built-in "email" rule
         date: true,
       },
       email: {
-        required: false,
+        required: true,
         // Specify that email should be validated
         // by the built-in "email" rule
         email: true,
