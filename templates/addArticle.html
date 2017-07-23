@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Add Your Article</title>
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
@@ -13,7 +13,6 @@
 
 </head>
 <body>
-
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
 		<nav class="navbar navbar-default">
@@ -60,70 +59,59 @@
 	</div>
 <br>
 	<!--HEADER END-->
+<br><br><br><br>
+<div class="container">
+	<div class="heading text-center">
+		<strong><h2>Add Your Article</h2></strong>
+		<hr>
+	</div>
+	<div class="bg-info col-md-12 col-sm-12 col-xs-12">
+	<br>
+		<form action="/Your_article_is/" method="post" id="setYourArticle">{% csrf_token %}
+		  
+			<div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2">  
+			    <div class="form-group">
+	                <label class="control-label col-md-3 col-sm-3 col-xs-4">Heading :</label>
+	                <div class="col-md-9 col-sm-9 col-xs-8">
+	                    <input type="text" name="heading" class="form-control" placeholder="Heading">
+	                </div>
+	            </div>
+<br><br>
+
+	            <div class="form-group">
+	                <label class="control-label col-md-3 col-sm-3 col-xs-4">About :</label>
+	                <div class="col-md-9 col-sm-9 col-xs-8">
+	                    <textarea type="text" name="about" class="form-control" placeholder="Some lines about your article" rows="2"></textarea>
+	                </div>
+	            </div>
+<br><br><br>
+
+	            <div class="form-group">
+	                <label class="control-label col-md-3 col-sm-3 col-xs-4">Article :</label>
+	                <div class="col-md-9 col-sm-9 col-xs-8">
+	                    <textarea type="text" name="article" class="form-control" placeholder="Your article Here...." rows="7"></textarea>
+	                </div>
+	            </div>
+<br><br><br><br><br><br><br><br>
+<!-- <hr> -->
+				<div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
+					<button class="btn btn-success btn-sm" type="submit">Submit</button>
+				</div><br>
+            </div>
 
 
-
-
-  <!-- page content -->
-       
-
-        <br><br><br><br>
-          <div class="container">
-          <center>
-            <h2>Questions You Asked!!</h2>
-            <hr>
-          </center>
-               {% for question in question_by_all_user %}
-
-
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                    {% if question.answer_is %}
-                      <div class="panel panel-success"> 
-                    {% elif not question.answer_is %}
-                      <div class="panel panel-danger"> 
-                    {% endif %}
-
-                        <div class="panel-heading">
-                          <div>
-                              <h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4>
-                              
-                              <p style="float: right;">By You on {{question.asked_Date}} at {{question.asked_Time}} </p><br><br>
-                          </div>
-                        </div>
-                      
-
-
-                        {% if question.answer_is %}
-                        <div class="panel-body"> 
-                            
-
-                          <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
-
-                          <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h4> 
-                          <small>Answered On {{question.answer_on_date}} at {{question.answer_on_time}} By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}}</a></small>
-                           <strong>Likes: {{question.number_of_likes}} Comments:</strong></small>
-                          </div>   
-                        </div>
-                        {% endif %}
-                  
-                      </div>
-              </div>
-                
-           
-           {% endfor %}
-
-       </div>
-
-<!-- page content ends -->
-
-
-
+		</form>
+		
+	</div>
+</div>
 
 
 
 
 
 <script src="/static/js/jquery.min.js"></script>
+  	<script type="text/javascript" src="/static/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/validation/contact.js"></script>
   	<script src="/static/js/jquery.easing.min.js"></script>
   	<script src="/static/js/bootstrap.min.js"></script>
   	<script src="/static/js/jquery.mixitup.js" type="text/javascript"></script>
@@ -131,7 +119,5 @@
 	<script type="text/javascript" src="/static/js/custom.js"></script>
     <script src="/static/contactform/contactform.js"></script>
     
-
-
 </body>
 </html>

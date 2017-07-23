@@ -884,3 +884,57 @@ def contactPage(request):
 	else:
 		return render(request,'index.html')
 
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def makeYourComment(request):
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+
+	if request.method == 'POST':
+		form = request.POST
+		questionId = AskQuestion.objects.get(id = form['abcId'])
+		CommentsAre = Comment.objects.filter(Question_is = questionId)
+		commentContent = form['comment']
+
+		commentObject = Comment.objects.create(
+			Question_is = questionId,
+			comment_Content = commentContent,
+			comment_date = datetime.now().date(),
+			comment_time = datetime.now().time(),
+			comment_by = myuserObject,
+			)
+
+		questionId.number_of_comments+=1
+		questionId.save()
+		
+		return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
+	else:
+		return HttpResponse('not Done')
+
+def add_your_article(request):
+	return render(request,'addArticle.html')
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def Your_article_is(request):
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+	if request.method == 'POST':
+		form = request.POST
+
+		heading = form['heading']
+		about = form['about']
+		article = form['article']
+
+		articleObject = YourArticle.objects.create(
+			addedBy = myuserObject,
+			article_heading = heading,
+			article_is = article,
+			article_about = about,
+			article_date = datetime.now().date(),
+			article_time = datetime.now().time()
+			)
+		return HttpResponse('Your Article has been successfully submitted!!')
+	else:
+		return redirect('/add_your_article/')

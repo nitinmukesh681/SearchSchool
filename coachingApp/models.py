@@ -117,6 +117,7 @@ class AskQuestion(models.Model):
 	edited_on_date = models.DateField(auto_now_add = True,null = True,blank = True)
 	edited_on_time = models.TimeField(auto_now_add = True,null = True, blank = True)
 	number_of_likes = models.BigIntegerField(default = 0, null = True, blank = True)
+	number_of_comments = models.BigIntegerField(default = 0, null = True, blank = True)
 
 	def __str__(self):
 		return 'Question is  %s and topic %s' % (self.Asked_Question,self.Ask_topic)
@@ -130,6 +131,30 @@ class likes(models.Model):
 	liked_date_time = models.DateTimeField(auto_now_add = True, blank = True, null = True)
 	def __str__(self):
 		return '%s %s' % (self.liked_by.user.username, self.liked_date_time)
+
+class Comment(models.Model):
+	Question_is = models.ForeignKey(AskQuestion,on_delete = models.CASCADE,null = True,blank = True)
+	comment_Content = models.TextField(null = True, blank = True)
+	comment_date = models.DateField(null = True, blank = True)
+	comment_time = models.TimeField(null = True, blank = True)
+	comment_by = models.ForeignKey(MyUser,null = True, blank = True)
+	def __str__(self):
+		return '%s %s' % (self.Question_is.id,self.comment_by.user.username)
+
+
+class YourArticle(models.Model):
+	addedBy = models.ForeignKey(MyUser,null = True, blank = True)
+	article_heading = models.CharField(max_length = 300,null = True,blank = True)
+	article_is = models.TextField(null = True,blank = True)
+	article_about = models.CharField(max_length = 300,null = True, blank = True)
+	article_date = models.DateField(null = True, blank = True)
+	article_time = models.TimeField(null = True, blank = True)
+	number_of_likes = models.BigIntegerField(default = 0,null = True, blank = True)
+	number_of_comments = models.BigIntegerField(default = 0, null = True, blank = True)
+	def __str__(self):
+		return '%s %s' % (self.id,self.addedBy.user.username)
+
+
 
 class ResultCategoryMaster(models.Model):
 	name = models.CharField(max_length = 200, null = True, blank = True)

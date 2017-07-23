@@ -33,5 +33,8 @@ urlpatterns = [
 	url(r'^uploadInst/',listing,name='upload_your_institution Images'),
 	url(r'^contactPage/',contactPage,name='contactPage'),
 	url(r'^updateProfile/',updateProfile,name='updateProfile'),
+	url(r'^makeYourComment/',makeYourComment,name='makeYourComment'),
+	url(r'^add_your_article/',add_your_article,name='add_your_article'),
+	url(r'^Your_article_is/',Your_article_is,name='Your_article_is'),
 
 	]

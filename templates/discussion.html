@@ -28,7 +28,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="mid_center">
                  
-                  <form action="/searchQuestionS/" method="post"> {% csrf_token %}
+                  <form action="/searchQuestionS/" method="post" autocomplete="off"> {% csrf_token %}
                     <div class="col-xs-12 form-group pull-right top_search">
                       <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="Search for Question by Topics or Viewers" style="color: purple;">
@@ -54,7 +54,7 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 			  <ul class="nav navbar-nav navbar-right">
 			    <li ><a href="/loginHome/#banner">Home</a></li>
-          <li><a href="/discussionPage/">Dashboard</a></li>
+          <li><a href="/discussionPage/">Ask</a></li>
           <li><a href="/loginHome/#about">Our Team</a></li>
 
           <li><a href="/AddInstitute/">Add Institution</a></li>
@@ -227,6 +227,7 @@
                 <div class="panel panel-danger" onclick="document.getElementById('{{question.id}}').style.display='block'"> 
                 {% endif %}
 
+                
                     <div class="panel-heading">
                           <div>
                             <h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4>
@@ -234,7 +235,7 @@
                             <p style="float: right;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </p><br><br>
                           </div>
                     </div>
-
+            
 
                    
                       
@@ -243,11 +244,16 @@
                           <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
 
                             <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h4> 
-                            <small>Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} <strong>Likes: {{question.number_of_likes}} Comments:</strong></small>
+                            <small>Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} <strong>Likes: {{question.number_of_likes}} Comments: {{question.number_of_comments}}</strong></small>
                           </div> 
                           
                           <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
-                            <a class="btn btn-warning btn-xs">Comment</a>
+                            <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{question.id}}nitin">Comment</a>
+
+
+
+
+
                           <!-- <form action="/likes_answer/" method="POST">{% csrf_token %} -->
                           <!-- <input type="hidden" name="id_required" value="{{question.id}}"> -->
                             <button class="btn btn-primary btn-xs" id="{{question.id}}101">Like</button> 
@@ -270,13 +276,49 @@
                             </script>
                           </div>  
                     </div>
-   
+   <!-- comment popup -->
+                            <div class="">
+                              <!-- Trigger the modal with a button -->
+                              
+                              <!-- Modal -->
+                              <div class="modal fade" id="{{question.id}}nitin" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Comment Here</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form action="/makeYourComment/" method="post" autocomplete="off">{% csrf_token %}
+
+                                        <input type="hidden" name="abcId" value="{{question.id}}">
+
+                                        <textarea name="comment" class="form-control" rows="4" placeholder="Comment here" required="Please Enter your comment"></textarea>
+                                          <br>
+
+                                        <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
+                                          <button class="btn btn-info btn-sm" type="submit">Submit</button>
+                                        </div>
+
+                                      </form>
+                                    </div>
+                                    <!--  -->
+                                  </div>
+                                  
+                                </div>
+                            </div>
+                              
+                            </div>
+
+<!-- commemt popup ends -->
                 {% elif not question.answer_is %}
                   <div id="{{question.id}}" style="display: none;">
                       <div class="">
                         <div class="">
                         <br>
-                          <form action="/answer_the_question_DP/" method="post" id="answerS">{% csrf_token %}
+                          <form action="/answer_the_question_DP/" method="post" id="answerS" autocomplete="off">{% csrf_token %}
                           <input type="hidden" name="abc" value="{{question.id}}">
                             <div class="form-group">
                               <textarea type="text" name="answer" class="form-control" rows="2" placeholder="Write your answer..."></textarea>

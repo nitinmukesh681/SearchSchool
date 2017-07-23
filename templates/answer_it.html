@@ -36,7 +36,7 @@
 			    <li class="active"><a href="/loginHome/#banner">Home</a></li>
 			   <!--  <li><a href="/home/#service">Service</a></li>
 			    <li><a href="/home/#portfolio">Portfolio</a></li> -->
-          <li><a href="/discussionPage/">Dashboard</a></li>
+          <li><a href="/discussionPage/">Ask</a></li>
 			    <li><a href="/loginHome/#contact">Contact Us</a></li>
            <li><a href="/AddInstitute/">Add Institution</a></li>
           <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{user.first_name}}<span class="fa fa-caret-down"></span></a>
@@ -123,7 +123,7 @@
 
                           <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h4> 
                            <small>Answered On {{question.answer_on_date}} at {{question.answer_on_time}} By <a>You</a>
-                           </small> <strong>Likes: {{question.number_of_likes}} Comments:</strong></small>
+                           </small> <strong>Likes: {{question.number_of_likes}} Comments:{{question.comments}}</strong></small>
                         </div>
 
                         <div class="col-md-1 col-sm-1">
