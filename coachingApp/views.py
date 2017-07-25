@@ -38,9 +38,8 @@ def search(request):
 					InstitutionObject = AboutInstitution.objects.get(Institution_name = abcObject.capitalize())
 					try:
 						print(1)
-						stats_data = statistical_data_institution.objects.get(InstitutionName = InstitutionObject)
 						reviewObject = ReviewAboutInstitution.objects.filter(InstitutionName = InstitutionObject)
-						return render(request,'info.html',{'stats_data':stats_data,'user':user,'into':into,'reviewObject':reviewObject,'InstitutionObject':InstitutionObject})
+						return render(request,'info.html',{'user':user,'into':into,'reviewObject':reviewObject,'InstitutionObject':InstitutionObject})
 					except:
 						print(2)
 						return render(request,'info.html',{'user':user,'into':into,'InstitutionObject':InstitutionObject})
@@ -61,6 +60,7 @@ def search(request):
 
 					except:
 						try:
+							print('city')
 							xyzObject = form['search']
 							cityObject = CityMaster.objects.get(name = xyzObject.capitalize())
 							InstitutionObject = AboutInstitution.objects.filter(city = cityObject)
@@ -219,7 +219,7 @@ def AddAnInstitution(request):
 		form = request.POST
 
 		Institution_name = form['institute_name']
-		established_year = form['year_established']
+		# established_year = form['year_established']
 		category = form['category']
 		website = form['website_name']
 		contact_details = form['contact']
@@ -236,7 +236,7 @@ def AddAnInstitution(request):
 		InstitutionObject = AboutInstitution.objects.create(
 			Institution_name = Institution_name.capitalize(),
 			InstitutionCategory = category,
-			established_year = established_year,
+			# established_year = established_year,
 			contact_details = contact_details,
 			addedBy = myuserObject,
 			website = website,
@@ -445,6 +445,10 @@ def loginPage(request):
 
 @csrf_exempt
 def loginAcc(request):
+	a = 0
+	questionObject = AskQuestion.objects.filter(is_answered_YesNo = False)
+	for adf in questionObject:
+		a += 1
 	username = request.POST['username']
 	password = request.POST['password']
 	user = authenticate(username = username, password = password)
@@ -465,7 +469,7 @@ def loginAcc(request):
 				return render(request,'login.html')
 
 			
-			return render(request,'login_home.html',{'first_name':first_name})
+			return render(request,'login_home.html',{'first_name':first_name ,'a':a})
 		else:
 			print(3)
 			messages.warning(request,"This account is not activated!!")
@@ -480,11 +484,15 @@ def loginAcc(request):
 @csrf_exempt
 @login_required(login_url = '/loginP')
 def loginHome(request):
+	a = 0
+	questionObject = AskQuestion.objects.filter(is_answered_YesNo = False)
+	for adf in questionObject:
+		a += 1
 	user = request.user
 	myuserObject = MyUser.objects.get(user = user)
 	first_name = user.first_name
 
-	return render(request,'login_home.html',{'first_name':first_name})
+	return render(request,'login_home.html',{'first_name':first_name,'a':a})
 
 
 @csrf_exempt
@@ -912,6 +920,8 @@ def makeYourComment(request):
 	else:
 		return HttpResponse('not Done')
 
+@csrf_exempt
+@login_required(login_url = '/loginP')
 def add_your_article(request):
 	return render(request,'addArticle.html')
 
@@ -935,6 +945,23 @@ def Your_article_is(request):
 			article_date = datetime.now().date(),
 			article_time = datetime.now().time()
 			)
-		return HttpResponse('Your Article has been successfully submitted!!')
+		return redirect('/show_your_article/')
 	else:
 		return redirect('/add_your_article/')
+
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def show_your_article(request):
+	user = request.user
+	ArticleObject = YourArticle.objects.all()
+	return render(request,'showArticle.html',{'ArticleObject':ArticleObject})
+
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def show_my_article(request):
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+	ArticleObject = YourArticle.objects.filter(addedBy = myuserObject)
+	return render(request,'showArticle.html',{'ArticleObject':ArticleObject})

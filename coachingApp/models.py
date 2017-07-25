@@ -67,7 +67,7 @@ class AboutInstitution(models.Model):
 	addedBy = models.ForeignKey(MyUser,null = True, blank = True)
 	Institution_name = models.CharField(max_length = 100,null = True, blank = True)
 	InstitutionCategory = models.CharField(max_length = 100,choices = mm, null = True, blank = True)
-	InstitutionType = models.CharField(max_length = 100,choices = mms, null = True, blank = True)	
+	InstitutionType = models.CharField(max_length = 100, null = True, blank = True)	
 	established_year = models.DateField(null = True, blank = True)
 	contact_details = models.BigIntegerField(null = True,blank = True)
 	website = models.URLField(null = True,blank = True,max_length = 200)

@@ -9,12 +9,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600|Raleway:600,300|Josefin+Slab:400,700,600italic,600,400italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="css/slick-team-slider.css"/>
   <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-  <!-- =======================================================
-        Theme Name: Tempo
-        Theme URL: https://bootstrapmade.com/tempo-free-onepage-bootstrap-theme/
-        Author: BootstrapMade.com
-        Author URL: https://bootstrapmade.com
-    ======================================================= -->
+  <script src="/static/js/jquery.min.js"></script>
 </head>
 <body>
 	<!--HEADER START-->
@@ -59,7 +54,36 @@
 				<div class="jumbotron">
 				  <h1 class="small">Welcome To <span class="bold">InstuFind</span></h1>
 				  <p class="big">Search Schools, Coaching around You</p>
-				  <a href="#" class="btn btn-banner">Learn More<i class="fa fa-send"></i></a>
+				  <p class="big">Answer, Ask and write article and many more....</p><br>
+					  <div class="col-md-2 col-sm-4 col-xs-8" style="">
+						  <form action="" method="post">{% csrf_token %}
+						  	<!-- <a href="#" class="btn btn-banner">Stream<i class="fa fa-send"></i></a> -->
+						  	<select name="stream" id="stream" class="form-control" style="background-color: black;color: white;" >
+						  	<option>Your stream</option>
+						  		<option value="Science">Science</option>
+						  		<option value="Arts">Arts</option>
+						  		<option value="Commerce">Commerce</option>
+						  	</select>
+
+						  	 <!-- <script type="text/javascript">
+                              $('#stream').select(
+                                  function(){
+                                    $.ajax({
+                                      type:"POST",
+                                      url:"//",
+                                      data:{'valueQ':value},
+                                      success:function(response)
+                                      {
+                                        console.log(response);
+                                        location.href = "//";
+                                      }
+                                    });
+                                  });
+                            </script>
+ -->
+
+						  </form>
+					  </div>
 				</div>
 			</div>
 		</div>
@@ -191,7 +215,7 @@
 									<div class="well">
 										<center>
 											<strong><p style="color: black;">KV BHU</p></strong> 
-											<a href="https://www.kvbhu.in">www.kvbhu.in </a>
+											<a href="https://www.kvbhuvaranasi.org">www.kvbhuvaranasi.org </a>
 										</center>
 									</div>
 								</a>
@@ -214,7 +238,7 @@
 									<div class="well">
 										<center>
 											<strong><p style="color: black;">IIM Indore</p></strong> 
-											<a href="https://www.iimidr.ac.in">www.iimidr.ac.in </a>
+											<a href="https://www.iimidr.ac.in">www.iimidr.ac.in</a>
 										</center>
 									</div>
 								</a>
@@ -224,7 +248,8 @@
 									<div class="well">
 										<center>
 											<strong><p style="color: black;">JNV</p></strong> 
-											<a href="https://www.jnv.in">www.jnv.in </a>
+											<a href="https://www.jnvwchamparan.bih.nic.in">jnvwchamparan.bih.nic.in/
+</a>
 										</center>
 									</div>
 								</a>
@@ -234,7 +259,7 @@
 									<div class="well">
 										<center>
 											<strong><p style="color: black;">DPS</p></strong> 
-											<a href="https://www.dpsvaranasi.in">www.dpsvaranasi.in </a>
+											<a href="https://www.dpsvaranasi.com">www.dpsvaranasi.com </a>
 										</center>
 									</div>
 								</a>
@@ -289,6 +314,47 @@
 	</div>
 	<!--PORTFOLIO END-->
 
+<!--CTA2 START-->
+	<div class="cta2">
+	<br><br>
+		<div class="container">
+			<div class="row text-center">
+				<div class="container" style="color: black;">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-sm-6 col-xs-12">
+							<div class="well">
+								<h4>Heading</h4>
+								<p>About</p>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-sm-6 col-xs-12">
+							<div class="well">
+								<h4>Heading</h4>
+								<p>About</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-sm-6 col-xs-12">
+							<div class="well">
+								<h4>Heading</h4>
+								<p>About</p>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-sm-6 col-xs-12">
+							<div class="well">
+								<h4>Heading</h4>
+								<p>About</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a href="/add_your_article/" class="btn btn-default">Request An Article</a>
+			</div>
+		</div>
+		<br>
+	</div>
+<!--CTA2 END-->
 
 
 	<!--TEAM START-->
@@ -297,7 +363,7 @@
 			<div class="row">
 				<div class="page-title text-center">
 					<h1>Meet Our Team</h1>
-					<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <br>incididunt ut labore et dolore magna aliqua. </p> -->
+					
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="">
@@ -428,7 +494,7 @@
                             Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Tempo
                         -->
                         Designed by <a href="https://bootstrapmade.com/">Nitin Mukesh</a>
-                        <p>Version:1.0.0.2</p>
+                        <p>Version:1.0.0.3</p>
                     </div>
 				</div>
 			</div>

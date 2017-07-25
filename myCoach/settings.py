@@ -72,6 +72,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'myCoach.wsgi.application'
 
 

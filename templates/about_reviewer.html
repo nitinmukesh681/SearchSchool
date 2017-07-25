@@ -40,8 +40,14 @@
 			  <ul class="nav navbar-nav navbar-right">
 			    {% if into %}
           <li class="active"><a href="/loginHome/#banner">Home</a></li>
-          <li><a href="/loginHome/#about">Our Team</a></li>
-          <li><a href="/loginHome/#contact">Contact Us</a></li>
+          <li><a class=" dropdown-toggle" data-toggle="dropdown">Article<span class="fa fa-caret-down"></span></a>
+
+            <ul class="dropdown-menu">
+              <li><a href="/show_your_article/">All Articles</a></li>
+              <li><a href="/show_my_article/">My Articles</a></li>
+            </ul>
+          </li>
+
           <li><a href="/AddInstitute/">Add Institution</a></li>
            <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{user.first_name}}<span class="fa fa-caret-down"></span></a>
 
@@ -139,12 +145,12 @@
 <br>
                     <!-- </div> -->
 
-                      <div class="row">
+                      <!-- <div class="row">
                         <label class="control-label col-md-3 col-sm-3 col-xs-6">Mobile</label>
                         <div class="col-md-5 col-sm-6 col-xs-6">
                           {{myuserObject.mobileNumber}}
                         </div>
-                      </div>
+                      </div> -->
 <br>
                       <div class="row">
                         <label class="control-label col-md-3 col-sm-3 col-xs-6">Full Address</label>
