@@ -38,5 +38,7 @@ urlpatterns = [
 	url(r'^Your_article_is/',Your_article_is,name='Your_article_is'),
 	url(r'^show_your_article/',show_your_article,name='Your_article_is'),
 	url(r'^show_my_article/',show_my_article,name='Your_article_is'),
+	url(r'^discussQ/',discussQ,name='discussQ'),
+	url(r'^article1/',article1,name='article1'),
 
 	]

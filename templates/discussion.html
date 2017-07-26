@@ -22,7 +22,7 @@
 
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
-		<nav class="navbar navbar-default" style="background-color: pink;">
+		<nav class="navbar navbar-default" style="background-color: ">
 			<div class="container">
 
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -242,7 +242,7 @@
                             <p style="float: right;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </p><br><br>
                           </div>
                     </div>
-            
+                </a>
 
                    
                       
@@ -281,8 +281,10 @@
                                     });
                                   });
                             </script>
+                          
                           </div>  
                     </div>
+
    <!-- comment popup -->
                             <div class="">
                               <!-- Trigger the modal with a button -->
@@ -316,7 +318,28 @@
                                   
                                 </div>
                             </div>
-                              
+                                <form action="/discussQ/" method="post">{% csrf_token %}
+                              <input type="hidden" name="idSend" value="{{question.id}}">
+
+                              <button class="btn btn-info btn-xs" type="submit" id="{{question.id}}nmb">Discuss</button>
+                            
+                        <!--     <script type="text/javascript">
+                              $('#{{question.id}}nmb').click(
+                                  function(){
+                                    $.ajax({
+                                      type:"POST",
+                                      url:"/discussQ/",
+                                      data:{'idSend':{{question.id}},},
+                                      success:function(response)
+                                      {
+                                        // console.log(response);
+                                        // location.href = "";
+                                      }
+                                    });
+                                  });
+                            </script> -->
+                            </form>
+                            
                             </div>
 
 <!-- commemt popup ends -->
@@ -346,6 +369,7 @@
                 </div> 
               </div>
                   <!--modal finished -->
+
            {% endfor %}
         </div>
 

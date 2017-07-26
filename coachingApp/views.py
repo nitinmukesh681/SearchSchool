@@ -954,7 +954,7 @@ def Your_article_is(request):
 @login_required(login_url = '/loginP')
 def show_your_article(request):
 	user = request.user
-	ArticleObject = YourArticle.objects.all()
+	ArticleObject = YourArticle.objects.all().order_by('-article_date')
 	return render(request,'showArticle.html',{'ArticleObject':ArticleObject})
 
 
@@ -963,5 +963,29 @@ def show_your_article(request):
 def show_my_article(request):
 	user = request.user
 	myuserObject = MyUser.objects.get(user = user)
-	ArticleObject = YourArticle.objects.filter(addedBy = myuserObject)
+	ArticleObject = YourArticle.objects.filter(addedBy = myuserObject).order_by('-article_date')
 	return render(request,'showArticle.html',{'ArticleObject':ArticleObject})
+
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def discussQ(request):
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+	if request.method == 'POST':
+		post = request.POST
+		questionId = AskQuestion.objects.get(id = post['idSend'])
+		CommentsAre = Comment.objects.filter(Question_is = questionId)
+		return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
+
+	else:
+		return redirect('/discussionPage/')
+
+@csrf_exempt
+def article1(request):
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		return render(request,'article1.html',{'myuserObject':myuserObject})
+	except:
+		return render(request,'article1.html',{})
