@@ -40,6 +40,6 @@ urlpatterns = [
 	url(r'^show_my_article/',show_my_article,name='Your_article_is'),
 	url(r'^discussQ/',discussQ,name='discussQ'),
 	url(r'^article1/',article1,name='article1'),
-	url(r'^likes_article/',likes_articles,name='likes_article'),
+	# url(r'^likes_article/',likes_articles,name='likes_article'),
 
 	]
