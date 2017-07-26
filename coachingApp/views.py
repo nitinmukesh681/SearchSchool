@@ -989,3 +989,5 @@ def article1(request):
 		return render(request,'article1.html',{'myuserObject':myuserObject})
 	except:
 		return render(request,'article1.html',{})
+
+

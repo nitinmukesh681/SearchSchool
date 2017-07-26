@@ -9,6 +9,8 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600|Raleway:600,300|Josefin+Slab:400,700,600italic,600,400italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="css/slick-team-slider.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<script src="/static/js/jquery.min.js"></script>
+
 
 
 </head>
@@ -85,20 +87,42 @@
 
 			<hr>
 		</div>
-		<div class="col-md-offset-8 col-sm-offset-6 col-xs-offset-
+		<div class="col-md-offset-7 col-sm-offset-6 col-xs-offset-
 		4">
-			<small>By <strong>{{art.addedBy.user.first_name}} {{art.addedBy.user.last_name}}</strong>  On {{art.article_date}} at {{art.article_time}}</small>
+			<small>By <strong>{{art.addedBy.user.first_name}} {{art.addedBy.user.last_name}}</strong>  On {{art.article_date}} at {{art.article_time}}
+				<strong>Likes: {{art.number_of_likes}} Comments: {{art.number_of_comments}}</strong>
+			</small>
 	
 		</div>
-		<div>
+		<div >
 		
-			<pre style="font-size: 18px;">
+			<pre style="font-size: 18px;" class="col-md-12 col-sm-10 col-sm-10">
 				<span class="fa fa-thumb-tack"></span>... {{art.article_is}}
 			</pre>
+			
 		</div>
 		 <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
-            <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{question.id}}nitin">Comment</a>
-            <button class="btn btn-primary btn-xs" id="{{question.id}}101">Like</button>
+            <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{art.id}}nitin">Comment</a>
+
+            <form action="/likes_article/" method="POST">{% csrf_token %}
+            <input type="hidden" name="id_required" value="{{art.id}}">
+            <button class="btn btn-primary btn-xs" type="submit" id="{{art.id}}">Like</button>
+            </form>
+           					<!-- <script type="text/javascript">
+                              $('#{{art.id}}').click(
+                                  function(){
+                                    $.ajax({
+                                      type:"POST",
+                                      url:"/likes_article/",
+                                      data:{'id_required':{{art.id}},},
+                                      success:function(response)
+                                      {
+                                        console.log(response);
+                                   location.href = "/show_your_article/";
+                                      }
+                                    });
+                                  });
+                            </script> -->
          </div> 
 	</div>
 {% endfor %}
