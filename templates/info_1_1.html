@@ -76,38 +76,91 @@
 	</div>
 
 	<!--HEADER END-->
-<br><br><br><br><br><br>
-<div class="container">
-<h3>Searched results are...</h3><br>
-<hr>
-  <div class="well col-xs-12 col-sm-12 col-md-12">
-    {% for institute in InstitutionObject %}
-    <div class="alert alert-info" style="background-color: ">
-    <br>
-      <div class="row">
-        <div class="col-md-8 col-sm-8 col-xs-7 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-          <h4 style="color: ;">{{institute.Institution_name}}, {{institute.city.name}}</h4>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-4">
-          <form action="/knowMore/" method="post">{% csrf_token %}
-            <input type="hidden" name="knowId" value="{{institute.id}}">
-            <button class="btn btn-success btn-sm" style="text-decoration: none;" type="submit">Know More</button>
-          </form>
-        </div>
-      </div>
-      <br>
-    </div>
-    <br>
-    <hr>
-    {% endfor %}
-  </div>
-</div>
+
+
 
 
 
 
   <!-- page content -->
        
+<br><br><br><br>
+  {% for institute in InstitutionObject %}
+              <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
+                <div class="x_panel">
+                  <div class="bg-success x_title">
+                    <h2>About <strong>{{institute.Institution_name}}</strong></h2>
+                  </div>
+                  <div class="clearfix"></div>
+                  
+
+                  <div class="x_content">
+
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">Institution Name</th>
+
+                            <th class="column-title">Established Year</th>
+                            <th class="column-title">Website</th>
+                            <th class="column-title">Contact To</th>
+                            <th class="column-title">Contact Number</th>
+
+                            <th class="column-title">City</th>
+                            <th class="column-title">Address</th>                                             <th class="column-title">More</th>         
+                         </tr>
+                        </thead>
+
+                        <tbody>
+                      
+                          <tr class="odd pointer">
+                            <td class=" ">{{institute.Institution_name}}</td>
+                            <td class=" ">{{institute.established_year}}</td>
+                            <td class=" "><a href="{{institute.website}}">{{institute.website}}</a></td>
+                            <td class=" ">{{institute.person_to_contact}}</td>
+                            <td class=" ">{{institute.contact_details}}</td>
+                            <td class=" ">{{institute.city}}</td>
+                            <td class=" ">{{institute.full_address}}, {{institute.pincode}}</td>
+                            <td>
+                                <form action="/knowMore/" method="post">{% csrf_token %}
+                                    <input type="hidden" name="knowId" value="{{institute.id}}">
+                                    <button class="btn btn-default" style="text-decoration: none;" type="submit">Know More</button>
+                                </form>
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+     
+                  <!--  -->
+
+                  </div>
+                </div>
+          </div>
+
+
+  <!-- /page content -->
+<!-- <div class="row">
+ 	<div class="col-md-4 col-sm-2"></div>
+</div> -->
+
+<div class="row">
+	<div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
+	 	<div class="bg-primary x_title">
+            <h3><span class="fa fa-lightbulb-o"></span>Description</h3>
+        </div>
+            <hr>
+
+        <h4><strong><span class="fa fa-cubes"></span></strong>{{institute.description}}</h4>
+
+	</div>
+</div>
+<hr> 
+{% endfor %}    
 
 <script src="/static/js/jquery.min.js"></script>
   	<script src="/static/js/jquery.easing.min.js"></script>

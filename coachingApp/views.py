@@ -280,7 +280,8 @@ def addReview(request):
 		InstitutionName = InstitutionObject,
 		review_title = xyz.capitalize(),
 		review = pqr.capitalize(),
-		addedBy = myuserObject
+		addedBy = myuserObject,
+		addedDateTime = datetime.now().date()
 		
 		)
 		myuserObject.Number_of_reviews +=1
