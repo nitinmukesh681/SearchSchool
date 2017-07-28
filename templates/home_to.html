@@ -30,11 +30,6 @@
 			    <li><a href="#about">Our Team</a></li>
 			    <li><a href="#contact">Contact Us</a></li>
 			    <li><a href="/AddInstitute/">Add Institution</a></li>
-			   
-
-
-
-
 			  </ul>
 			</div>
 		  </div>
@@ -43,13 +38,31 @@
 	<!--HEADER END-->
 
 	<!--BANNER START-->
-	<div id="banner" class="section-padding">
+	<div id="banner" class="">
 		<div class="container">
 			<div class="row">
 				<div class="jumbotron">
 				  <h1 class="small">Welcome To <span class="bold">InstuFind</span></h1>
 				  <p class="big">Search Schools, Coaching around You</p>
-				  <a href="#" class="btn btn-banner">Learn More<i class="fa fa-send"></i></a>
+				  <br><br><br>
+					 
+
+				<div class="mid_center">
+               
+	                <form action="/search/" method="post"> {% csrf_token %}
+	                  <div class="col-xs-12 form-group pull-right top_search">
+	                    <div class="input-group">
+	                      <input type="text" class="form-control input-lg" name="search" placeholder="Search for Institution by Area Pincode or city or webiste or name" style="color: purple;">
+		                      <span class="input-group-btn">
+		                            <button class="btn btn-default btn-lg" type="submit" style="background-color: purple; color: white;">Go!</button>
+		                      </span>
+	                    </div>
+	                  </div>
+	                </form>
+
+               <!--  -->
+              </div>
+
 				</div>
 			</div>
 		</div>
@@ -58,31 +71,61 @@
 
 	<!--CTA1 START-->
 	<div class="cta-1">
-		<div class="container">
-
-		 <div class="mid_center">
-               
-                <form action="/search/" method="post"> {% csrf_token %}
-                  <div class="col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                      <input type="text" class="form-control input-lg" name="search" placeholder="Search for..." style="color: purple;">
-	                      <span class="input-group-btn">
-	                            <button class="btn btn-default btn-lg" type="submit" style="background-color: purple; color: white;">Go!</button>
-	                      </span>
-                    </div>
-                  </div>
-                </form>
-              </div>
+		<div class="container">	
+			<div class="row">
+				<div class="col-md-3 col-sm-4 col-xs-12">
+					<div class="row text-center white">
+						<h2 class="cta-title">Got Stuck?</h2>
+						<a class="btn btn-default btn-sm" href="/discussionPage/">Ask And Discuss</a>
+					</div>
+				</div>
+	
+				<div class="col-md-9 col-sm-8 col-xs-12 text-center" style="color:white;">
+					<h2>Latest Questions</h2>
 
 
-			<div class="row text-center white">
-				<h1 class="cta-title">Say Hey to InstuFind!!</h1>
-				<p class="cta-sub-title">The ultimate place where you can also get reviews about Institution.</p>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<!-- Indicators -->
+	<!-- <ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+		<li data-target="#myCarousel" data-slide-to="3"></li>
+		<li data-target="#myCarousel" data-slide-to="4"></li>
+	</ol> -->
+	<!-- Wrapper for slides -->
+	<div class="carousel-inner">
+		<div class="item active" >
+					<h4>{{questionObject.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject1.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject2.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject3.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject4.Asked_Question}}</h4>
+		</div>
+	</div>
+
+	<!-- left and right controls -->
+
+</div>
+
+
+				</div>	
 			</div>
 		</div>
 	</div>
 	<!--CTA1 END-->
-
+	
 	<!--SERVICE START-->
 	<div id="service" class="section-padding">
 		<div class="container">
@@ -92,7 +135,97 @@
 					
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
-				<div class="col-md-4">
+				<!--BANNER START-->
+	<div id="banner" class="">
+		<div class="container">
+			<div class="row">
+				<div class="jumbotron">
+				  <h1 class="small">Welcome To <span class="bold">InstuFind</span></h1>
+				  <p class="big">Search Schools, Coaching around You</p>
+				  <br><br><br>
+					 
+
+				<div class="mid_center">
+               
+	                <form action="/search/" method="post"> {% csrf_token %}
+	                  <div class="col-xs-12 form-group pull-right top_search">
+	                    <div class="input-group">
+	                      <input type="text" class="form-control input-lg" name="search" placeholder="Search for Institution by Area Pincode or city or webiste or name" style="color: purple;">
+		                      <span class="input-group-btn">
+		                            <button class="btn btn-default btn-lg" type="submit" style="background-color: purple; color: white;">Go!</button>
+		                      </span>
+	                    </div>
+	                  </div>
+	                </form>
+
+               <!--  -->
+              </div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--BANNER END-->
+
+	<!--CTA1 START-->
+	<div class="cta-1">
+		<div class="container">	
+			<div class="row">
+				<div class="col-md-3 col-sm-4 col-xs-12">
+					<div class="row text-center white">
+						<h2 class="cta-title">Got Stuck?</h2>
+						<a class="btn btn-default btn-sm" href="/discussionPage/">Ask And Discuss</a>
+					</div>
+				</div>
+	
+				<div class="col-md-9 col-sm-8 col-xs-12 text-center" style="color:white;">
+					<h2>Latest Questions</h2>
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<!-- Indicators -->
+	<!-- <ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+		<li data-target="#myCarousel" data-slide-to="3"></li>
+		<li data-target="#myCarousel" data-slide-to="4"></li>
+	</ol> -->
+	<!-- Wrapper for slides -->
+	<div class="carousel-inner">
+		<div class="item active" >
+					<h4>{{questionObject.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject1.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject2.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject3.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject4.Asked_Question}}</h4>
+		</div>
+	</div>
+
+	<!-- left and right controls -->
+
+</div>
+
+
+				</div>	
+			</div>
+		</div>
+	</div>
+	<!--CTA1 END-->
+	<center>
+		<h2>{{message}}</h2>
+	</center><div class="col-md-4">
 					<div class="service-box">
 						<div class="service-icon"><i class="fa fa-picture-o"></i></div>
 						<div class="service-text">

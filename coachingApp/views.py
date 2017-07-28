@@ -18,8 +18,14 @@ from coachingApp.forms import DocumentForm
 # Create your views here.
 @csrf_exempt
 def homepage(request):
-	InstitutionObject = AboutInstitution.objects.filter()
-	return render(request,'index.html')
+	questionObject = AskQuestion.objects.latest('id')
+	idS = questionObject.id
+	questionObject1 = AskQuestion.objects.get(id = idS - 1)
+	questionObject2= AskQuestion.objects.get(id = idS - 2)
+	questionObject3 = AskQuestion.objects.get(id = idS - 3)
+	questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+	return render(request,'index.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4})
 
 @csrf_exempt
 def search(request):
@@ -74,18 +80,46 @@ def search(request):
 								try:
 									# user = request.user
 									myuserObject = MyUser.objects.get(user = user)
-									return render(request,'noResultLogin.html',{'myuserObject':myuserObject})
+									questionObject = AskQuestion.objects.latest('id')
+									idS = questionObject.id
+									questionObject1 = AskQuestion.objects.get(id = idS - 1)
+									questionObject2= AskQuestion.objects.get(id = idS - 2)
+									questionObject3 = AskQuestion.objects.get(id = idS - 3)
+									questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+									return render(request,'noResultLogin.html',{'myuserObject':myuserObject,'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4})
 								except:
-									return render(request,'noResult.html')
+									questionObject = AskQuestion.objects.latest('id')
+									idS = questionObject.id
+									questionObject1 = AskQuestion.objects.get(id = idS - 1)
+									questionObject2= AskQuestion.objects.get(id = idS - 2)
+									questionObject3 = AskQuestion.objects.get(id = idS - 3)
+									questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+									return render(request,'noResult.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4})
 								# return render(request,'noResult.html')
 
 			except:
 				try:
 					user = request.user
 					myuserObject = MyUser.objects.get(user = user)
-					return render(request,'noResultLogin.html',{'myuserObject':myuserObject})
+					questionObject = AskQuestion.objects.latest('id')
+					idS = questionObject.id
+					questionObject1 = AskQuestion.objects.get(id = idS - 1)
+					questionObject2= AskQuestion.objects.get(id = idS - 2)
+					questionObject3 = AskQuestion.objects.get(id = idS - 3)
+					questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+					return render(request,'noResultLogin.html',{'myuserObject':myuserObject,'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4})
 				except:
-					return render(request,'noResult.html')
+					questionObject = AskQuestion.objects.latest('id')
+					idS = questionObject.id
+					questionObject1 = AskQuestion.objects.get(id = idS - 1)
+					questionObject2= AskQuestion.objects.get(id = idS - 2)
+					questionObject3 = AskQuestion.objects.get(id = idS - 3)
+					questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+					return render(request,'noResult.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4})
 
 		else:
 			return redirect('/home/')
@@ -147,15 +181,36 @@ def search(request):
 									myuserObject = MyUser.objects.get(user = user)
 									return render(request,'noResultLogin.html',{'into':into,'myuserObject':myuserObject})
 								except:
-									return render(request,'noResult.html')
+									questionObject = AskQuestion.objects.latest('id')
+									idS = questionObject.id
+									questionObject1 = AskQuestion.objects.get(id = idS - 1)
+									questionObject2= AskQuestion.objects.get(id = idS - 2)
+									questionObject3 = AskQuestion.objects.get(id = idS - 3)
+									questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+									return render(request,'noResult.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,})
 
 			except:
 				try:
 					user = request.user
 					myuserObject = MyUser.objects.get(user = user)
-					return render(request,'noResultLogin.html',{'into':into,'myuserObject':myuserObject})
+					questionObject = AskQuestion.objects.latest('id')
+					idS = questionObject.id
+					questionObject1 = AskQuestion.objects.get(id = idS - 1)
+					questionObject2= AskQuestion.objects.get(id = idS - 2)
+					questionObject3 = AskQuestion.objects.get(id = idS - 3)
+					questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+					return render(request,'noResultLogin.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,'into':into,'myuserObject':myuserObject})
 				except:
-					return render(request,'noResult.html')
+					questionObject = AskQuestion.objects.latest('id')
+					idS = questionObject.id
+					questionObject1 = AskQuestion.objects.get(id = idS - 1)
+					questionObject2= AskQuestion.objects.get(id = idS - 2)
+					questionObject3 = AskQuestion.objects.get(id = idS - 3)
+					questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+					return render(request,'noResult.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,})
 
 		else:
 			return redirect('/home/')
@@ -469,8 +524,14 @@ def loginAcc(request):
 				messages.warning(request,"This account is not found!!")
 				return render(request,'login.html')
 
-			
-			return render(request,'login_home.html',{'first_name':first_name ,'a':a})
+			questionObject = AskQuestion.objects.latest('id')
+			idS = questionObject.id
+			questionObject1 = AskQuestion.objects.get(id = idS - 1)
+			questionObject2= AskQuestion.objects.get(id = idS - 2)
+			questionObject3 = AskQuestion.objects.get(id = idS - 3)
+			questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
+			return render(request,'login_home.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,'first_name':first_name ,'a':a})
 		else:
 			print(3)
 			messages.warning(request,"This account is not activated!!")
@@ -485,6 +546,13 @@ def loginAcc(request):
 @csrf_exempt
 @login_required(login_url = '/loginP')
 def loginHome(request):
+	questionObject = AskQuestion.objects.latest('id')
+	idS = questionObject.id
+	questionObject1 = AskQuestion.objects.get(id = idS - 1)
+	questionObject2= AskQuestion.objects.get(id = idS - 2)
+	questionObject3 = AskQuestion.objects.get(id = idS - 3)
+	questionObject4 = AskQuestion.objects.get(id = idS - 4)
+
 	a = 0
 	questionObject = AskQuestion.objects.filter(is_answered_YesNo = False)
 	for adf in questionObject:
@@ -493,7 +561,7 @@ def loginHome(request):
 	myuserObject = MyUser.objects.get(user = user)
 	first_name = user.first_name
 
-	return render(request,'login_home.html',{'first_name':first_name,'a':a})
+	return render(request,'login_home.html',{'first_name':first_name,'a':a,'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,})
 
 
 @csrf_exempt
@@ -745,49 +813,74 @@ def askQuestion_DP(request):
 
 
 @csrf_exempt
-@login_required(login_url = '/loginP')
 def discussionPage(request):
-	user = request.user
-	myuserObject = MyUser.objects.get(user = user)
-	topics = TopicMaster.objects.all()
-	AskQuestionObject = AskQuestion.objects.all().order_by('-id')
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		topics = TopicMaster.objects.all()
+		AskQuestionObject = AskQuestion.objects.all().order_by('-id')
 
-	return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+		return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+	except:
+		topics = TopicMaster.objects.all()
+		AskQuestionObject = AskQuestion.objects.all().order_by('-id')
+
+		return render(request,'discussion.html',{'topics':topics,'AskQuestionObject':AskQuestionObject})
+
 
 # views for filter post of last seven days
 
 @csrf_exempt
-@login_required(login_url = '/loginP')
 def discussionPage_last_seven_days(request):
-	user = request.user
-	myuserObject = MyUser.objects.get(user = user)
-	startdate = datetime.today()
-	enddate = startdate - timedelta(days = 6)
-	topics = TopicMaster.objects.all()
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		startdate = datetime.today()
+		enddate = startdate - timedelta(days = 6)
+		topics = TopicMaster.objects.all()
 
-	AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate).order_by('-id')
-	for obj in AskQuestionObject:
-		print(obj)
+		AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate).order_by('-id')
+		for obj in AskQuestionObject:
+			print(obj)
 
-	return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+		return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+	except:
+		startdate = datetime.today()
+		enddate = startdate - timedelta(days = 6)
+		topics = TopicMaster.objects.all()
+
+		AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate).order_by('-id')
+		for obj in AskQuestionObject:
+			print(obj)
+
+		return render(request,'discussion.html',{'topics':topics,'AskQuestionObject':AskQuestionObject})
 
 
 @csrf_exempt
-@login_required(login_url = '/loginP')
 def discussionPage_last_thirty_days(request):
-	user = request.user
-	myuserObject = MyUser.objects.get(user = user)
-	startdate = datetime.today()
-	enddate = startdate - timedelta(days = 30)
-	topics = TopicMaster.objects.all()
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		startdate = datetime.today()
+		enddate = startdate - timedelta(days = 30)
+		topics = TopicMaster.objects.all()
 
-	AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate).order_by('-id')
-	for obj in AskQuestionObject:
-		print(obj)
+		AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate).order_by('-id')
+		for obj in AskQuestionObject:
+			print(obj)
 
-	return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
+		return render(request,'discussion.html',{'topics':topics,'myuserObject':myuserObject,'AskQuestionObject':AskQuestionObject})
 
+	except:
+		startdate = datetime.today()
+		enddate = startdate - timedelta(days = 30)
+		topics = TopicMaster.objects.all()
 
+		AskQuestionObject = AskQuestion.objects.all().filter(asked_Date__gte = enddate).order_by('-id')
+		for obj in AskQuestionObject:
+			print(obj)
+
+		return render(request,'discussion.html',{'topics':topics,'AskQuestionObject':AskQuestionObject})
 
 
 @csrf_exempt
@@ -969,19 +1062,27 @@ def show_my_article(request):
 
 
 @csrf_exempt
-@login_required(login_url = '/loginP')
 def discussQ(request):
-	user = request.user
-	myuserObject = MyUser.objects.get(user = user)
-	if request.method == 'POST':
-		post = request.POST
-		questionId = AskQuestion.objects.get(id = post['idSend'])
-		CommentsAre = Comment.objects.filter(Question_is = questionId)
-		return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		if request.method == 'POST':
+			post = request.POST
+			questionId = AskQuestion.objects.get(id = post['idSend'])
+			CommentsAre = Comment.objects.filter(Question_is = questionId)
+			return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
 
-	else:
-		return redirect('/discussionPage/')
+		else:
+			return redirect('/discussionPage/')
+	except:
+		if request.method == 'POST':
+			post = request.POST
+			questionId = AskQuestion.objects.get(id = post['idSend'])
+			CommentsAre = Comment.objects.filter(Question_is = questionId)
+			return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
 
+		else:
+			return redirect('/discussionPage/')
 @csrf_exempt
 def article1(request):
 	try:

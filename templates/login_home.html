@@ -84,21 +84,32 @@
 		  </div>
 		</nav>
 	</div>
-	<!--HEADER END-->
-
-	<!--BANNER START-->
-	<div id="banner" class="section-padding">
+<!--BANNER START-->
+	<div id="banner" class="">
 		<div class="container">
 			<div class="row">
-
-
-				
-
-
 				<div class="jumbotron">
 				  <h1 class="small">Welcome To <span class="bold">InstuFind</span></h1>
 				  <p class="big">Search Schools, Coaching around You</p>
-				  <a href="#" class="btn btn-banner">Learn More<i class="fa fa-send"></i></a>
+				  <br><br><br>
+					 
+
+				<div class="mid_center">
+               
+	                <form action="/search/" method="post"> {% csrf_token %}
+	                  <div class="col-xs-12 form-group pull-right top_search">
+	                    <div class="input-group">
+	                      <input type="text" class="form-control input-lg" name="search" placeholder="Search for Institution by Area Pincode or city or webiste or name" style="color: purple;">
+		                      <span class="input-group-btn">
+		                            <button class="btn btn-default btn-lg" type="submit" style="background-color: purple; color: white;">Go!</button>
+		                      </span>
+	                    </div>
+	                  </div>
+	                </form>
+
+               <!--  -->
+              </div>
+
 				</div>
 			</div>
 		</div>
@@ -107,47 +118,81 @@
 
 	<!--CTA1 START-->
 	<div class="cta-1">
-		<div class="container">
-
-		 <div class="mid_center">
-               
-                <form action="/search/" method="post"> {% csrf_token %}
-                  <div class="col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                      <input type="text" class="form-control input-lg" name="search" placeholder="Search for Institution by Area Pincode or city or webiste or name" style="color: purple;">
-	                      <span class="input-group-btn">
-	                            <button class="btn btn-default btn-lg" type="submit" style="background-color: purple; color: white;">Go!</button>
-	                      </span>
-                    </div>
-                  </div>
-                </form>
-              </div>
+		<div class="container">	
+			<div class="row">
+				<div class="col-md-3 col-sm-4 col-xs-12">
+					<div class="row text-center white">
+						<h2 class="cta-title">Got Stuck?</h2>
+						<a class="btn btn-default btn-sm" href="/discussionPage/">Ask And Discuss</a>
+					</div>
+				</div>
+	
+				<div class="col-md-9 col-sm-8 col-xs-12 text-center" style="color:white;">
+					<h2>Latest Questions</h2>
 
 
-			<div class="row text-center white">
-				<h1 class="cta-title">Say Hello to InstuFind!!</h1>
-				<p class="cta-sub-title">The ultimate place where you can also get reviews about Institution.</p>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<!-- Indicators -->
+	<!-- <ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+		<li data-target="#myCarousel" data-slide-to="3"></li>
+		<li data-target="#myCarousel" data-slide-to="4"></li>
+	</ol> -->
+	<!-- Wrapper for slides -->
+	<div class="carousel-inner">
+		<div class="item active" >
+					<h4>{{questionObject.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject1.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject2.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject3.Asked_Question}}</h4>
+		</div>
+
+		<div class="item">
+					<h4>{{questionObject4.Asked_Question}}</h4>
+		</div>
+	</div>
+
+	<!-- left and right controls -->
+
+</div>
+
+
+				</div>	
 			</div>
 		</div>
 	</div>
 	<!--CTA1 END-->
-
+	<center>
+		<h2>{{message}}</h2>
+	</center>
 	<!--SERVICE START-->
 	<div id="service" class="section-padding">
 		<div class="container">
 			<div class="row">
 				<div class="page-title text-center">
 					<h1>Our Service</h1>
-					
+					<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <br>incididunt ut labore et dolore magna aliqua. </p> -->
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="col-md-4">
 					<div class="service-box">
+					<a href="/Register/" style="text-decoration: none; color: black;">
 						<div class="service-icon"><i class="fa fa-picture-o"></i></div>
 						<div class="service-text">
 							<h3>Info</h3>
-							<p> Register on our website to add details of your Institution and let world know about your institution.</p>
+							<p>Register on our website to add details of your Institution and let world know about your institution.</p>
 						</div>
+						</a>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -173,6 +218,7 @@
 		</div>
 	</div>
 	<!--SERVICE END-->
+
 	<!--CTA456 START-->
 	<div class="cta2">
 		<div class="container">
@@ -315,6 +361,7 @@
 		</div>
 	</div>
 	<!--PORTFOLIO END-->
+
 <!--CTA2 START-->
 	<div class="cta2">
 	<br><br>
@@ -359,13 +406,14 @@
 	</div>
 <!--CTA2 END-->
 
+
 	<!--TEAM START-->
 	<div id="about" class="section-padding">
 		<div class="container">
 			<div class="row">
 				<div class="page-title text-center">
 					<h1>Meet Our Team</h1>
-					<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <br>incididunt ut labore et dolore magna aliqua. </p> -->
+					
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="">
@@ -387,6 +435,7 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="col-md-6">
 						<div class="team-info">
 							<div class="img-sec">
@@ -405,14 +454,14 @@
 							</div>
 						</div>
 					</div>
-			
 					
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<!--TEAM END-->
-    
+   
 	<!--CTA2 START-->
 	<div class="cta2">
 		<div class="container">
@@ -434,9 +483,11 @@
 					
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
-              
+               <!--  <div id="sendmessage">Your message has been sent. Thank you!</div>
+                <div id="errormessage"></div> -->
+                
 				<div class="form-sec">
-                	<form action="/contactPage/" method="post" role="form" class="contactForm" id="contact">
+                	<form action="/contactPage/"  method="post" role="form" class="contactForm" id="contact">{% csrf_token %}
                     	<div class="col-md-4 form-group">
                             <input type="text" name="name" class="form-control text-field-box" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                             <div class="validation"></div>
@@ -487,7 +538,7 @@
 				<div class="footer_copyright">
 					<p> © Copyright, All Rights Reserved.</p>					
 					<div class="credits">
-                        
+                      
                         <p>Version:1.0.0.4</p>
                     </div>
 				</div>
@@ -495,6 +546,8 @@
 		</div>
 	</div>
   	<script src="/static/js/jquery.min.js"></script>
+  	<script type="text/javascript" src="/static/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/validation/contact.js"></script>
   	<script src="/static/js/jquery.easing.min.js"></script>
   	<script src="/static/js/bootstrap.min.js"></script>
   	<script src="/static/js/jquery.mixitup.js" type="text/javascript"></script>
