@@ -114,9 +114,9 @@
         
       </div>
       <div class="panel col-md-4 col-sm-4 col-xs-10 text-center">
-        <h4>{{InstitutionObject.established_year}}</h4>
+        <h4>{{InstitutionObject.email}}</h4>
         <hr>
-        <h6>Established Year</h6>
+        <h6>Email</h6>
       </div>      
     </div>
 
@@ -158,13 +158,25 @@
     </div>
   </div>
 
+          <div class="row ">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="alert alert-info x_title">
+                <h3><span class="fa fa-lightbulb-o"></span> Description</h3>
+              </div>
+              <h4><strong><span class="fa fa-cubes"></span>...{{InstitutionObject.description}}</h4>
+              <hr>
+            </div>
+
+          </div>
 
           <div class="row " id="{{institute.id}}">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="alert alert-danger x_title ">
               <br>
-                <div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-                     <a style="text-decoration: none; color: black;" data-target="#myModal2" data-toggle="modal"> <h2 class="column-title"><span class="fa fa-diamond">...</span><strong>Review</strong></h2> </a>
+                <div class="">
+                 <h3 class="column-title"><span class="fa fa-diamond">...</span><strong>Review</strong>
+                     <button style="text-decoration: none; color: black;" data-target="#myModal2" data-toggle="modal" class="btn btn-info btn-sm col-md-offset-8 col-sm-offset-7">Add New</button>
+                  </h3>
                 </div>
               <br>
 
@@ -243,7 +255,7 @@
 
                                       <div class="row">
                                         <div class="form-group">
-                                          <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-8">
+                                          <div class="col-md-9 col-sm-9 col-xs-9 col-sm-offset-9 col-xs-offset-8 col-md-offset-8">
                                             <!-- <button type="Cancel" class="btn btn-primary">Cancel</button> -->
                                             <button type="submit" class="btn btn-success">Submit</button>
                                           </div>

@@ -992,3 +992,44 @@ def article1(request):
 		return render(request,'article1.html',{})
 
 
+@csrf_exempt
+def governmentSchool(request):
+	try:
+		into = True
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		InstitutionObject = AboutInstitution.objects.filter(InstitutionCategory = 'School' ,InstitutionType = 'Government')
+		return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,'myuserObject':myuserObject})
+	except:
+		into = False
+		InstitutionObject = AboutInstitution.objects.filter(InstitutionCategory = 'School', InstitutionType = 'Government')
+		return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,})
+
+
+@csrf_exempt
+def privateSchool(request):
+	try:
+		into = True
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		InstitutionObject = AboutInstitution.objects.filter(InstitutionCategory = 'School' ,InstitutionType = 'Private')
+		return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,'myuserObject':myuserObject})
+	except:
+		into = False
+		InstitutionObject = AboutInstitution.objects.filter(InstitutionCategory = 'School', InstitutionType = 'Private')
+		return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,})
+
+@csrf_exempt
+def coaching(request):
+	try:
+		into = True
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		InstitutionObject = AboutInstitution.objects.filter(InstitutionCategory = 'Coaching' ,InstitutionType = 'Private')
+		return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,'myuserObject':myuserObject})
+	except:
+		into = False
+		InstitutionObject = AboutInstitution.objects.filter(InstitutionCategory = 'Coaching', InstitutionType = 'Private')
+		return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,})
+
+
