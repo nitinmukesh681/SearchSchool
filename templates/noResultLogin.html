@@ -40,8 +40,14 @@
             </ul>
           </li>
 
-          <li><a href="/AddInstitute/">Add Institution</a></li>
-        
+				<li><a class=" dropdown-toggle" data-toggle="dropdown">Schools<span class="fa fa-caret-down"></span></a>
+		        	<ul class="dropdown-menu">
+			            <li><a href="/privateSchool/">Private</a></li> 
+			            <li><a href="/governmentSchool/">Government</a></li>
+			            <li><a href="/coaching/">Coaching</a></li>
+			            <li><a href="/AddInstitute/">Add Institution</a></li>
+		        	</ul> 
+		        </li>        
          
 
           <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{user.first_name}}<span class="fa fa-caret-down"></span></a>
