@@ -24,8 +24,10 @@ def homepage(request):
 	questionObject2= AskQuestion.objects.get(id = idS - 2)
 	questionObject3 = AskQuestion.objects.get(id = idS - 3)
 	questionObject4 = AskQuestion.objects.get(id = idS - 4)
-
-	return render(request,'index.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4})
+	totalInstitution = AboutInstitution.objects.all().count()
+	totalQuestion = AskQuestion.objects.all().count()
+	totalComment = Comment.objects.all().count()
+	return render(request,'index.html',{'totalComment':totalComment,'totalQuestion':totalQuestion,'totalInstitution':totalInstitution, 'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4})
 
 @csrf_exempt
 def search(request):
