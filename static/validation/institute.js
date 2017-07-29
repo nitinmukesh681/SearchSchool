@@ -10,7 +10,7 @@ $(function () {
       // of an input field. Validation rules are defined
       // on the right side
       institute_name: "required",
-      website_name : "required",
+      // website_name : "required",
       person_contact:"required",
       country: "required",
       state: "required",
@@ -25,12 +25,12 @@ $(function () {
         // by the built-in "email" rule
         date: true,
       },
-      email: {
-        required: true,
-        // Specify that email should be validated
-        // by the built-in "email" rule
-        email: true,
-      },
+      // email: {
+      //   required: true,
+      //   // Specify that email should be validated
+      //   // by the built-in "email" rule
+      //   email: true,
+      // },
       contact: {
         required: true,
         maxlength: 10,
