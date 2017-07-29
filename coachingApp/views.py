@@ -532,8 +532,10 @@ def loginAcc(request):
 			questionObject2= AskQuestion.objects.get(id = idS - 2)
 			questionObject3 = AskQuestion.objects.get(id = idS - 3)
 			questionObject4 = AskQuestion.objects.get(id = idS - 4)
-
-			return render(request,'login_home.html',{'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,'first_name':first_name ,'a':a})
+			totalInstitution = AboutInstitution.objects.all().count()
+			totalQuestion = AskQuestion.objects.all().count()
+			totalComment = Comment.objects.all().count()
+			return render(request,'login_home.html',{'totalComment':totalComment,'totalQuestion':totalQuestion,'totalInstitution':totalInstitution,'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,'first_name':first_name ,'a':a})
 		else:
 			print(3)
 			messages.warning(request,"This account is not activated!!")
@@ -554,7 +556,9 @@ def loginHome(request):
 	questionObject2= AskQuestion.objects.get(id = idS - 2)
 	questionObject3 = AskQuestion.objects.get(id = idS - 3)
 	questionObject4 = AskQuestion.objects.get(id = idS - 4)
-
+	totalInstitution = AboutInstitution.objects.all().count()
+	totalQuestion = AskQuestion.objects.all().count()
+	totalComment = Comment.objects.all().count()
 	a = 0
 	questionObject = AskQuestion.objects.filter(is_answered_YesNo = False)
 	for adf in questionObject:
@@ -563,7 +567,7 @@ def loginHome(request):
 	myuserObject = MyUser.objects.get(user = user)
 	first_name = user.first_name
 
-	return render(request,'login_home.html',{'first_name':first_name,'a':a,'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,})
+	return render(request,'login_home.html',{'totalComment':totalComment,'totalQuestion':totalQuestion,'totalInstitution':totalInstitution,'first_name':first_name,'a':a,'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,})
 
 
 @csrf_exempt
@@ -681,8 +685,8 @@ def add_Question(request):
 			AskQuestionObect = AskQuestion.objects.create(
 				userAsked = userAsked,
 				Asked_to = myuserObject,
-				# asked_date = datetime.datetime.now().date(),
-				# asked_time = datetime.datetime.now().time(),
+				asked_date = datetime.now().date(),
+				asked_time = datetime.now().time(),
 				Asked_Question = Asked_Question,
 				Ask_topic = Asked_topic,
 				)			
@@ -1047,20 +1051,26 @@ def Your_article_is(request):
 
 
 @csrf_exempt
-@login_required(login_url = '/loginP')
 def show_your_article(request):
-	user = request.user
-	ArticleObject = YourArticle.objects.all().order_by('-article_date')
-	return render(request,'showArticle.html',{'ArticleObject':ArticleObject})
-
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		ArticleObject = YourArticle.objects.all().order_by('-article_date')
+		return render(request,'showArticle.html',{'myuserObject':myuserObject,'ArticleObject':ArticleObject})
+	except:
+		ArticleObject = YourArticle.objects.all().order_by('-article_date')
+		return render(request,'showArticle.html',{'ArticleObject':ArticleObject})
 
 @csrf_exempt
 @login_required(login_url = '/loginP')
 def show_my_article(request):
-	user = request.user
-	myuserObject = MyUser.objects.get(user = user)
-	ArticleObject = YourArticle.objects.filter(addedBy = myuserObject).order_by('-article_date')
-	return render(request,'showArticle.html',{'ArticleObject':ArticleObject})
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		ArticleObject = YourArticle.objects.filter(addedBy = myuserObject).order_by('-article_date')
+		return render(request,'showArticle.html',{'ArticleObject':ArticleObject,'myuserObject':myuserObject})
+	except:
+		return redirect('/loginP')
 
 
 @csrf_exempt

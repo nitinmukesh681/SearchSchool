@@ -40,8 +40,14 @@
 			    <li class="active"><a href="#banner">Home</a></li>
 			    <!-- <li><a href="#service">Service</a></li> -->
 			    <!-- <li><a href="#portfolio">Portfolio</a></li> -->
-			    <li><a href="#about">Our Team</a></li>
-			    <li><a href="#contact">Contact Us</a></li>
+			    <li><a href="/discussionPage/">Ask<span class="badge bg-red">{{a}}</span></a></li>
+			<li><a class=" dropdown-toggle" data-toggle="dropdown">Article<span class="fa fa-caret-down"></span></a>
+
+            <ul class="dropdown-menu">
+              <li><a href="/show_your_article/">All Articles</a></li>
+              <li><a href="/show_my_article/">My Articles</a></li>
+            </ul>
+          </li>
 			    <li><a class=" dropdown-toggle" data-toggle="dropdown">Schools<span class="fa fa-caret-down"></span></a>
 		        	<ul class="dropdown-menu">
 			            <li><a href="/privateSchool/">Private</a></li> 
@@ -68,7 +74,36 @@
 			<div class="row">
 				<div class="jumbotron">
 				  <h1 class="small">Welcome To <span class="bold">InstuFind</span></h1>
-				  <p class="big">Search Schools, Coaching around You</p>
+
+				  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+	
+					<div class="carousel-inner" style="color: white;">
+						<div class="item active" >
+							<h2 class="big">Search Schools, Coaching around You...</h2>
+						</div>
+						
+						<div class="item">
+							<h2>Get reviews about the institution from previous students and faculties...</h2>
+						</div>
+
+						<div class="item">
+							<h2>Ask Question on various topics, Answer them and get discussion...</h2>
+						</div>
+
+						<div class="item">
+							<h2>Post Your article and success stories and let the world know it...</h2>
+						</div>
+
+						<div class="item">
+							<h2>Search schools by Name, City or your area Pincode...</h2>	
+						</div>
+					</div>
+
+					<!-- left and right controls -->
+
+				</div>
+
+				  
 				  <br><br><br>
 					 
 
@@ -96,7 +131,7 @@
               	<div class=" col-md-4 col-sm-4 col-xs-4 text-center">
               		<strong><h3>{{totalQuestion}}</h3></strong>
               		<hr>
-              		<h5>Total Questions</h5>
+              		<h5>Questions Asked</h5>
               	</div>
               	<div class=" col-md-4 col-sm-4 col-xs-4 text-center">
               		<strong><h3>{{totalComment}}</h3></strong>
@@ -127,14 +162,7 @@
 
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<!-- Indicators -->
-	<!-- <ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-		<li data-target="#myCarousel" data-slide-to="3"></li>
-		<li data-target="#myCarousel" data-slide-to="4"></li>
-	</ol> -->
-	<!-- Wrapper for slides -->
+	
 	<div class="carousel-inner">
 		<div class="item active" >
 					<h4>{{questionObject.Asked_Question}}</h4>
