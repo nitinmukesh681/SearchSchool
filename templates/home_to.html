@@ -25,11 +25,11 @@
 			  <a class="navbar-brand" href="/home/">InstuFind</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
-			   <ul class="nav navbar-nav navbar-right">
+			    <ul class="nav navbar-nav navbar-right">
 			    <li class="active"><a href="#banner">Home</a></li>
 			    <!-- <li><a href="#service">Service</a></li> -->
 			    <!-- <li><a href="#portfolio">Portfolio</a></li> -->
-			    <li><a href="/discussionPage/">Ask<span class="badge bg-red">{{a}}</span></a></li>
+          		<li><a href="/discussionPage/">Ask<span class="badge bg-red">{{a}}</span></a></li>
 			<li><a class=" dropdown-toggle" data-toggle="dropdown">Article<span class="fa fa-caret-down"></span></a>
 
             <ul class="dropdown-menu">
@@ -37,7 +37,7 @@
               <li><a href="/show_my_article/">My Articles</a></li>
             </ul>
           </li>
-			    <li><a class=" dropdown-toggle" data-toggle="dropdown">Schools<span class="fa fa-caret-down"></span></a>
+			   <li><a class=" dropdown-toggle" data-toggle="dropdown">Schools<span class="fa fa-caret-down"></span></a>
 		        	<ul class="dropdown-menu">
 			            <li><a href="/privateSchool/">Private</a></li> 
 			            <li><a href="/governmentSchool/">Government</a></li>
@@ -46,10 +46,28 @@
 		        	</ul> 
 		        </li>
 
+			    <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{first_name}}<span class="fa fa-caret-down"></span></a>
 
-			   <li><a href="/Register/">Register</a>
-			   </li>
-			   <li><a href="/loginP/">Login</a></li>
+
+			    <ul class="dropdown-menu">
+			     <li><a href="/profile/">Profile</a></li> 
+			    <li><a href="/logout/">Logout</a></li> 
+			    </ul> 
+
+			    </li>
+
+
+
+			    <li><a class=" dropdown-toggle" data-toggle="dropdown">Question<span class="fa fa-caret-down"></span></a>
+
+			    	<ul class="dropdown-menu">
+                        <li><a href="/answer_the_question/">Question For You</a></li>
+                        <li><a href="/ask">Your Question</a></li>
+                        </ul>
+
+			    </li>
+
+			    
 			  </ul>
 			</div>
 		  </div>
@@ -155,38 +173,7 @@
 					
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
-				<!--BANNER START-->
-	<div id="banner" class="">
-		<div class="container">
-			<div class="row">
-				<div class="jumbotron">
-				  <h1 class="small">Welcome To <span class="bold">InstuFind</span></h1>
-				  <p class="big">Search Schools, Coaching around You</p>
-				  <br><br><br>
-					 
-
-				<div class="mid_center">
-               
-	                <form action="/search/" method="post"> {% csrf_token %}
-	                  <div class="col-xs-12 form-group pull-right top_search">
-	                    <div class="input-group">
-	                      <input type="text" class="form-control input-lg" name="search" placeholder="Search for Institution by Area Pincode or city or webiste or name" style="color: purple;">
-		                      <span class="input-group-btn">
-		                            <button class="btn btn-default btn-lg" type="submit" style="background-color: purple; color: white;">Go!</button>
-		                      </span>
-	                    </div>
-	                  </div>
-	                </form>
-
-               <!--  -->
-              </div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--BANNER END-->
-
+			
 	<!--CTA1 START-->
 	<div class="cta-1">
 		<div class="container">	
@@ -198,54 +185,15 @@
 					</div>
 				</div>
 	
-				<div class="col-md-9 col-sm-8 col-xs-12 text-center" style="color:white;">
-					<h2>Latest Questions</h2>
-
-
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<!-- Indicators -->
-	<!-- <ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-		<li data-target="#myCarousel" data-slide-to="3"></li>
-		<li data-target="#myCarousel" data-slide-to="4"></li>
-	</ol> -->
-	<!-- Wrapper for slides -->
-	<div class="carousel-inner">
-		<div class="item active" >
-					<h4>{{questionObject.Asked_Question}}</h4>
-		</div>
-
-		<div class="item">
-					<h4>{{questionObject1.Asked_Question}}</h4>
-		</div>
-
-		<div class="item">
-					<h4>{{questionObject2.Asked_Question}}</h4>
-		</div>
-
-		<div class="item">
-					<h4>{{questionObject3.Asked_Question}}</h4>
-		</div>
-
-		<div class="item">
-					<h4>{{questionObject4.Asked_Question}}</h4>
-		</div>
-	</div>
-
-	<!-- left and right controls -->
-
-</div>
-
-
-				</div>	
+					
 			</div>
 		</div>
 	</div>
 	<!--CTA1 END-->
 	<center>
 		<h2>{{message}}</h2>
-	</center><div class="col-md-4">
+	</center>
+				<div class="col-md-4">
 					<div class="service-box">
 						<div class="service-icon"><i class="fa fa-picture-o"></i></div>
 						<div class="service-text">

@@ -11,7 +11,7 @@ $(function () {
       // on the right side
       institute_name: "required",
       // website_name : "required",
-      person_contact:"required",
+      // person_contact:"required",
       country: "required",
       state: "required",
       city: "required",
