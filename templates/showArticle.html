@@ -127,20 +127,20 @@
 			</small>
 	
 		</div>
-		<div >
+		<div class="col-md-12 col-sm-10 col-sm-10">
 		
-			<pre style="font-size: 18px;" class="col-md-12 col-sm-10 col-sm-10">
-				<span class="fa fa-thumb-tack"></span>... <h3 style="word-wrap: break-word;">{{art.article_is}}</h3>
+			<pre style="font-size: 18px;" >
+				<span class="fa fa-thumb-tack"></span>... <h3 >{{art.article_is}}</h3>
 			</pre>
 			
 		</div>
 		 <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
             <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{art.id}}nitin">Comment</a>
 
-            <form action="/likes_article/" method="POST">{% csrf_token %}
-            <input type="hidden" name="id_required" value="{{art.id}}">
+            <!-- <form action="/likes_article/" method="POST">{% csrf_token %}
+            <input type="hidden" name="id_required" value="{{art.id}}"> -->
             <button class="btn btn-primary btn-xs" type="submit" id="{{art.id}}">Like</button>
-            </form>
+           <!--  </form> -->
            					<!-- <script type="text/javascript">
                               $('#{{art.id}}').click(
                                   function(){

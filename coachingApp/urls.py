@@ -43,5 +43,6 @@ urlpatterns = [
 	url(r'^privateSchool/',privateSchool,name='privateSchool'),
 	url(r'^governmentSchool/',governmentSchool,name='governmentSchool'),
 	url(r'^coaching/',coaching,name='coaching'),
+	url(r'^dashboard/',conc,name='dashboard'),
 
 	]

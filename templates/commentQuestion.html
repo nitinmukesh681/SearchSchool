@@ -220,11 +220,12 @@
 <!-- commemt popup ends -->
 
                 <br>
-  <div class="container">
+               <strong><h3>More Comments...</h3></strong> 
+  <div class="">
     <div class="">
       {% for com in CommentsAre %}
 
-      <div class="well col-md-9 col-sm-9 col-xs-12 col-md-offset-1 col-sm-offset-1">
+      <div class="well col-md-12 col-sm-12 col-xs-12">
 
         <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{com.comment_Content}}</h4> 
         <small>Commented On {{com.comment_date}} at {{com.comment_time}} By <a>{{com.comment_by.user.first_name}} {{com.comment_by.user.last_name}}</a></small>

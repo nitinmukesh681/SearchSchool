@@ -105,8 +105,8 @@ class TopicMaster(models.Model):
 class AskQuestion(models.Model):
 	userAsked = models.ForeignKey(MyUser,null = True, blank = True)
 	Asked_to = models.ForeignKey(MyUser,related_name = 'asked_to', null = True, blank = True)
-	asked_Date = models.DateField(null = True, blank = True)
-	asked_Time = models.TimeField(null = True, blank = True)
+	asked_Date = models.DateField(auto_now_add = True,null = True, blank = True)
+	asked_Time = models.TimeField(auto_now_add = True,null = True, blank = True)
 	Asked_Question = models.TextField(null = True, blank = True)
 	Ask_topic = models.ForeignKey(TopicMaster,null = True, blank = True)
 	answer_is = models.TextField(null = True, blank = True)

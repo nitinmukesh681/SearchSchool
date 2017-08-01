@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse, HttpResponseNotFound
 from django.core.urlresolvers import reverse
@@ -309,8 +310,14 @@ def AddAnInstitution(request):
 			description = description.capitalize(),
 
 			)
+		questionObject = AskQuestion.objects.latest('id')
+		idS = questionObject.id
+		questionObject1 = AskQuestion.objects.get(id = idS - 1)
+		questionObject2= AskQuestion.objects.get(id = idS - 2)
+		questionObject3 = AskQuestion.objects.get(id = idS - 3)
+		questionObject4 = AskQuestion.objects.get(id = idS - 4)
 
-		return render(request,'home_to.html',{'Institution_name':Institution_name})
+		return render(request,'home_to.html',{'Institution_name':Institution_name,'questionObject':questionObject,'questionObject1':questionObject1,'questionObject2':questionObject2,'questionObject3':questionObject3,'questionObject4':questionObject4,'myuserObject':myuserObject})
 	else:
 		return redirect('/home')
 
@@ -437,6 +444,11 @@ def registerYourself(request):
 			
 			)
 	
+		subject = 'Thanaks for Registering'
+		message = ' Thanks for registering on our site. We hope you will enjoy all the features provided. Search schools and ask question related to any topic and get discussion over that. All the Best!!!  By Instufind'
+		from_email = settings.EMAIL_HOST_USER
+		to_list = [email,settings.EMAIL_HOST_USER]
+		send_mail(subject,message,from_email,to_list,fail_silently = True)
 
 		return render(request,'successRegister.html',{'email':email})
 	else:
@@ -1018,7 +1030,7 @@ def makeYourComment(request):
 		questionId.number_of_comments+=1
 		questionId.save()
 		
-		return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
+		return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId,'myuserObject':myuserObject})
 	else:
 		return HttpResponse('not Done')
 
@@ -1148,3 +1160,5 @@ def coaching(request):
 		return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,})
 
 
+def conc(request):
+	return render(request,'dashboard.html')
