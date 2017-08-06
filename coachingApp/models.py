@@ -68,6 +68,7 @@ class AboutInstitution(models.Model):
 	Institution_name = models.CharField(max_length = 100,null = True, blank = True)
 	InstitutionCategory = models.CharField(max_length = 100,choices = mm, null = True, blank = True)
 	InstitutionType = models.CharField(max_length = 100, null = True, blank = True)	
+	school_board = models.CharField(max_length = 100,null = True ,blank = True)
 	established_year = models.CharField(max_length = 6, null = True, blank = True)
 	contact_details = models.BigIntegerField(null = True,blank = True)
 	website = models.URLField(null = True,blank = True,max_length = 200)

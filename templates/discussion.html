@@ -17,6 +17,9 @@
   .abcd:hover{
     background-color: grey;
   }
+  #akk:hover{
+    color:blue;
+  }
 </style>
 <body>
 
@@ -153,8 +156,7 @@
 
             <div class="">
 
-              <button class="btn btn-info" id="" data-target="#myModal3" data-toggle="modal">Ask Question</button>
-
+             
   <!--modal testing -->
                  
               <div class="container">
@@ -269,6 +271,11 @@
 
           <br>
         <div class="container">
+        <div class=" panel col-xs-12 col-md-12 col-sm-12">
+           <h3 id="akk" data-target="#myModal3" data-toggle="modal">What is your Question?</h3>
+            <br>
+        </div>
+
           {% for question in AskQuestionObject %}
               <div class="col-md-12 col-sm-12 col-xs-12">
                 {% if question.answer_is %}
@@ -280,6 +287,7 @@
                 
                     <div class="panel-heading">
                           <div>
+                          <p>Topics:{{question.Ask_topic.name}}</p>
                             <h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4>
                               
                             <p style="float: right;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </p><br><br>
