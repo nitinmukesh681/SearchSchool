@@ -20,7 +20,13 @@
 
 
 </head>
-<body>
+<style type="text/css">
+  .nitin {
+    box-shadow: 3px 3px 5px #888888;
+  }
+
+</style>
+<body style="background-color: #F0F0F0;">
 <div class="container" >
 
 
@@ -113,10 +119,10 @@
              	<center><h1 style="font-family: cursive;"><strong> About {{myuserObject.user.first_name}}</strong></h1></center> 
              </div>
 
-                       <div class="container">
+                       <div class=" panel nitin">
 
               <div class="row">
-                <div class="col-md-6 col-sm-8 col-xs-8 ">
+                <div class="col-md-6 col-sm-8 col-xs-8 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
                   <div class="x_panel">
                     <!-- <div class="x_title">
                    
@@ -179,9 +185,13 @@
                       </div>
                    
 <br>
+<hr>           
+ <button class="btn btn-info" id="" data-target="#myModal3" data-toggle="modal">Ask Question</button>
+
                       
 
                     </div>
+                    <br>
                   </div>
                   </div>
                 <!-- </div> -->
@@ -195,16 +205,15 @@
                   </div>
                  
  -->
-            
- 
+                   
+
 </div>
-<hr>
+
 	<div class="col-xs-12 col-md-12 col-sm-12">
 
 	<!-- <form action="/askQuestion/" method="post">{% csrf_token %}
 		<input type="hidden" name="user_id" value="{{myuserObject.id}}"> -->
-		<button class="btn btn-info" id="" data-target="#myModal3" data-toggle="modal">Ask Question</button>
-	
+		
 
 	<!-- </form>
  -->

@@ -16,8 +16,11 @@
   .abcd:hover{
     background-color: orange;
   }
+  .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
 </style>
-<body>
+<body style="background-color: #F8F8F8;">
 
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
@@ -118,7 +121,7 @@
 
           <center>
            <strong> <h2>Discussion</h2> </strong>
-            <hr>
+<hr class="pg-titl-bdr-btm"></hr>
           </center>
 
             <div id="statusReport">
@@ -138,16 +141,16 @@
                   <div class="pan">
                   <div class="p">
                   {% if not questionId.is_answered_YesNo %}
-                    <div class="panel panel-danger abcd" data-target="#{{question.id}}" data-toggle="modal"> 
+                    <div class="panel nitin abcd" data-target="#{{question.id}}" data-toggle="modal"> 
                   {% elif questionId.is_answered_YesNo  %}
-                    <div class="panel panel-success">     
+                    <div class="panel nitin">     
                   {% endif %}
                       <div class="panel-heading">
 
                           <h3><span class="fa fa-fw fa-question" >...</span>{{questionId.Asked_Question}}</h3>
                           <h5 style="float: right;">By {{questionId.userAsked.user.first_name}} On {{questionId.asked_Date}} at {{questionId.asked_Time}}</h5>
                           <br>
-                        
+                        <hr>
                       
                       </div>
 
@@ -225,7 +228,7 @@
     <div class="">
       {% for com in CommentsAre %}
 
-      <div class="well col-md-12 col-sm-12 col-xs-12">
+      <div class="panel col-md-12 col-sm-12 col-xs-12">
 
         <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{com.comment_Content}}</h4> 
         <small>Commented On {{com.comment_date}} at {{com.comment_time}} By <a>{{com.comment_by.user.first_name}} {{com.comment_by.user.last_name}}</a></small>

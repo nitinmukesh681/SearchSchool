@@ -16,8 +16,11 @@
   .abcd:hover{
     background-color: orange;
   }
+  .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
 </style>
-<body>
+<body style="background-color: #F0F0F0;">
 
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
@@ -86,7 +89,8 @@
 
           <center>
             <h2>Questions You Answered!!</h2>
-            <hr>
+            <hr class="pg-titl-bdr-btm"></hr>
+
           </center>
 
             <div id="statusReport">
@@ -107,16 +111,16 @@
                   <div class="pan">
                   <div class="p">
                   {% if not question.is_answered_YesNo %}
-                    <div class="panel panel-danger abcd" data-target="#{{question.id}}" data-toggle="modal"> 
+                    <div class="panel abcd nitin" data-target="#{{question.id}}" data-toggle="modal"> 
                   {% elif question.is_answered_YesNo  %}
-                    <div class="panel panel-success">     
+                    <div class="panel nitin ">     
                   {% endif %}
                       <div class="panel-heading">
-
+                        <p style="color: #C8C8C8 ;">Question asked on <strong>{{question.Ask_topic.name}}</strong></p>
                           <h3><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h3>
-                          <h5 style="float: right;">By {{question.userAsked.user.first_name}} On {{question.asked_Date}} at {{question.asked_Time}}</h5>
-                          <br>
-                        
+                          <h5 style="color: #C8C8C8 ;">By {{question.userAsked.user.first_name}} On {{question.asked_Date}} at {{question.asked_Time}}</h5>
+                          
+                        <hr>
                       
                       </div>
 
@@ -125,15 +129,15 @@
                       <div class="container">
                       <div class="row">
                        
-                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-1 col-sm-offset-1">
+                        <div class="">
 
                           <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h4> 
-                           <small>Answered On {{question.answer_on_date}} at {{question.answer_on_time}} By <a>You</a>
-                           </small> <strong>Likes: {{question.number_of_likes}} Comments:{{question.comments}}</strong></small>
+                           <small style="color: #C8C8C8 ;">Answered On {{question.answer_on_date}} at {{question.answer_on_time}} By <a>You</a>
+                           </small> <strong>Likes: {{question.number_of_likes}} Comments:{{question.number_of_likes}}</strong></small>
                         </div>
 
-                        <div class="col-md-1 col-sm-1">
-                        <button class="btn btn-info" data-target="#{{question.id}}" data-toggle="modal"><span class="fa fa-fw fa-edit"></span></button>
+                        <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
+                        <button class="btn btn-info btn-sm" data-target="#{{question.id}}" data-toggle="modal"><span class="fa fa-fw fa-edit"></span></button>
                          </div>   
                       </div> 
                       </div> 

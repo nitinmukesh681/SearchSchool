@@ -12,7 +12,12 @@
 
 
 </head>
-<body>
+<style type="text/css">
+   .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
+</style>
+<body style="background-color: #F0F0F0;">
 
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
@@ -77,36 +82,38 @@
           <div class="container">
           <center>
             <h2>Questions You Asked!!</h2>
-            <hr>
+            <hr class="pg-titl-bdr-btm"></hr>
+
           </center>
                {% for question in question_by_all_user %}
 
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                     {% if question.answer_is %}
-                      <div class="panel panel-success"> 
+                      <div class="panel nitin"> 
                     {% elif not question.answer_is %}
-                      <div class="panel panel-danger"> 
+                      <div class="panel nitin"> 
                     {% endif %}
 
                         <div class="panel-heading">
                           <div>
+                            <p style="color: #C8C8C8 ;">Question asked on <strong>{{question.Ask_topic.name}}</strong></p>
                               <h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4>
                               
-                              <p style="float: right;">By You on {{question.asked_Date}} at {{question.asked_Time}} </p><br><br>
+                              <p style="color: #C8C8C8 ;">By You on {{question.asked_Date}} at {{question.asked_Time}} </p>
                           </div>
                         </div>
-                      
+                      <hr>
 
 
                         {% if question.answer_is %}
                         <div class="panel-body"> 
                             
 
-                          <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
+                          <div class=" ">
 
                           <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h4> 
-                          <small>Answered On {{question.answer_on_date}} at {{question.answer_on_time}} By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}}</a></small>
+                          <small style="color: #C8C8C8 ;">Answered On {{question.answer_on_date}} at {{question.answer_on_time}} By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}}</a></small>
                            <strong>Likes: {{question.number_of_likes}} Comments:</strong></small>
                           </div>   
                         </div>
