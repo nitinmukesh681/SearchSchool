@@ -18,34 +18,24 @@
     background-color: grey;
   }
   #akk:hover{
-    color:blue;
+    color:purple;
+  }
+  .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
+  .anitin{
+    margin-left: 13px;
+    margin-top: 13px;
   }
 </style>
-<body>
+<body style="background-color: #F8F8F8;">
 
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
 		<nav class="navbar navbar-default" style="background-color: ">
 			<div class="container">
 
-        <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="mid_center">
-                 
-                  <form action="/searchQuestionS/" method="post" autocomplete="off"> {% csrf_token %}
-                    <div class="col-xs-12 form-group pull-right top_search">
-                      <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search for Question by Topics or Viewers" style="color: purple;">
-                          <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit" style="background-color: purple; color: white;">Go!</button>
-                          </span>
-                      </div>
-                    </div>
-                  </form>
-
-                 <!--  -->
-        </div>
-      </div>
-
+       
 			<div class="navbar-header">
 			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 			    <span class="icon-bar"></span>
@@ -247,8 +237,25 @@
             </div>
           </div> 
        
+          <div class="container">
+          <div class="row col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-9 col-sm-9 col-xs-8">
+                  <div class="">
+                           
+                            <form action="/searchQuestionS/" method="post" autocomplete="off"> {% csrf_token %}
+                              <div class="col-xs-12 form-group pull-right top_search">
+                                <div class="input-group">
+                                  <input type="text" class="form-control" name="search" placeholder="Search for Question by Topics or Viewers" style="color: purple;">
+                                    <span class="input-group-btn">
+                                          <button class="btn btn-default" type="submit" style="background-color: purple; color: white;">Go!</button>
+                                    </span>
+                                </div>
+                              </div>
+                            </form>
+                  </div>
+              </div>
 
-            <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-8">
+            <div class="">
                   
                 <div class="btn-group">
                           <button type="button" class="btn btn-info">Filter</button>
@@ -266,46 +273,51 @@
                 </div>
             </div>
 
+                
+
         </div>
       </div>
+        
+<hr>
+        
 
-          <br>
-        <div class="container">
-        <div class=" panel col-xs-12 col-md-12 col-sm-12">
-           <h3 id="akk" data-target="#myModal3" data-toggle="modal">What is your Question?</h3>
-            <br>
+        <div class="panel nitin col-xs-12 col-md-12 col-sm-12">
+           <h3 id="akk" style="color: #A8A8A8 ;" data-target="#myModal3" data-toggle="modal">What is your Question?...</h3>
+            
         </div>
 
           {% for question in AskQuestionObject %}
-              <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-12 col-sm-12 col-xs-12 ">
                 {% if question.answer_is %}
-                <div class="panel panel-success"> 
+                <div class="panel nitin">
+
                 {% elif not question.answer_is %}
-                <div class="panel panel-danger" onclick="document.getElementById('{{question.id}}').style.display='block'"> 
+                <div class="panel nitin" onclick="document.getElementById('{{question.id}}').style.display='block'"> 
                 {% endif %}
 
                 
-                    <div class="panel-heading">
+                    <div class="anitin">
                           <div>
-                          <p>Topics:{{question.Ask_topic.name}}</p>
-                            <h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4>
+                          <p style="color: #C8C8C8 ;">Question asked on <strong>{{question.Ask_topic.name}}</strong></p>
+                           <strong><h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4></strong> 
                               
-                            <p style="float: right;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </p><br><br>
+                            <p style="color: #C8C8C8 ;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </p>
                           </div>
+                           <hr>
                     </div>
                 </a>
 
                    
                       
                     {% if question.answer_is %}
-                    <div class="panel-body"> 
-                          <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1">
+                    <div class=""> 
+                          <div class="col-md-12 col-sm-12 col-xs-12 anitin">
 
                             <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h4> 
-                            <small>Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} <strong>Likes: {{question.number_of_likes}} Comments: {{question.number_of_comments}}</strong></small>
+                            <small style="color: #C8C8C8 ;">Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} <strong>Likes: {{question.number_of_likes}} Comments: {{question.number_of_comments}}</strong></small>
                           </div> 
                           
-                          <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
+                          <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-6">
                             <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{question.id}}nitin">Comment</a>
 
 
@@ -369,7 +381,7 @@
                                   
                                 </div>
                             </div>
-                                <form action="/discussQ/" method="post">{% csrf_token %}
+                            <form action="/discussQ/" method="post">{% csrf_token %}
                               <input type="hidden" name="idSend" value="{{question.id}}">
 
                               <button class="btn btn-info btn-xs" type="submit" id="{{question.id}}nmb">Discuss</button>
@@ -418,9 +430,10 @@
                
                 {% endif %}
                 </div> 
-              </div>
-                  <!--modal finished -->
 
+              </div>
+              <br><br>
+                  <!--modal finished -->
            {% endfor %}
         </div>
 

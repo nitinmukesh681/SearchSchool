@@ -14,7 +14,12 @@
 
 
 </head>
-<body>
+<style type="text/css">
+  .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
+</style>
+<body style="background-color: #F8F8F8;">
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
 		<nav class="navbar navbar-default">
@@ -113,7 +118,8 @@
 <br>
 <div class="container">
 {% for art in ArticleObject %}
-	<div class="well col-md-12 col-xs-12 col-sm-12">
+	<div class="panel nitin col-md-12 col-xs-12 col-sm-12">
+	<br>
 		<div class="bg-info text-center">
 		<br>
 			<h2>{{art.article_heading}}</h2>
@@ -129,8 +135,8 @@
 		</div>
 		<div class="col-md-12 col-sm-10 col-sm-10">
 		
-			<pre style="font-size: 18px;" >
-				<span class="fa fa-thumb-tack"></span>... <h3 >{{art.article_is}}</h3>
+			<pre style="font-size: 18px; white-space: pre-wrap; background-color: white;" >
+				<h3 ><span class="fa fa-thumb-tack"></span>... {{art.article_is}}</h3>
 			</pre>
 			
 		</div>
@@ -140,6 +146,7 @@
             <!-- <form action="/likes_article/" method="POST">{% csrf_token %}
             <input type="hidden" name="id_required" value="{{art.id}}"> -->
             <button class="btn btn-primary btn-xs" type="submit" id="{{art.id}}">Like</button>
+
            <!--  </form> -->
            					<!-- <script type="text/javascript">
                               $('#{{art.id}}').click(
@@ -155,8 +162,10 @@
                                       }
                                     });
                                   });
-                            </script> -->
-         </div> 
+                           </script> -->
+        <hr>
+         </div>
+
 	</div>
 {% endfor %}
 </div>

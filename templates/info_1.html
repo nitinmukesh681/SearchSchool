@@ -12,7 +12,12 @@
 
 
 </head>
-<body>
+<style type="text/css">
+  .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
+</style>
+<body style="background-color: #F8F8F8;">
 
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
@@ -101,15 +106,15 @@
 <div class="container">
 <h3>Results Found are...</h3>
 <hr>
-  <div class="well col-xs-12 col-sm-12 col-md-12">
+  <div class=" col-xs-12 col-sm-12 col-md-12">
     {% for institute in InstitutionObject %}
-    <div class="alert alert-info" style="background-color: ">
+    <div class="panel nitin">
     <br>
       <div class="row">
-        <div class="col-md-8 col-sm-8 col-xs-7 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+        <div class="col-md-8 col-sm-8 col-xs-6 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
           <h4 style="color: ;">{{institute.Institution_name}}, {{institute.city.name}}</h4>
         </div>
-        <div class="col-md-3 col-sm-3 col-xs-4">
+        <div class="col-md-3 col-sm-3 col-xs-5">
           <form action="/knowMore/" method="post">{% csrf_token %}
             <input type="hidden" name="knowId" value="{{institute.id}}">
             <button class="btn btn-success btn-sm" style="text-decoration: none;" type="submit">Know More</button>

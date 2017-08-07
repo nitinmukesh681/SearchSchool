@@ -21,8 +21,13 @@
 		text-decoration: none;
 
 	}
+	
+	.nitin {
+    box-shadow: 3px 3px 5px #888888;
+	}
 </style>
-<body onload="alert('Sorry, No results found!!!')">
+
+<body style="background-color: #F0F0F0;" onload="alert('No result is Found!!!');">
 	<!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
 		<nav class="navbar navbar-default">
@@ -57,7 +62,7 @@
 		        	</ul> 
 		        </li>
 
-			    <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{myuserObject.user.first_name}}<span class="fa fa-caret-down"></span></a>
+			    <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{user.first_name}}<span class="fa fa-caret-down"></span></a>
 
 
 			    <ul class="dropdown-menu">
@@ -90,7 +95,36 @@
 			<div class="row">
 				<div class="jumbotron">
 				  <h1 class="small">Welcome To <span class="bold">InstuFind</span></h1>
-				  <p class="big">Search Schools, Coaching around You</p>
+
+				  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+	
+					<div class="carousel-inner" style="color: white;">
+						<div class="item active" >
+							<h2 class="big">Search Schools, Coaching around You...</h2>
+						</div>
+						
+						<div class="item">
+							<h2>Get reviews about the institution from previous students and faculties...</h2>
+						</div>
+
+						<div class="item">
+							<h2>Ask Question on various topics, Answer them and get discussion...</h2>
+						</div>
+
+						<div class="item">
+							<h2>Post Your article and success stories and let the world know it...</h2>
+						</div>
+
+						<div class="item">
+							<h2>Search schools by Name, City or your area Pincode...</h2>	
+						</div>
+					</div>
+
+					<!-- left and right controls -->
+
+				</div>
+
+				  
 				  <br><br><br>
 					 
 
@@ -109,37 +143,48 @@
 
                <!--  -->
               </div>
+              <div class="row" style="color: white;">
+              	<div class=" col-md-4 col-sm-4 col-xs-4 text-center ">
+              		<strong><h3>{{totalInstitution}}</h3></strong>
+              		<hr>
+              		<h5>Total Institution</h5>
+              	</div>
+              	<div class=" col-md-4 col-sm-4 col-xs-4 text-center">
+              		<strong><h3>{{totalQuestion}}</h3></strong>
+              		<hr>
+              		<h5>Questions Asked</h5>
+              	</div>
+              	<div class=" col-md-4 col-sm-4 col-xs-4 text-center">
+              		<strong><h3>{{totalComment}}</h3></strong>
+              		<hr>
+              		<h5>Total comments</h5>
+              	</div>
+              </div>
 
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--BANNER END-->
-
+<br><br>
 	<!--CTA1 START-->
-	<div class="cta-1">
-		<div class="container">	
+	<div class="">
+		<div class="container panel nitin">	
 			<div class="row">
 				<div class="col-md-3 col-sm-4 col-xs-12">
-					<div class="row text-center white">
+					<div class="row text-center">
 						<h2 class="cta-title">Got Stuck?</h2>
+						<hr class="pg-titl-bdr-btm"></hr>
 						<a class="btn btn-default btn-sm" href="/discussionPage/">Ask And Discuss</a>
 					</div>
 				</div>
 	
-				<div class="col-md-9 col-sm-8 col-xs-12 text-center" style="color:white;">
+				<div class="col-md-9 col-sm-8 col-xs-12 text-center" style="color:;">
 					<h2>Latest Questions</h2>
-
+					<hr class="pg-titl-bdr-btm"></hr>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<!-- Indicators -->
-	<!-- <ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-		<li data-target="#myCarousel" data-slide-to="3"></li>
-		<li data-target="#myCarousel" data-slide-to="4"></li>
-	</ol> -->
-	<!-- Wrapper for slides -->
+	
 	<div class="carousel-inner">
 		<div class="item active" >
 					<h4>{{questionObject.Asked_Question}}</h4>
@@ -169,6 +214,7 @@
 
 				</div>	
 			</div>
+			<br>
 		</div>
 	</div>
 	<!--CTA1 END-->
@@ -177,7 +223,7 @@
 	</center>
 	<!--SERVICE START-->
 	<div id="service" class="section-padding">
-		<div class="container">
+		<div class="container panel nitin">
 			<div class="row">
 				<div class="page-title text-center">
 					<h1>Our Service</h1>
@@ -220,17 +266,18 @@
 	<!--SERVICE END-->
 
 	<!--CTA456 START-->
-	<div class="cta2">
-		<div class="container">
-			<div class="row white text-center">
+	<div class="">
+		<div class="container panel nitin">
+			<div class="row text-center">
 				<div class="page-title text-center">
 					<h1>Featured Institutes</h1>
 					<hr class="pg-titl-bdr-btm"></hr>
 					<div class="container">
-						<div class="row col-xs-offset-2 col-sm-offset-1 ">
-							<div class="col-md-3 col-sm-5 col-xs-8">
+						<div class="row">
+							<div class="col-md-3 col-sm-5 col-xs-12">
 								<a href="https://www.bhuonline.in"> 
 									<div class="well">
+
 										<center>
 											<strong><p style="color: black;">CHS</p></strong> 
 											<a href="https://www.bhuonline.in">www.bhuonline.in </a>
@@ -238,7 +285,7 @@
 									</div>
 								</a>
 							</div>
-							<div class="col-md-3 col-sm-5 col-xs-8 ">
+							<div class="col-md-3 col-sm-5 col-xs-12 ">
 								<a href="">
 									<div class="well">
 										<center>
@@ -248,7 +295,7 @@
 									</div>
 								</a>
 							</div>
-							<div class="col-md-3 col-sm-5 col-xs-8">
+							<div class="col-md-3 col-sm-5 col-xs-12">
 								<a href="">
 									<div class="well">
 										<center>
@@ -258,7 +305,7 @@
 									</div>
 								</a>
 							</div>
-							<div class="col-md-3 col-sm-5 col-xs-8">
+							<div class="col-md-3 col-sm-5 col-xs-12">
 								<a href="">
 									<div class="well">
 										<center>
@@ -270,49 +317,6 @@
 							</div>
 						</div>
 
-						<div class="row col-xs-offset-2 col-sm-offset-1 ">
-							<div class="col-md-3 col-sm-5 col-xs-8">
-								<a href=""> 
-									<div class="well">
-										<center>
-											<strong><p style="color: black;">IIT BHU</p></strong> 
-											<a href="https://www.iitbhu.ac.in">www.iitbhu.ac.in </a>
-										</center>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-3 col-sm-5 col-xs-8 ">
-								<a href="">
-									<div class="well">
-										<center>
-											<strong><p style="color: black;">IIM Indore</p></strong> 
-											<a href="https://www.iimidr.ac.in">www.iimidr.ac.in</a>
-										</center>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-3 col-sm-5 col-xs-8">
-								<a href="">
-									<div class="well">
-										<center>
-											<strong><p style="color: black;">JNV</p></strong> 
-											<a href="https://www.jnvwchamparan.bih.nic.in">jnvwchamparan.bih.nic.in/
-											</a>
-										</center>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-3 col-sm-5 col-xs-8">
-								<a href="">
-									<div class="well">
-										<center>
-											<strong><p style="color: black;">DPS</p></strong> 
-											<a href="https://www.dpsvaranasi.com">www.dpsvaranasi.com </a>
-										</center>
-									</div>
-								</a>
-							</div>
-						</div>
 					</div>
 				</div>
 
@@ -324,7 +328,7 @@
 
 	<!--PORTFOLIO START-->
 	<div id="portfolio" class="section-padding">
-		<div class="container">
+		<div class="container panel nitin">
 			<div class="row">
 				<div class="page-title text-center">
 					<h1>Some Snapshots</h1>
@@ -345,13 +349,13 @@
 								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="4">
 									<img src="/static/img/ssc2.jpg" class="img-responsive">
 								</div>
-								<div class="filimg mix category-1 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
-									<img src="/static/img/sun.jpg" class="img-responsive">								</div>
-								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
-									<img src="/static/img/iimI.jpg" class="img-responsive">								</div>
-								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
+								<!-- <div class="filimg mix category-1 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
+									<img src="/static/img/sun.jpg" class="img-responsive"></div> -->
+								<!-- <div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
+									<img src="/static/img/iimI.jpg" class="img-responsive">								</div> -->
+								<!-- <div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
 									<img src="/static/img/chs.jpg" class="img-responsive">
-								</div>
+								</div> -->
 								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
 									<img src="/static/img/dpsV.jpg" class="img-responsive">
 								</div>
@@ -363,10 +367,12 @@
 	<!--PORTFOLIO END-->
 
 <!--CTA2 START-->
-	<div class="cta2">
+	<div class="">
 	<br><br>
-		<div class="container">
+		<div class="container panel nitin">
 			<div class="row text-center">
+			<h1>Articles</h1>
+			<br>
 				<div class="container" style="color: black;">
 					<div class="row">
 						<div class="col-md-6 col-sm-6 col-sm-6 col-xs-12">
@@ -399,17 +405,18 @@
 						</div>
 					</div>
 				</div>
-				<a href="/add_your_article/" class="btn btn-default">Request An Article</a>
+				<a href="/add_your_article/" class="btn btn-default nitin">Request An Article</a>
 			</div>
+			<br>
 		</div>
-		<br>
+		
 	</div>
 <!--CTA2 END-->
 
 
 	<!--TEAM START-->
 	<div id="about" class="section-padding">
-		<div class="container">
+		<div class="container panel nitin">
 			<div class="row">
 				<div class="page-title text-center">
 					<h1>Meet Our Team</h1>
@@ -457,6 +464,8 @@
 					
 				</div>
 			</div>
+			<br>
+
 		</div>
 
 	</div>
@@ -476,7 +485,7 @@
 
 	<!--CONTACT START-->
 	<div id="contact" class="section-padding">
-		<div class="container">
+		<div class="container panel nitin ">
 			<div class="row">
 				<div class="page-title text-center">
 					<h1>Quick Contact</h1>

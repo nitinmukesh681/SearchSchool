@@ -12,7 +12,12 @@
 
 
 </head>
-<body>
+<style type="text/css">
+  .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
+</style>
+<body style="background-color: #F8F8F8;">
 <div class="container" >
 
 
@@ -62,17 +67,18 @@
 
 	<!--HEADER END-->
 <br><br><br><br><br><br>
-             <div class="bg-danger col-xs-12 col-sm-12 col-md-12">
+        <div class="container ">
+             <div class="panel nitin col-xs-12 col-sm-12 col-md-12">
              	<center><h1 style="font-family: cursive;"><strong> Login Here</strong></h1></center> 
              </div>
              <!-- <div class="  col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
              <div class="ln_solid"></div> 
              </div>  -->     
             <br><br><br><br>
-          
+          <div class="">
             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="/login/" autocomplete="off">{% csrf_token %}
               <br>
-                <div class="bg-warning col-md-8 col-sm-8 col-xs-12 col-md-offset-2">
+                <div class="panel nitin col-md-8 col-sm-8 col-xs-12 col-md-offset-2 col-sm-offset-2">
                   <br>
                   <div class="x_panel">
                    
@@ -105,7 +111,7 @@
                     </div>
 
                     <div class="form-group">
-                      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-8">
+                      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-8 col-sm-offset-8 col-xs-offset-8">
                         <!-- <button type="Cancel" class="btn btn-primary">Cancel</button> -->
                         <button type="submit" class="btn btn-success">Login</button>
                       </div>
@@ -113,8 +119,10 @@
 
                     </div>
             </form>
+            </div>
             
   </div>
+</div>
 
 <script src="/static/js/jquery.min.js"></script>
   	<script src="/static/js/jquery.easing.min.js"></script>

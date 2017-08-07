@@ -278,6 +278,7 @@ def AddAnInstitution(request):
 
 		Institution_name = form['institute_name']
 		# established_year = form['year_established']
+		board = form['board']
 		typeS = form['type']
 		category = form['category']
 		website = form['website_name']
@@ -295,6 +296,7 @@ def AddAnInstitution(request):
 		InstitutionObject = AboutInstitution.objects.create(
 			Institution_name = Institution_name.capitalize(),
 			InstitutionCategory = category,
+			school_board = board,
 			InstitutionType = typeS,
 			# established_year = established_year,
 			contact_details = contact_details,
