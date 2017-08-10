@@ -12,7 +12,12 @@
 
 
 </head>
-<body>
+<style type="text/css">
+  .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
+</style>
+<body style="background-color: #F8F8F8;">
 <!--HEADER START-->
 	<div class="main-navigation navbar-fixed-top">
 		<nav class="navbar navbar-default">
@@ -69,32 +74,33 @@
 <div class="container">
 	<div class="heading text-center">
 		<strong><h2>Add Your Article</h2></strong>
-		<hr>
+		<hr class="pg-titl-bdr-btm"></hr>
+
 	</div>
-	<div class="bg-info col-md-12 col-sm-12 col-xs-12">
+	<div class="panel nitin col-md-12 col-sm-12 col-xs-12">
 	<br>
 		<form action="/Your_article_is/" method="post" id="setYourArticle">{% csrf_token %}
 		  
 			<div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2">  
 			    <div class="form-group">
-	                <label class="control-label col-md-3 col-sm-3 col-xs-4">Heading :</label>
-	                <div class="col-md-9 col-sm-9 col-xs-8">
+	                <!-- <label class="control-label col-md-3 col-sm-3 col-xs-4">Heading :</label> -->
+	                <div class="col-md-12 col-sm-12 col-xs-12">
 	                    <input type="text" name="heading" class="form-control" placeholder="Heading">
 	                </div>
 	            </div>
 <br><br>
 
 	            <div class="form-group">
-	                <label class="control-label col-md-3 col-sm-3 col-xs-4">About :</label>
-	                <div class="col-md-9 col-sm-9 col-xs-8">
+	                <!-- <label class="control-label col-md-3 col-sm-3 col-xs-4">About :</label> -->
+	                <div class="col-md-12 col-sm-12 col-xs-12">
 	                    <textarea type="text" name="about" class="form-control" placeholder="Some lines about your article" rows="2"></textarea>
 	                </div>
 	            </div>
 <br><br><br>
 
 	            <div class="form-group">
-	                <label class="control-label col-md-3 col-sm-3 col-xs-4">Article :</label>
-	                <div class="col-md-9 col-sm-9 col-xs-8">
+	                <!-- <label class="control-label col-md-3 col-sm-3 col-xs-4">Article :</label> -->
+	                <div class="col-md-12 col-sm-12 col-xs-12">
 	                    <textarea type="text" name="article" class="form-control" placeholder="Your article Here...." rows="7"></textarea>
 	                </div>
 	            </div>
