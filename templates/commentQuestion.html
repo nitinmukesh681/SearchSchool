@@ -147,9 +147,9 @@
                   {% endif %}
                       <div class="panel-heading">
 
-                          <h3><span class="fa fa-fw fa-question" >...</span>{{questionId.Asked_Question}}</h3>
-                          <h5 style="float: right;">By {{questionId.userAsked.user.first_name}} On {{questionId.asked_Date}} at {{questionId.asked_Time}}</h5>
-                          <br>
+                          <h4><span class="fa fa-fw fa-question" >...</span>{{questionId.Asked_Question}}</h4>
+                          <h5 style="color: #C8C8C8 ;">By {{questionId.userAsked.user.first_name}} On {{questionId.asked_Date}} at {{questionId.asked_Time}}</h5>
+                          
                         <hr>
                       
                       </div>
@@ -159,11 +159,11 @@
                       <div class="container">
                       <div class="row">
                        
-                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-1 col-sm-offset-1">
+                        <div class="">
 
                           <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{questionId.answer_is}}</h4> 
-                           <small>Answered On {{questionId.answer_on_date}} at {{questionId.answer_on_time}} By <a>You</a>
-                           </small> <strong>Likes: {{questionId.number_of_likes}} Comments: {{questionId.number_of_comments}}</strong></small>
+                           <small style="color: #C8C8C8 ;">Answered On {{questionId.answer_on_date}} at {{questionId.answer_on_time}} By <a>{{questionId.Asked_to.user.first_name}}</a>
+                           </small style="color: #C8C8C8 ;"> <strong>Likes: {{questionId.number_of_likes}} Comments: {{questionId.number_of_comments}}</strong></small>
                         </div>
 
                         <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">

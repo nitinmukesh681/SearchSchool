@@ -30,13 +30,13 @@
 			    <span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
 			  </button>
-			  <a class="navbar-brand" href="/loginHome/">InstuFind</a>
+			  <a class="navbar-brand" href="#">InstuFind</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 			  <ul class="nav navbar-nav navbar-right">
 			   
 			    {% if myuserObject.is_loggedIn %}
-          <li class="active"><a href="#banner">Home</a></li>
+          <li class="active"><a href="/loginHome/#banner">Home</a></li>
           <!-- <li><a href="#service">Service</a></li> -->
           <!-- <li><a href="#portfolio">Portfolio</a></li> -->
               <li><a href="/discussionPage/">Ask</a></li>
@@ -73,7 +73,7 @@
 
 			   {% elif not myuserObject.is_loggedIn %}
 			     <ul class="nav navbar-nav navbar-right">
-			    <li class="active"><a href="#banner">Home</a></li>
+			    <li class="active"><a href="/home/#banner">Home</a></li>
 			    <!-- <li><a href="#service">Service</a></li> -->
 			    <!-- <li><a href="#portfolio">Portfolio</a></li> -->
 			    <li><a href="/discussionPage/">Ask<span class="badge bg-red">{{a}}</span></a></li>
@@ -126,17 +126,17 @@
 
 			<hr>
 		</div>
-		<div class="col-md-offset-7 col-sm-offset-6 col-xs-offset-
-		4">
-			<small>By <strong>{{art.addedBy.user.first_name}} {{art.addedBy.user.last_name}}</strong>  On {{art.article_date}} at {{art.article_time}}
+		<div class="">
+			<small style="color: #C8C8C8 ;">By <strong>{{art.addedBy.user.first_name}} {{art.addedBy.user.last_name}}</strong>  On {{art.article_date}} at {{art.article_time}}
 				<strong>Likes: {{art.number_of_likes}} Comments: {{art.number_of_comments}}</strong>
 			</small>
 	
 		</div>
-		<div class="col-md-12 col-sm-10 col-sm-10">
+		<br>
+		<div class="col-md-12 col-sm-10 col-sm-10" style="">
 		
-			<pre style="font-size: 12px; white-space: pre-wrap;word-break: normal; background-color: white;" >
-				<h3 ><span class="fa fa-thumb-tack"></span>... {{art.article_is}}</h3>
+			<pre style=" white-space: pre-wrap;word-break: normal; background-color: white; " >
+				<h4 ><span class="fa fa-thumb-tack"></span>... {{art.article_is}}</h4>
 			</pre>
 			
 		</div>

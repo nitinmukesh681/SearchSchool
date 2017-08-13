@@ -17,8 +17,8 @@
   .abcd:hover{
     background-color: grey;
   }
-  #akk:hover{
-    color:purple;
+  .akk:hover{
+    color: black;
   }
   .nitin {
     box-shadow: 1px 1px 1px #888888;
@@ -237,9 +237,9 @@
             </div>
           </div> 
        
-          <div class="container">
-          <div class="row col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-9 col-sm-9 col-xs-8">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="">
                            
                             <form action="/searchQuestionS/" method="post" autocomplete="off"> {% csrf_token %}
@@ -248,42 +248,42 @@
                                   <input type="text" class="form-control" name="search" placeholder="Search for Question by Topics or Viewers" style="color: purple;">
                                     <span class="input-group-btn">
                                           <button class="btn btn-default" type="submit" style="background-color: purple; color: white;">Go!</button>
+                                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="background-color: purple; color: white;"">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                          </button>
+                                          <ul class="dropdown-menu" role="menu">
+                                            <li><a href="/discussionPage_today/">Today Post</a></li>
+                                            <li><a href="/discussionPage_last_seven_days/">Last week post</a></li>
+                                            <li><a href="/discussionPage_last_thirty_days/">Last Month Post</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="/discussionPage/">All Post</a></li>
+                                          </ul>
                                     </span>
+
+                  
+               
+                          
+                        
+               
+           
                                 </div>
                               </div>
                             </form>
                   </div>
               </div>
 
-            <div class="">
-                  
-                <div class="btn-group">
-                          <button type="button" class="btn btn-info">Filter</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="/discussionPage_today/">Today Post</a></li>
-                            <li><a href="/discussionPage_last_seven_days/">Last week post</a></li>
-                            <li><a href="/discussionPage_last_thirty_days/">Last Month Post</a></li>
-                            <li class="divider"></li>
-                            <li><a href="/discussionPage/">All Post</a></li>
-                          </ul>
-                </div>
-            </div>
 
                 
 
         </div>
-      </div>
+      
         
 <hr>
         
-
+    
         <div class="panel nitin col-xs-12 col-md-12 col-sm-12">
-           <h3 id="akk" style="color: #A8A8A8 ;" data-target="#myModal3" data-toggle="modal">What is your Question?...</h3>
-            
+          <h5 id="akk" style="color: #A8A8A8 ;" data-target="#myModal3" data-toggle="modal">What is your Question?...</h5>    
         </div>
 
           {% for question in AskQuestionObject %}
@@ -301,7 +301,7 @@
                           <p style="color: #C8C8C8 ;">Question asked on <strong>{{question.Ask_topic.name}}</strong></p>
                            <strong><h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4></strong> 
                               
-                            <p style="color: #C8C8C8 ;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </p>
+                            <h6 style="color: #C8C8C8 ;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </h6>
                           </div>
                            <hr>
                     </div>
@@ -313,7 +313,10 @@
                     <div class=""> 
                           <div class="col-md-12 col-sm-12 col-xs-12 anitin">
 
-                            <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h4> 
+                          <pre style=" white-space: pre-wrap;word-break: normal; background-color: white; border: none;">
+                            <h5><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</h5> 
+                          </pre>
+
                             <small style="color: #C8C8C8 ;">Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} <strong>Likes: {{question.number_of_likes}} Comments: {{question.number_of_comments}}</strong></small>
                           </div> 
                           
@@ -439,7 +442,7 @@
 
 <!-- page content ends -->
 
-
+</div>
 
 
 
