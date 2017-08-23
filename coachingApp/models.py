@@ -155,6 +155,14 @@ class YourArticle(models.Model):
 	def __str__(self):
 		return '%s %s' % (self.id,self.addedBy.user.username)
 
+class CommentArticle(models.Model):
+	Article_is = models.ForeignKey(YourArticle,on_delete = models.CASCADE,null = True,blank = True)
+	comment_Content = models.TextField(null = True, blank = True)
+	comment_date = models.DateField(null = True, blank = True)
+	comment_time = models.TimeField(null = True, blank = True)
+	comment_by = models.ForeignKey(MyUser,null = True, blank = True)
+	def __str__(self):
+		return '%s %s' % (self.Article_is.id,self.comment_by.user.username)
 
 
 class ResultCategoryMaster(models.Model):

@@ -280,8 +280,8 @@
       
         
 <hr>
-        
-    
+      <div>  
+      
         <div class="panel nitin col-xs-12 col-md-12 col-sm-12">
           <h5 id="akk" style="color: #A8A8A8 ;" data-target="#myModal3" data-toggle="modal">What is your Question?...</h5>    
         </div>
@@ -328,7 +328,10 @@
 
                           <!-- <form action="/likes_answer/" method="POST">{% csrf_token %} -->
                           <!-- <input type="hidden" name="id_required" value="{{question.id}}"> -->
-                            <button class="btn btn-primary btn-xs" id="{{question.id}}101">Like</button> 
+
+                            <button class="btn btn-primary btn-xs" id="{{question.id}}101" onclick="document.getElementById('{{question.id}}101').style.display = 'none';document.getElementById('{{question.id}}ab').style.display = 'block';">Like</button> 
+
+                            <button type="button" id="{{question.id}}ab" class="btn btn-xs btn-success" style="display: none;">Liked</button>
                           
                           <!-- </form>  -->
                             <script type="text/javascript">
@@ -341,7 +344,7 @@
                                       success:function(response)
                                       {
                                         console.log(response);
-                                        location.href = "/discussionPage/";
+                                        // location.href = "/discussionPage/";
                                       }
                                     });
                                   });
@@ -382,7 +385,7 @@
                                   </div>
                                   
                                 </div>
-                            </div>
+                              </div>
                             <form action="/discussQ/" method="post">{% csrf_token %}
                               <input type="hidden" name="idSend" value="{{question.id}}">
 
@@ -406,7 +409,7 @@
                             </form>
                             
                             </div>
-
+      </div>
 <!-- commemt popup ends -->
                 {% elif not question.answer_is %}
                   <div id="{{question.id}}" style="display: none;">

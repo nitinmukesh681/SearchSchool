@@ -225,15 +225,17 @@ def info(request):
 @csrf_exempt
 @login_required(login_url = '/loginP')
 def AddInstitute(request):
-	user = request.user
-	first_name = user.first_name
-	countryObjects = CountryMaster.objects.all()
-	stateObjects = StateMaster.objects.all()
-	cityObjects = CityMaster.objects.all()
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		first_name = user.first_name
+		countryObjects = CountryMaster.objects.all()
+		stateObjects = StateMaster.objects.all()
+		cityObjects = CityMaster.objects.all()
 
-	return render(request,'add_institute.html',{'first_name':first_name, 'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects})
-
-
+		return render(request,'add_institute.html',{'first_name':first_name, 'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects})
+	except:
+		return redirect('/loginP/')
 # def country(request):
 # 	# countryObjects = CountryMaster.objects.all()
 # 	stateObjects = StateMaster.objects.all()
@@ -1164,3 +1166,30 @@ def coaching(request):
 
 def conc(request):
 	return render(request,'dashboard.html')
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def commentOnArticle(request):
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+	
+	if request.method == 'POST':
+		post = request.POST
+
+		YourArticleObject = YourArticle.objects.get(id = post['artObj'])
+		YourArticleObject.number_of_comments +=1
+		YourArticleObject.save()
+
+		abc = post['comment']
+		newComment = CommentArticle.objects.create(
+			Article_is = YourArticleObject,
+			comment_Content = abc,
+			comment_date = datetime.now().date(),
+			comment_time = datetime.now().time(),
+			comment_by = myuserObject
+			)
+
+		return HttpResponse('Your comment is submitted!!!')
+
+	else:
+		return HttpResponse('done')
