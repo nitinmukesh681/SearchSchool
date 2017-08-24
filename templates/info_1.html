@@ -16,6 +16,17 @@
   .nitin {
     box-shadow: 1px 1px 1px #888888;
   }
+  .cccc{
+    border: none;
+     height: 29px;
+     width: 240px;
+     color: purple;
+     background: #F8F8F8;
+     border:1px solid black;
+  }
+  input:focus {
+    background: white;
+}
 </style>
 <body style="background-color: #F8F8F8;">
 
@@ -111,8 +122,24 @@
 	<!--HEADER END-->
 <br><br><br><br><br><br>
 <div class="container">
-<h3>Results Found are...</h3>
-<hr>
+
+<form action="/searchInstituteBs/" method="post">{% csrf_token %}
+
+     <input type="text" class="cccc" name="searchN" placeholder="State or City">
+ 
+      <button class="btn btn-info btn-sm" type="submit">Go</button>
+      
+    
+</form>
+<br><br>
+                     <div id="statusReport">
+                      {% if messages %}
+                      {% for msg in messages %}
+                         ## {{msg.message}}
+                
+                      {% endfor %}
+                      {% endif %}
+                    </div>
   <div class=" col-xs-12 col-sm-12 col-md-12">
     {% for institute in InstitutionObject %}
     <div class="panel nitin">

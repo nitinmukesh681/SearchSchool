@@ -27,6 +27,18 @@
     margin-left: 13px;
     margin-top: 13px;
   }
+  .cld{
+     border: none;
+     height: 29px;
+     width: 240px;
+     color: purple;
+     border-color: black;
+     border:1px solid black;
+     background: #F8F8F8;
+  }
+  input:focus {
+    background: white;
+}
 </style>
 <body style="background-color: #F8F8F8;">
 
@@ -245,10 +257,10 @@
                             <form action="/searchQuestionS/" method="post" autocomplete="off"> {% csrf_token %}
                               <div class="col-xs-12 form-group pull-right top_search">
                                 <div class="input-group">
-                                  <input type="text" class="form-control" name="search" placeholder="Search for Question by Topics or Viewers" style="color: purple;">
-                                    <span class="input-group-btn">
-                                          <button class="btn btn-default" type="submit" style="background-color: purple; color: white;">Go!</button>
-                                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="background-color: purple; color: white;"">
+                                  <input type="text" class="cld" name="search" placeholder="Enter Topics" style="color: purple;">
+                                    <span class="">
+                                          <button class="btn btn-default btn-sm" type="submit" style="background-color: purple; color: white;">Go!</button>
+                                            <button type="button" class="btn dropdown-toggle btn-sm" data-toggle="dropdown" style="background-color: purple; color: white;"">
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
                                           </button>

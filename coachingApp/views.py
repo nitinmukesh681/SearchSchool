@@ -1193,3 +1193,27 @@ def commentOnArticle(request):
 
 	else:
 		return HttpResponse('done')
+
+def searchInstituteBs(request):
+	
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+
+	if request.method == 'POST':
+		form = request.POST
+		try:
+			into = True
+			stateObjects = StateMaster.objects.get(name = form['searchN'].capitalize())
+			InstitutionObject = AboutInstitution.objects.filter(state__name__contains = stateObjects)
+			return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,'myuserObject':myuserObject})
+		except:
+			try:
+				into = True
+				cityObjects = CityMaster.objects.get(name = form['searchN'].capitalize())
+				InstitutionObject = AboutInstitution.objects.filter(city__name__contains = cityObjects)
+				return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,'myuserObject':myuserObject})
+			except:
+				messages.warning(request,'No results found!!')
+				return render(request,'info_1.html')
+	else:
+		return HttpResponse('not done')
