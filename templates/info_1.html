@@ -19,10 +19,10 @@
   .cccc{
     border: none;
      height: 29px;
-     width: 240px;
-     color: purple;
-     background: #F8F8F8;
-     border:1px solid black;
+     width: 190px;
+     color: #b2b2b2;
+     /*background: #F8F8F8;*/
+     border:2px solid #b2b2b2;
   }
   input:focus {
     background: white;
@@ -120,16 +120,18 @@
 	</div>
 
 	<!--HEADER END-->
-<br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 <div class="container">
 
 <form action="/searchInstituteBs/" method="post">{% csrf_token %}
-
-     <input type="text" class="cccc" name="searchN" placeholder="State or City">
- 
-      <button class="btn btn-info btn-sm" type="submit">Go</button>
-      
-    
+<div class="form-group pull-right top_search">
+  <div class="input-group">
+    <input type="text" class="cccc" name="searchN" placeholder="State or City">
+    <span class="input-group-btn">   
+      <button class="btn  btn-sm" style="background-color: #b2b2b2" type="submit">Go</button>
+    </span>
+  </div>
+</div>
 </form>
 <br><br>
                      <div id="statusReport">

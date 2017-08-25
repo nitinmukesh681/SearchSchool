@@ -30,11 +30,11 @@
   .cld{
      border: none;
      height: 29px;
-     width: 240px;
+     width: 190px;
      color: purple;
      border-color: black;
-     border:1px solid black;
-     background: #F8F8F8;
+     border:2px solid #b2b2b2;
+     /*background: #F8F8F8;*/
   }
   input:focus {
     background: white;
@@ -255,12 +255,12 @@
                   <div class="">
                            
                             <form action="/searchQuestionS/" method="post" autocomplete="off"> {% csrf_token %}
-                              <div class="col-xs-12 form-group pull-right top_search">
+                              <div class=" form-group pull-right top_search">
                                 <div class="input-group">
-                                  <input type="text" class="cld" name="search" placeholder="Enter Topics" style="color: purple;">
-                                    <span class="">
-                                          <button class="btn btn-default btn-sm" type="submit" style="background-color: purple; color: white;">Go!</button>
-                                            <button type="button" class="btn dropdown-toggle btn-sm" data-toggle="dropdown" style="background-color: purple; color: white;"">
+                                  <input type="text" class="cld" name="search" placeholder="Enter Topics" style="color: #b2b2b2;">
+                                    <span class="input-group-btn">
+                                          <button class="btn btn-default btn-sm" type="submit" style="background-color: #b2b2b2; color: white;">Go!</button>
+                                           <!--  <button type="button" class="btn dropdown-toggle btn-sm" data-toggle="dropdown" style="background-color: #b2b2b2; color: white">
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
                                           </button>
@@ -270,7 +270,7 @@
                                             <li><a href="/discussionPage_last_thirty_days/">Last Month Post</a></li>
                                             <li class="divider"></li>
                                             <li><a href="/discussionPage/">All Post</a></li>
-                                          </ul>
+                                          </ul> -->
                                     </span>
 
                   
