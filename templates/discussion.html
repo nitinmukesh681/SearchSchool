@@ -293,11 +293,9 @@
         
 <hr>
       <div>  
-      
-        <div class="panel nitin col-xs-12 col-md-12 col-sm-12">
+      <div class="panel nitin col-xs-12 col-md-12 col-sm-12">
           <h5 id="akk" style="color: #A8A8A8 ;" data-target="#myModal3" data-toggle="modal">What is your Question?...</h5>    
         </div>
-
           {% for question in AskQuestionObject %}
               <div class="col-md-12 col-sm-12 col-xs-12 ">
                 {% if question.answer_is %}
@@ -398,30 +396,30 @@
                                   
                                 </div>
                               </div>
-                            <form action="/discussQ/" method="post">{% csrf_token %}
-                              <input type="hidden" name="idSend" value="{{question.id}}">
+                              <form action="/discussQ/" method="post">{% csrf_token %}
+                                <input type="hidden" name="idSend" value="{{question.id}}">
 
-                              <button class="btn btn-info btn-xs" type="submit" id="{{question.id}}nmb">Discuss</button>
-                            
-                        <!--     <script type="text/javascript">
-                              $('#{{question.id}}nmb').click(
-                                  function(){
-                                    $.ajax({
-                                      type:"POST",
-                                      url:"/discussQ/",
-                                      data:{'idSend':{{question.id}},},
-                                      success:function(response)
-                                      {
-                                        // console.log(response);
-                                        // location.href = "";
-                                      }
+                                <button class="btn btn-info btn-xs" type="submit" id="{{question.id}}nmb">Discuss</button>
+                              
+                          <!--     <script type="text/javascript">
+                                $('#{{question.id}}nmb').click(
+                                    function(){
+                                      $.ajax({
+                                        type:"POST",
+                                        url:"/discussQ/",
+                                        data:{'idSend':{{question.id}},},
+                                        success:function(response)
+                                        {
+                                          // console.log(response);
+                                          // location.href = "";
+                                        }
+                                      });
                                     });
-                                  });
-                            </script> -->
-                            </form>
+                              </script> -->
+                              </form>
                             
                             </div>
-      </div>
+      <!-- </div> -->
 <!-- commemt popup ends -->
                 {% elif not question.answer_is %}
                   <div id="{{question.id}}" style="display: none;">
