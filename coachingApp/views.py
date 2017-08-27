@@ -1194,22 +1194,24 @@ def commentOnArticle(request):
 	else:
 		return HttpResponse('done')
 
+
 def searchInstituteBs(request):
 	
-	user = request.user
-	myuserObject = MyUser.objects.get(user = user)
+	# user = request.user
+	# myuserObject = MyUser.objects.get(user = user)
 
 	if request.method == 'POST':
 		form = request.POST
+		abcdIs = form['searchN'].capitalize()
 		try:
 			into = True
-			stateObjects = StateMaster.objects.get(name = form['searchN'].capitalize())
+			stateObjects = StateMaster.objects.get(name = abcdIs)
 			InstitutionObject = AboutInstitution.objects.filter(state__name__contains = stateObjects)
 			return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,'myuserObject':myuserObject})
 		except:
 			try:
 				into = True
-				cityObjects = CityMaster.objects.get(name = form['searchN'].capitalize())
+				cityObjects = CityMaster.objects.get(name = abcdIs)
 				InstitutionObject = AboutInstitution.objects.filter(city__name__contains = cityObjects)
 				return render(request,'info_1.html',{'InstitutionObject':InstitutionObject, 'into':into,'myuserObject':myuserObject})
 			except:
