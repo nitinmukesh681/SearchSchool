@@ -47,7 +47,14 @@
             </ul>
           </li>
 
-          <li><a href="/AddInstitute/">Add Institution</a></li>
+           <li><a class=" dropdown-toggle" data-toggle="dropdown">Schools<span class="fa fa-caret-down"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/privateSchool/">Private</a></li> 
+                  <li><a href="/governmentSchool/">Government</a></li>
+                  <li><a href="/coaching/">Coaching</a></li>
+                  <li><a href="/AddInstitute/">Add Institution</a></li>
+              </ul> 
+            </li>
         
          
 
@@ -202,7 +209,8 @@
                 <br>
                 <br>
         <div class="col-xs-12 col-md-12 col-sm-12">
-          <button class="btn btn-info" style="float: right;" id="" data-target="#myModal3" data-toggle="modal">Edit</button>
+          <button class="btn btn-info btn-sm
+          " style="float: right;" id="" data-target="#myModal3" data-toggle="modal">Edit</button>
 
         </div>
     
@@ -210,6 +218,71 @@
   </div>
 </div>  
 	
+</div>
+
+
+
+<div class="panel nitin">
+<br>
+  <div class=" " style="float: right; margin-right: 12px;">
+    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#akd">Add</button>
+  </div>
+<br><br>
+  <div class="text-center">
+    <h4>Your Areas of Specialisation </h4>
+    <hr class="pg-titl-bdr-btm"></hr>
+  </div>
+
+  <div class="row">
+    {% for abcd in areaObject %}
+    <div class="col-md-4 col-sm-4 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 text-center">
+      <div style="background-color: #F0F0F0; box-shadow: 1px 1px 1px #888888;">
+        <br>
+        <h3>{{abcd.areaOfSpecialisation.name}}</h3>
+        <br>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-md-1 col-sm-1 col-xs-1"></div>
+
+  </div>
+<br>
+</div>
+            <div class="container">
+              <div class="modal fade" id="akd" role="dialog">
+                                  <div class="modal-dialog">
+                                  
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Add Here</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form action="/addYourSpecial/" method="post" autocomplete="off">{% csrf_token %}
+
+                                         
+                                          <select class="form-control" name="topicIs">
+                                            <option>Select A Topic</option>
+                                            {% for top in TopicObjects %}
+                                            <option value="{{top.name}}">{{top.name}}</option>
+                                            {% endfor %}
+                                          </select>
+                                            <br>
+
+                                          <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
+                                            <button class="btn btn-info btn-sm" type="submit" id="{{art.id}}nitin">Submit</button>
+                                            
+                                          </div>
+
+                                        </form>
+                                      </div>
+                                      <!--  -->
+                                    </div>
+                                    
+                                  </div>
+              </div>
+                </div>
 </div>
 	<div class="container">
             <div class="row">

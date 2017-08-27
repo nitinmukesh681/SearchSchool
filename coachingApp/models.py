@@ -201,3 +201,11 @@ class Help_Contact(models.Model):
 
 	def __str__(self):
 		return '%s' % (self.subject)
+
+class SpecialisationMaster(models.Model):
+	userIs = models.ForeignKey(MyUser,null = True, blank = True)
+	areaOfSpecialisation = models.ForeignKey(TopicMaster,null = True, blank = True)
+	addedOn = models.DateField(null = True,blank = True)
+
+	def __str__(self):
+		return '%s ' %(self.id)

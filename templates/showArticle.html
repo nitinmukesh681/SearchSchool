@@ -48,8 +48,14 @@
             </ul>
           </li>
 
-          <li><a href="/AddInstitute/">Add Institution</a></li>
-        
+           <li><a class=" dropdown-toggle" data-toggle="dropdown">Schools<span class="fa fa-caret-down"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/privateSchool/">Private</a></li> 
+                  <li><a href="/governmentSchool/">Government</a></li>
+                  <li><a href="/coaching/">Coaching</a></li>
+                  <li><a href="/AddInstitute/">Add Institution</a></li>
+              </ul> 
+            </li>
          
 
           <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{myuserObject.user.first_name}}<span class="fa fa-caret-down"></span></a>
@@ -140,10 +146,11 @@
 			</pre>
 			
 		</div>
+    {% if myuserObject.is_loggedIn %}
 		 <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
 			
 
-
+     
 	        	<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{art.id}}nitin">Comment</button>
 
 	        	
@@ -153,90 +160,45 @@
             <input type="hidden" name="id_required" value="{{art.id}}"> -->
             <button class="btn btn-primary btn-xs" type="submit" id="{{art.id}}">Like</button>
 
-	        	<div class="container">
-						<div class="modal fade" id="{{art.id}}nitin" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Comment Here</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form action="/commentArticle/" method="post" autocomplete="off">{% csrf_token %}
-
-                                        <input type="hidden" name="artObj" value="{{art.id}}">
-
-
-                                        <textarea name="comment" class="form-control" rows="4" placeholder="Comment here" required="Please Enter your comment"></textarea>
-                                          <br>
-
-                                        <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
-                                          <button class="btn btn-info btn-sm" type="submit" id="{{art.id}}nitin">Submit</button>
-                                          
-                                        </div>
-
-                                      </form>
-                                    </div>
-                                    <!--  -->
-                                  </div>
-                                  
-                                </div>
-                        </div>
-                </div>
+	        	
 
 	        	<div class="container">
-						<div class="modal fade" id="{{art.id}}nitin" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Comment Here</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form action="/commentArticle/" method="post" autocomplete="off">{% csrf_token %}
-
-                                        <input type="hidden" name="artObj" value="{{art.id}}">
-
-
-                                        <textarea name="comment" class="form-control" rows="4" placeholder="Comment here" required="Please Enter your comment"></textarea>
-                                          <br>
-
-                                        <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
-                                          <button class="btn btn-info btn-sm" type="submit" id="{{art.id}}nitin">Submit</button>
-                                          
-                                        </div>
-
-                                      </form>
-                                    </div>
-                                    <!--  -->
-                                  </div>
+  						<div class="modal fade" id="{{art.id}}nitin" role="dialog">
+                                  <div class="modal-dialog">
                                   
-                                </div>
-                        </div>
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Comment Here</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form action="/commentArticle/" method="post" autocomplete="off">{% csrf_token %}
+
+                                          <input type="hidden" name="artObj" value="{{art.id}}">
+
+
+                                          <textarea name="comment" class="form-control" rows="4" placeholder="Comment here" required="Please Enter your comment"></textarea>
+                                            <br>
+
+                                          <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
+                                            <button class="btn btn-info btn-sm" type="submit" id="{{art.id}}nitin">Submit</button>
+                                            
+                                          </div>
+
+                                        </form>
+                                      </div>
+                                      <!--  -->
+                                    </div>
+                                    
+                                  </div>
+              </div>
                 </div>
-           <!--  </form> -->
-           					<!-- <script type="text/javascript">
-                              $('#{{art.id}}').click(
-                                  function(){
-                                    $.ajax({
-                                      type:"POST",
-                                      url:"/likes_article/",
-                                      data:{'id_required':{{art.id}},},
-                                      success:function(response)
-                                      {
-                                        console.log(response);
-                                   location.href = "/show_your_article/";
-                                      }
-                                    });
-                                  });
-                           </script> -->
+           
         <hr>
          </div>
-					
+
+			{% endif %}	
 
 	</div>
 {% endfor %}

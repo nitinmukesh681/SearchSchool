@@ -605,20 +605,23 @@ def profile(request):
 	countryObjects = CountryMaster.objects.all()
 	stateObjects = StateMaster.objects.all()
 	cityObjects = CityMaster.objects.all()
+	TopicObjects = TopicMaster.objects.all()
 	
 	user = request.user
 	myuserObject = MyUser.objects.get(user = user)
+
+	areaObject = SpecialisationMaster.objects.filter(userIs = myuserObject)
 
 	form = DocumentForm()
 	try:
 		imageObject = Document.objects.get(userId = myuserObject)
 		try:
 			InstitutionObject = AboutInstitution.objects.filter(addedBy = myuserObject)
-			return render(request,'profile.html',{'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'InstitutionObject':InstitutionObject,'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
+			return render(request,'profile.html',{'TopicObjects':TopicObjects, 'areaObject':areaObject, 'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'InstitutionObject':InstitutionObject,'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
 		except:
-			return render(request,'profile.html',{'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
+			return render(request,'profile.html',{'TopicObjects':TopicObjects, 'areaObject':areaObject, 'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'form':form, 'imageObject':imageObject, 'myuserObject':myuserObject})
 	except:
-		return render(request,'profile.html',{'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'form':form,'myuserObject':myuserObject})
+		return render(request,'profile.html',{'TopicObjects':TopicObjects, 'areaObject':areaObject,'countryObjects':countryObjects,'stateObjects':stateObjects,'cityObjects':cityObjects,'form':form,'myuserObject':myuserObject})
 
 
 @csrf_exempt
@@ -1219,3 +1222,28 @@ def searchInstituteBs(request):
 				return render(request,'info_1.html')
 	else:
 		return HttpResponse('not done')
+
+@csrf_exempt
+@login_required(login_url = '/loginP')
+def addYourSpecial(request):
+	# try:
+	user = request.user
+	myuserObject = MyUser.objects.get(user = user)
+		
+	if request.method == 'POST':
+		form = request.POST
+
+		topicIs = TopicMaster.objects.get(name = form['topicIs'])
+
+		SpecialisationMasterNew = SpecialisationMaster.objects.create(
+			userIs = myuserObject,
+			areaOfSpecialisation = topicIs,
+			addedOn = datetime.now().date()
+
+			)
+		return redirect('/profile/')
+	else:
+		return redirect('/profile/')
+
+	# except:
+	# 	return redirect('/loginP/')

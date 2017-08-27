@@ -338,8 +338,11 @@
                          
                             <small style="color: #C8C8C8 ;">Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} <strong>Likes: {{question.number_of_likes}} Comments: {{question.number_of_comments}}</strong></small>
                           </div> 
+
+                          
                           
                           <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-6">
+                          {% if myuserObject.is_loggedIn %}
                             <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{question.id}}nitin">Comment</a>
 
 
@@ -352,7 +355,7 @@
                             <button class="btn btn-primary btn-xs" id="{{question.id}}101" onclick="document.getElementById('{{question.id}}101').style.display = 'none';document.getElementById('{{question.id}}ab').style.display = 'block';">Like</button> 
 
                             <button type="button" id="{{question.id}}ab" class="btn btn-xs btn-success" style="display: none;">Liked</button>
-                          
+                          {% endif %}
                           <!-- </form>  -->
                             <script type="text/javascript">
                               $('#{{question.id}}101').click(

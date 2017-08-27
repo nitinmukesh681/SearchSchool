@@ -45,5 +45,6 @@ urlpatterns = [
 	url(r'^coaching/',coaching,name='coaching'),
 	url(r'^commentArticle/',commentOnArticle,name='commentOnArticle'),
 	url(r'^searchInstituteBs/',searchInstituteBs,name='commentOnArticle'),
+	url(r'^addYourSpecial/',addYourSpecial,name='addYourSpecial'),
 
 	]
