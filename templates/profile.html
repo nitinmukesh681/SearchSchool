@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="css/slick-team-slider.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 
+<script src="/static/js/jquery.min.js"></script>
 
 </head>
 <style type="text/css">
@@ -238,11 +239,35 @@
     <div class="col-md-4 col-sm-4 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 text-center">
       <div style="background-color: #F0F0F0; box-shadow: 1px 1px 1px #888888;">
         <br>
+
+      <form action="/deleteSpl/" method="post">{% csrf_token %}
+        <input type="hidden" name="id_required" value="{{abcd.id}}">
+        <button type="submit" id="{{abcd.id}}" class="btn btn-danger btn-xs" style="float: right; margin-right: 6px; margin-top: -15px;">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </form>
+        <!-- <script type="text/javascript">
+          $('#{{abcd.id}}').click(
+            function(){
+              $.ajax({
+                type:"POST",
+                url:"/deleteSpl/",
+                data:{'id_required':{{abcd.id}},},
+                success:function(response)
+                {
+                  console.log(response);
+                  location.href = "/profile/";
+                }
+                  });
+                    });
+        </script> -->
+
         <h3>{{abcd.areaOfSpecialisation.name}}</h3>
         <br>
       </div>
+      <br>
     </div>
-    <br>
+    <!-- <br> -->
     {% endfor %}
     <div class="col-md-1 col-sm-1 col-xs-1"></div>
 

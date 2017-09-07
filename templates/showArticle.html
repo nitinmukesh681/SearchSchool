@@ -119,8 +119,14 @@
 	<div class="col-md-offset-8 col-sm-offset-6 col-xs-offset-4">
 		
 	</div>
+
+	{% if myuserObject.is_loggedIn %}
 	<a href="/add_your_article/" class="btn btn-primary">Add Article</a>
+	{% elif not myuserObject.is_loggedIn %}
+	<h4>You need to be logged in to add your article.</h4>
+	{% endif %}
 </div>
+
 <br>
 <div class="container">
 {% for art in ArticleObject %}

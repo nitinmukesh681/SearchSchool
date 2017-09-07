@@ -1247,3 +1247,18 @@ def addYourSpecial(request):
 
 	# except:
 	# 	return redirect('/loginP/')
+
+
+
+
+#delete your area of spl
+def deleteSpl(request):
+	if request.method == 'POST':
+		post = request.POST
+
+		id_got = post['id_required']
+
+		objectDeleteIs = SpecialisationMaster.objects.get(id = id_got)
+		objectDeleteIs.delete()
+		return redirect('/profile/')
+
