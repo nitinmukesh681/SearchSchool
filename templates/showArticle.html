@@ -130,6 +130,7 @@
 <br>
 <div class="container">
 {% for art in ArticleObject %}
+<a href={% url 'articleInfo' id=art.id %}>
 	<div class="panel nitin col-md-12 col-xs-12 col-sm-12">
 	<br>
 		<div class="bg-info text-center">
@@ -138,75 +139,25 @@
 
 			<hr>
 		</div>
+		
 		<div class="">
 			<small style="color: #C8C8C8 ;">By <strong>{{art.addedBy.user.first_name}} {{art.addedBy.user.last_name}}</strong>  On {{art.article_date}} at {{art.article_time}}
 				<strong>Likes: {{art.number_of_likes}} Comments: {{art.number_of_comments}}</strong>
 			</small>
 	
 		</div>
+		
 		<br>
-		<div class="col-md-12 col-sm-10 col-sm-10" style="">
+		<!-- <div class="col-md-12 col-sm-10 col-sm-10" style="">
 		
 			<pre style=" white-space: pre-wrap;word-break: normal; background-color: white; " >
 				<h4 ><span class="fa fa-thumb-tack"></span>... {{art.article_is}}</h4>
 			</pre>
 			
-		</div>
-    {% if myuserObject.is_loggedIn %}
-		 <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
-			
-
-     
-	        	<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{art.id}}nitin">Comment</button>
-
-	        	
-
-
-            <!-- <form action="/likes_article/" method="POST">{% csrf_token %}
-            <input type="hidden" name="id_required" value="{{art.id}}"> -->
-            <button class="btn btn-primary btn-xs" type="submit" id="{{art.id}}">Like</button>
-
-	        	
-
-	        	<div class="container">
-  						<div class="modal fade" id="{{art.id}}nitin" role="dialog">
-                                  <div class="modal-dialog">
-                                  
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Comment Here</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                        <form action="/commentArticle/" method="post" autocomplete="off">{% csrf_token %}
-
-                                          <input type="hidden" name="artObj" value="{{art.id}}">
-
-
-                                          <textarea name="comment" class="form-control" rows="4" placeholder="Comment here" required="Please Enter your comment"></textarea>
-                                            <br>
-
-                                          <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
-                                            <button class="btn btn-info btn-sm" type="submit" id="{{art.id}}nitin">Submit</button>
-                                            
-                                          </div>
-
-                                        </form>
-                                      </div>
-                                      <!--  -->
-                                    </div>
-                                    
-                                  </div>
-              </div>
-                </div>
-           
-        <hr>
-         </div>
-
-			{% endif %}	
-
+		</div> -->
+    
 	</div>
+</a>
 {% endfor %}
 </div>
 

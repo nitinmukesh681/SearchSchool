@@ -36,7 +36,7 @@ SECRET_KEY = ')-pxhl2$an2)v@^w6f3@2oef2-q-s3gg6x&ewfr*#1qng+qzlu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tranquil-mountain-56514.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -58,7 +58,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -106,7 +106,7 @@ DATABASES = {
         'USER':'nitin',
         'PASSWORD':'nitin',
         'HOST':'localhost',
-        'PORT':'',
+        'PORT':'5432',
     }
 }
 db_from_env = dj_database_url.config(conn_max_age=500)

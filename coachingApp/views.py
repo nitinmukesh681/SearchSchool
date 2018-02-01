@@ -1262,3 +1262,18 @@ def deleteSpl(request):
 		objectDeleteIs.delete()
 		return redirect('/profile/')
 
+
+#read Your article
+def articleInfo(request,id):
+
+	try:
+		user = request.user
+		myuserObject = MyUser.objects.get(user = user)
+		
+		YourArticleIs = YourArticle.objects.get(id=id)
+
+		return render(request,'thisArticle.html',{'myuserObject':myuserObject,'YourArticleIs':YourArticleIs})
+	except:
+		YourArticleIs = YourArticle.objects.get(id=id)
+
+		return render(request,'thisArticle.html',{'YourArticleIs':YourArticleIs})
