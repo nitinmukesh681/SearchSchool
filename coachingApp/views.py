@@ -1177,13 +1177,14 @@ def commentOnArticle(request):
 	myuserObject = MyUser.objects.get(user = user)
 	
 	if request.method == 'POST':
-		post = request.POST
+		form = request.POST
+		abc = form['artObj']
 
-		YourArticleObject = YourArticle.objects.get(id = post['artObj'])
+		YourArticleObject = YourArticle.objects.get(id = form['artObj'])
 		YourArticleObject.number_of_comments +=1
 		YourArticleObject.save()
 
-		abc = post['comment']
+		abc = form['comment']
 		newComment = CommentArticle.objects.create(
 			Article_is = YourArticleObject,
 			comment_Content = abc,
@@ -1192,7 +1193,7 @@ def commentOnArticle(request):
 			comment_by = myuserObject
 			)
 
-		return HttpResponse('Your comment is submitted!!!')
+		return redirect('/article/%d/'%YourArticleObject.id)
 
 	else:
 		return HttpResponse('done')
@@ -1271,9 +1272,10 @@ def articleInfo(request,id):
 		myuserObject = MyUser.objects.get(user = user)
 		
 		YourArticleIs = YourArticle.objects.get(id=id)
-
-		return render(request,'thisArticle.html',{'myuserObject':myuserObject,'YourArticleIs':YourArticleIs})
+		articleComment = CommentArticle.objects.filter(Article_is = YourArticleIs)
+		return render(request,'thisArticle.html',{'articleComment':articleComment, 'myuserObject':myuserObject,'YourArticleIs':YourArticleIs})
 	except:
 		YourArticleIs = YourArticle.objects.get(id=id)
+		articleComment = CommentArticle.objects.filter(Article_is = YourArticleIs)
 
-		return render(request,'thisArticle.html',{'YourArticleIs':YourArticleIs})
+		return render(request,'thisArticle.html',{'articleComment':articleComment, 'YourArticleIs':YourArticleIs})

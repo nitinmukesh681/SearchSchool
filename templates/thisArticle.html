@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Your Article</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600|Raleway:600,300|Josefin+Slab:400,700,600italic,600,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="css/slick-team-slider.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<script src="/static/js/jquery.min.js"></script>
+
+
+
+</head>
+<style type="text/css">
+  .nitin {
+    box-shadow: 1px 1px 1px #888888;
+  }
+</style>
+<body style="background-color: #F8F8F8;">
+<!--HEADER START-->
+	<div class="main-navigation navbar-fixed-top">
+		<nav class="navbar navbar-default">
+			<div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">InstuFind</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+			  <ul class="nav navbar-nav navbar-right">
+			   
+			    {% if myuserObject.is_loggedIn %}
+          <li class="active"><a href="/loginHome/#banner">Home</a></li>
+          <!-- <li><a href="#service">Service</a></li> -->
+          <!-- <li><a href="#portfolio">Portfolio</a></li> -->
+              <li><a href="/discussionPage/">Ask</a></li>
+			<li><a class=" dropdown-toggle" data-toggle="dropdown">Article<span class="fa fa-caret-down"></span></a>
+
+            <ul class="dropdown-menu">
+              <li><a href="/show_your_article/">All Articles</a></li>
+              <li><a href="/show_my_article/">My Articles</a></li>
+            </ul>
+          </li>
+
+           <li><a class=" dropdown-toggle" data-toggle="dropdown">Schools<span class="fa fa-caret-down"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/privateSchool/">Private</a></li> 
+                  <li><a href="/governmentSchool/">Government</a></li>
+                  <li><a href="/coaching/">Coaching</a></li>
+                  <li><a href="/AddInstitute/">Add Institution</a></li>
+              </ul> 
+            </li>
+         
+
+          <li><a class=" dropdown-toggle" data-toggle="dropdown">Hi {{myuserObject.user.first_name}}<span class="fa fa-caret-down"></span></a>
+
+
+            <ul class="dropdown-menu">
+              <li><a href="/profile/">Profile</a></li> 
+              <li><a href="/logout/">Logout</a></li> 
+            </ul> 
+
+          </li>
+
+          <li><a class=" dropdown-toggle" data-toggle="dropdown">Question<span class="fa fa-caret-down"></span></a>
+
+            <ul class="dropdown-menu">
+              <li><a href="/answer_the_question/">Question For You</a></li>
+              <li><a href="/ask">Your Question</a></li>
+            </ul>
+
+          </li>
+
+			   {% elif not myuserObject.is_loggedIn %}
+			     <ul class="nav navbar-nav navbar-right">
+			    <li class="active"><a href="/home/#banner">Home</a></li>
+			    <!-- <li><a href="#service">Service</a></li> -->
+			    <!-- <li><a href="#portfolio">Portfolio</a></li> -->
+			    <li><a href="/discussionPage/">Ask<span class="badge bg-red">{{a}}</span></a></li>
+			<li><a class=" dropdown-toggle" data-toggle="dropdown">Article<span class="fa fa-caret-down"></span></a>
+
+            <ul class="dropdown-menu">
+              <li><a href="/show_your_article/">All Articles</a></li>
+              <li><a href="/show_my_article/">My Articles</a></li>
+            </ul>
+          </li>
+			    <li><a class=" dropdown-toggle" data-toggle="dropdown">Schools<span class="fa fa-caret-down"></span></a>
+		        	<ul class="dropdown-menu">
+			            <li><a href="/privateSchool/">Private</a></li> 
+			            <li><a href="/governmentSchool/">Government</a></li>
+			            <li><a href="/coaching/">Coaching</a></li>
+			            <li><a href="/AddInstitute/">Add Institution</a></li>
+		        	</ul> 
+		        </li>
+
+
+			   <li><a href="/Register/">Register</a>
+			   </li>
+			   <li><a href="/loginP/">Login</a></li>
+			  </ul>
+			   {% endif %}
+
+			  </ul>
+			</div>
+		  </div>
+		</nav>
+	</div>
+<br>
+	<!--HEADER END-->
+<br><br><br><br><br>
+
+<div class="container">
+	<div class="col-md-offset-8 col-sm-offset-6 col-xs-offset-4">
+		
+	</div>
+
+	{% if myuserObject.is_loggedIn %}
+	<a href="/add_your_article/" class="btn btn-primary">Add Article</a>
+	{% elif not myuserObject.is_loggedIn %}
+	<h4>You need to be logged in to add your article.</h4>
+	{% endif %}
+</div>
+
+<br>
+<div class="container">
+	<div class="panel nitin col-md-12 col-xs-12 col-sm-12">
+	<br>
+		<div class="bg-info text-center">
+		<br>
+			<h2>{{YourArticleIs.article_heading}}</h2>
+
+			<hr>
+		</div>
+		<div class="">
+			<small style="color: #C8C8C8 ;">By <strong>{{YourArticleIs.addedBy.user.first_name}} {{YourArticleIs.addedBy.user.last_name}}</strong>  On {{YourArticleIs.article_date}} at {{art.article_time}}
+				<strong>Likes: {{YourArticleIs.number_of_likes}} Comments: {{YourArticleIs.number_of_comments}}</strong>
+			</small>
+	
+		</div>
+		<br>
+		<div class="col-md-12 col-sm-10 col-sm-10" style="">
+		
+			<pre style=" white-space: pre-wrap;word-break: normal; background-color: white; " >
+				<h4 ><span class="fa fa-thumb-tack"></span>... {{YourArticleIs.article_is}}</h4>
+			</pre>
+			
+		</div>
+    {% if myuserObject.is_loggedIn %}
+		 <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
+			
+
+     
+	        	<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{art.id}}nitin">Comment</button>
+
+	        	
+
+
+            <!-- <form action="/likes_article/" method="POST">{% csrf_token %}
+            <input type="hidden" name="id_required" value="{{art.id}}"> -->
+            <button class="btn btn-primary btn-xs" type="submit" id="{{art.id}}">Like</button>
+
+	        	
+
+	        	<div class="container">
+  						<div class="modal fade" id="{{art.id}}nitin" role="dialog">
+                                  <div class="modal-dialog">
+                                  
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Comment Here</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form action="/commentArticle/" method="post" autocomplete="off">{% csrf_token %}
+
+                                          <input type="hidden" name="artObj" value="{{YourArticleIs.id}}">
+
+
+                                          <textarea name="comment" class="form-control" rows="4" placeholder="Comment here" required="Please Enter your comment"></textarea>
+                                            <br>
+
+                                          <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
+                                            <button class="btn btn-info btn-sm" type="submit" id="{{art.id}}nitin">Submit</button>
+                                            
+                                          </div>
+
+                                        </form>
+                                      </div>
+                                      <!--  -->
+                                    </div>
+                                    
+                                  </div>
+              </div>
+                </div>
+           
+        <hr>
+         </div>
+
+			{% endif %}	
+
+	</div>
+
+	<div class="">
+		<h3>Comments:</h3>
+    <div class="">
+      {% for com in articleComment %}
+
+      <div class="panel col-md-12 col-sm-12 col-xs-12">
+
+        <h4><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{com.comment_Content}}</h4> 
+        <small style="color: #C8C8C8 ;">Commented On {{com.comment_date}} at {{com.comment_time}} By <a>{{com.comment_by.user.first_name}} {{com.comment_by.user.last_name}}</a></small>
+      
+      </div>
+      {% endfor %}
+
+    </div>
+</div>
+
+
+
+
+
+<script src="/static/js/jquery.min.js"></script>
+  	<script type="text/javascript" src="/static/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/validation/contact.js"></script>
+  	<script src="/static/js/jquery.easing.min.js"></script>
+  	<script src="/static/js/bootstrap.min.js"></script>
+  	<script src="/static/js/jquery.mixitup.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/static/js/slick.min.js"></script>
+	<script type="text/javascript" src="/static/js/custom.js"></script>
+    <script src="/static/contactform/contactform.js"></script>
+    
+</body>
+</html>
