@@ -13,11 +13,11 @@
 
 </head>
 <style type="text/css">
-  .abcd:hover{
-    background-color: orange;
-  }
   .nitin {
     box-shadow: 1px 1px 1px #888888;
+  }
+  a{
+    text-decoration: none;
   }
 </style>
 <body style="background-color: #F8F8F8;">
@@ -166,9 +166,7 @@
                            </small style="color: #C8C8C8 ;"> <strong>Likes: {{questionId.number_of_likes}} Comments: {{questionId.number_of_comments}}</strong></small>
                         </div>
 
-                        <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-4">
-                            <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{questionId.id}}nitin">Comment</a>
-                        </div>
+                       
 
 
                       </div> 
@@ -183,7 +181,8 @@
 
                     </div>
                 </div>
-
+               
+                  
 <!-- comment popup -->
                             <div class="">
                               <!-- Trigger the modal with a button -->
@@ -196,14 +195,14 @@
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Comment Here</h4>
+                                      <h4 class="modal-title">Answer Here....</h4>
                                     </div>
                                     <div class="modal-body">
                                       <form action="/makeYourComment/" method="post" autocomplete="off">{% csrf_token %}
 
                                         <input type="hidden" name="abcId" value="{{questionId.id}}">
 
-                                        <textarea name="comment" class="form-control" rows="4" placeholder="Comment here" required="Please Enter your comment"></textarea>
+                                        <textarea name="comment" class="form-control" rows="4" placeholder="Your answer Here...." required="Please Enter your comment"></textarea>
                                           <br>
 
                                         <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
@@ -223,9 +222,15 @@
 <!-- commemt popup ends -->
 
                 <br>
-               <strong><h3>More Comments...</h3></strong> 
+   <strong>
+      <div class="">          
+        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#{{questionId.id}}nitin">Answer</a>
+      </div>
+  </strong> 
+               <br>
   <div class="">
     <div class="">
+       
       {% for com in CommentsAre %}
 
       <div class="panel col-md-12 col-sm-12 col-xs-12">

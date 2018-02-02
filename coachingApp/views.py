@@ -1095,27 +1095,21 @@ def show_my_article(request):
 
 
 @csrf_exempt
-def discussQ(request):
+def questionInfo(request,id):
 	try:
 		user = request.user
 		myuserObject = MyUser.objects.get(user = user)
-		if request.method == 'POST':
-			post = request.POST
-			questionId = AskQuestion.objects.get(id = post['idSend'])
-			CommentsAre = Comment.objects.filter(Question_is = questionId)
-			return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
+		
+		questionId = AskQuestion.objects.get(id = id)
+		CommentsAre = Comment.objects.filter(Question_is = questionId)
+		return render(request,'commentQuestion.html',{'myuserObject':myuserObject, 'CommentsAre':CommentsAre,'questionId':questionId})
 
-		else:
-			return redirect('/discussionPage/')
+		
 	except:
-		if request.method == 'POST':
-			post = request.POST
-			questionId = AskQuestion.objects.get(id = post['idSend'])
-			CommentsAre = Comment.objects.filter(Question_is = questionId)
-			return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
+		questionId = AskQuestion.objects.get(id = post['idSend'])
+		CommentsAre = Comment.objects.filter(Question_is = questionId)
+		return render(request,'commentQuestion.html',{'CommentsAre':CommentsAre,'questionId':questionId})
 
-		else:
-			return redirect('/discussionPage/')
 @csrf_exempt
 def article1(request):
 	try:

@@ -39,6 +39,9 @@
   input:focus {
     background: white;
 }
+a{
+  text-decoration: none;
+}
 </style>
 <body style="background-color: #F8F8F8;">
 
@@ -322,7 +325,8 @@
                     <div class="anitin">
                           <div>
                           <p style="color: #C8C8C8 ;">Question asked on <strong>{{question.Ask_topic.name}}</strong></p>
-                           <strong><h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4></strong> 
+                          <a href={% url 'questionInfo' id=question.id %} style="text-decoration: none;">
+                           <strong><h4><span class="fa fa-fw fa-question" >...</span>{{question.Asked_Question}}</h4></strong> </a>
                               
                             <h6 style="color: #C8C8C8 ;">By <strong>{{question.userAsked.user.first_name}} {{question.userAsked.user.last_name}}</strong>  On {{question.asked_Date}} at {{question.asked_Time}} </h6>
                           </div>
@@ -332,134 +336,7 @@
 
                    
                       
-                    {% if question.answer_is %}
-                    <div class=""> 
-                          <div class="col-md-12 col-sm-12 col-xs-12 anitin">
-
-                          
-                            <p><span style="color: purple;" class="fa fa-fw fa-hand-o-right"></span> {{question.answer_is}}</p> 
-                         
-                            <small style="color: #C8C8C8 ;">Answered By <a>{{question.Asked_to.user.first_name}} {{question.Asked_to.user.last_name}} </a> On {{question.answer_on_date}} at {{question.answer_on_time}} <strong>Likes: {{question.number_of_likes}} Comments: {{question.number_of_comments}}</strong></small>
-                          </div> 
-
-                          
-                          
-                          <div class="btn-group col-md-offset-10 col-sm-offset-10 col-xs-offset-6">
-                          {% if myuserObject.is_loggedIn %}
-                            <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#{{question.id}}nitin">Comment</a>
-
-
-
-
-
-                          <!-- <form action="/likes_answer/" method="POST">{% csrf_token %} -->
-                          <!-- <input type="hidden" name="id_required" value="{{question.id}}"> -->
-
-                            <button class="btn btn-primary btn-xs" id="{{question.id}}101" onclick="document.getElementById('{{question.id}}101').style.display = 'none';document.getElementById('{{question.id}}ab').style.display = 'block';">Like</button> 
-
-                            <button type="button" id="{{question.id}}ab" class="btn btn-xs btn-success" style="display: none;">Liked</button>
-                          {% endif %}
-                          <!-- </form>  -->
-                            <script type="text/javascript">
-                              $('#{{question.id}}101').click(
-                                  function(){
-                                    $.ajax({
-                                      type:"POST",
-                                      url:"/likes_answer/",
-                                      data:{'id_required':{{question.id}},},
-                                      success:function(response)
-                                      {
-                                        console.log(response);
-                                        // location.href = "/discussionPage/";
-                                      }
-                                    });
-                                  });
-                            </script>
-                          
-                          </div>  
-                    </div>
-
-   <!-- comment popup -->
-                            <div class="">
-                              <!-- Trigger the modal with a button -->
-                              
-                              <!-- Modal -->
-                              <div class="modal fade" id="{{question.id}}nitin" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Comment Here</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form action="/makeYourComment/" method="post" autocomplete="off">{% csrf_token %}
-
-                                        <input type="hidden" name="abcId" value="{{question.id}}">
-
-                                        <textarea name="comment" class="form-control" rows="4" placeholder="Comment here" required="Please Enter your comment"></textarea>
-                                          <br>
-
-                                        <div class="col-md-offset-10 col-sm-offset-10 col-xs-offset-10">
-                                          <button class="btn btn-info btn-sm" type="submit">Submit</button>
-                                        </div>
-
-                                      </form>
-                                    </div>
-                                    <!--  -->
-                                  </div>
-                                  
-                                </div>
-                              </div>
-                              <form action="/discussQ/" method="post">{% csrf_token %}
-                                <input type="hidden" name="idSend" value="{{question.id}}">
-
-                                <button class="btn btn-info btn-xs" type="submit" id="{{question.id}}nmb">Discuss</button>
-                              
-                          <!--     <script type="text/javascript">
-                                $('#{{question.id}}nmb').click(
-                                    function(){
-                                      $.ajax({
-                                        type:"POST",
-                                        url:"/discussQ/",
-                                        data:{'idSend':{{question.id}},},
-                                        success:function(response)
-                                        {
-                                          // console.log(response);
-                                          // location.href = "";
-                                        }
-                                      });
-                                    });
-                              </script> -->
-                              </form>
-                            
-                            </div>
-      <!-- </div> -->
-<!-- commemt popup ends -->
-                {% elif not question.answer_is %}
-                  <div id="{{question.id}}" style="display: none;">
-                      <div class="">
-                        <div class="">
-                        <br>
-                          <form action="/answer_the_question_DP/" method="post" id="answerS" autocomplete="off">{% csrf_token %}
-                          <input type="hidden" name="abc" value="{{question.id}}">
-                            <div class="form-group">
-                              <textarea type="text" name="answer" class="form-control" rows="5" placeholder="Write your answer..."></textarea>
-                            </div>
-
-                            <div class="form-group">
-                             
-                              <button class="btn btn-info btn-sm col-md-offset-11 col-sm-offset-10 col-xs-offset-8" type="submit">Submit</button>
-                            </div>
-
-                          </form>
-                        </div>
-                      
-                      </div>
-                  </div>
-               
-                {% endif %}
+                   
                 </div> 
 
               </div>
